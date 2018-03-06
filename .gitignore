@@ -1,0 +1,10 @@
+#npm ignores
+node_modules
+
+#build artifacts
+build/
+dist/
+*.exe
+*.msi
+wix.wixpdb
+wix.wixobj

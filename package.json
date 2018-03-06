@@ -1,0 +1,38 @@
+{
+  "name": "test_mdns",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron index.js",
+    "test": "node test.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -w",
+    "candle": "wixtoolset-compiler candle --args=\"wix.wxs -dversion=%npm_package_version% -ext WiXUtilExtension -ext WiXBalExtension\"",
+    "light": "wixtoolset-compiler light --args=\"-o holusionStargazerSetup.exe wix.wixobj -ext WiXUIExtension.dll -ext WiXUtilExtension -ext WiXBalExtension\"",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "author": "Sebastien DUMETZ <s.dumetz@holusion.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bonjour": "^3.5.0",
+    "nan": "^2.9.2",
+    "node-gyp": "^3.6.2"
+  },
+  "devDependencies": {
+    "electron": "1.8.2",
+    "electron-builder": "^20.2.0",
+    "electron-rebuild": "^1.7.3",
+    "wixtoolset-compiler": "^1.0.3"
+  },
+  "build": {
+    "appId": "com.holusion.app",
+    "nodeGypRebuild": true,
+    "win": {
+      "target": [
+        "msi"
+      ],
+      "icon": "static/icons/favicon.ico"
+    }
+  }
+}

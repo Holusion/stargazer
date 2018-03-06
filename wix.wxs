@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+  xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+  xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+  <Bundle
+    Name="holusion stargazer"
+    Version="0.0.1"
+    Manufacturer="Holusion SAS"
+    IconSourceFile=".\static\icons\favicon.ico"
+    SplashScreenSourceFile=".\static\icons\holusion_logo.png"
+    UpgradeCode="1c1ad690-ad5d-498a-99df-b9afb84451d1">
+
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <bal:WixStandardBootstrapperApplication
+        LicenseUrl="https://opensource.org/licenses/mit-license.php"
+        LogoFile=".\static\icons\holusion_logo.png"
+        />
+    </BootstrapperApplicationRef>
+
+    <Chain>
+      <MsiPackage
+        Id="bonjour64"
+        DisplayName="Bonjour Network Services (x86_64)"
+        SourceFile=".\vendor\Bonjour SDK\Installer\Bonjour64.msi"
+        InstallCondition="VersionNT64"  />
+      <MsiPackage
+        Id="bonjourx86"
+        DisplayName="Bonjour Network Services (x86)"
+        SourceFile=".\vendor\Bonjour SDK\Installer\Bonjour64.msi"
+        InstallCondition="NOT VersionNT64"  />
+     <MsiPackage
+        Id="mainPackage"
+        SourceFile=".\dist\test_mdns-1.0.0.msi" />
+    </Chain>
+  </Bundle>
+</Wix>
