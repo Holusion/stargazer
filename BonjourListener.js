@@ -1,5 +1,5 @@
 'use strict';
-const {NativeListener} = require('./build/Release/BonjourListener').BonjourListener;
+const NativeListener = require('./build/Release/BonjourListener').BonjourListener;
 const {EventEmitter} = require("events");
 class BonjourListener extends EventEmitter{
   constructor(){
@@ -11,18 +11,18 @@ class BonjourListener extends EventEmitter{
     return Array.from(this._list);
   }
   onchange(str){
-    let changes = str.split("\n")
-    changes.forEach(function(line){
-      let [action, name] = line.split(" ");
+    let changes = str.split("\n").filter(n => n);
+    changes.forEach((line)=>{
+      let [action, ...name] = line.split(" ");
       switch (action){
         case 'add':
-          this._list.add(name);
+          this._list.add(name.join(" "));
           break;
         case 'rm':
-          this._list.delete(name);
+          this._list.delete(name.join(" "));
           break;
         default:
-          console.warn("unknown Zeroconf action : %s", action);
+          console.warn("unknown Zeroconf action : %s", line);
       }
     });
     if (0 < changes.length){
@@ -30,3 +30,5 @@ class BonjourListener extends EventEmitter{
     }
   }
 }
+
+module.exports = BonjourListener;

@@ -142,15 +142,17 @@ class BonjourListener : public Nan::ObjectWrap  {
 		BonjourListener* obj = Nan::ObjectWrap::Unwrap<BonjourListener>(info.Holder());
 		info.GetReturnValue().Set(obj->handle());
 	}
-
-	//Stub method to emit from JS. Not used under normal op.
 	/*
-  static NAN_METHOD(List) {
-    BonjourListener* obj = ObjectWrap::Unwrap<BonjourListener>(info.Holder());
-		Isolate *isolate = info.GetIsolate();
-		Nan::ReturnValue res = info.GetReturnValue();
-    obj->listener.Call(0,0);
-	} //*/
+	//GET the address of a product Need to be cancelled
+	// Use kDNSServiceFlagsTimeout for this?
+	// Maybe it needs it's own wrapper object. The lifecycle is non-trivial  here
+	static NAN_METHOD(GetAddress) {
+		BonjourListener* obj = Nan::ObjectWrap::Unwrap<BonjourListener>(info.Holder());
+		Callback cb(To<Function>(info[0]).ToLocalChecked());
+		int err = DNSServiceGetAddrInfo(&client, kDNSServiceFlagsReturnIntermediates, opinterface, GetProtocol(argv[opi+0]), argv[opi+1], addrinfo_reply, this);
+		info.GetReturnValue().Set(obj->handle());
+	}
+	//*/
 	static inline Nan::Persistent<v8::Function> & constructor() {
 		static Nan::Persistent<v8::Function> my_constructor;
 		return my_constructor;

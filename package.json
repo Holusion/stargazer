@@ -22,7 +22,9 @@
   "devDependencies": {
     "electron": "1.8.2",
     "electron-builder": "^20.2.0",
-    "electron-rebuild": "^1.7.3",
+    "electron-rebuild": "^1.7.3"
+  },
+  "optionalDependencies":{
     "wixtoolset-compiler": "^1.0.3"
   },
   "build": {
