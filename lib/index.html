@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Holusion products management</title>
+    <link rel="stylesheet" href="../node_modules/material-components-web/dist/material-components-web.css">
+    <script async defer src="index.js"></script>
+    <style>
+    :root{
+      --mdc-theme-primary: #103040;
+      --mdc-theme-secondary: #2fafe6;
+    }
+    html {
+        height: 100%;
+      }
+    body{
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+    }
+    div#main-content{
+      display: inline-flex;
+      flex-direction: column;
+      flex-grow: 1;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .mdc-button__icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 0px;
+      font-size: 24px;
+      line-height: inherit;
+      vertical-align: middle;
+    }
+    .mdc-list-item.drawer-list-item.mdc-list-item--selected{
+      color: var(--mdc-theme-primary);
+    }
+    </style>
+  </head>
+<body>
+  <load-notifier style="position:absolute;top:5px;right:5px;"></load-notifier>
+  <load-spinner absolute id="main-spinner"></load-spinner>
+  <body class="mdc-typography">
+    <aside class="mdc-drawer mdc-drawer--persistent mdc-drawer--open">
+      <nav class="mdc-drawer__drawer">
+        <div class="mdc-drawer__toolbar-spacer"></div>
+        <div class="mdc-list-group">
+          <button onclick="updateProductList()" class="mdc-button mdc-button--stroked">
+            <h-icon name="refresh" class="mdc-button__icon" />
+          </button>
+        </div>
+        <div class="mdc-list-group">
+          <h-products fetch="GetList" ></h-products>
+        </div>
+      </nav>
+    </aside>
+    <!--Will be filled by a template element -->
+    <div id="main-content">
+      Loading, please wait...
+    </div>
+
+    <script src="../node_modules/material-components-web/dist/material-components-web.js"></script>
+    <script>
+      mdc.autoInit()
+      let drawer = new mdc.drawer.MDCPersistentDrawer(document.querySelector(".mdc-drawer"));
+    </script>
+</body>
+</html>
