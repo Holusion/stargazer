@@ -1,28 +1,75 @@
 'use strict';
 const path = require('path');
 const url = require('url');
-
+const {EventEmitter} = require("events");
 const {ipcMain, app, BrowserWindow} = require('electron');
 
 const pkgInfos = require("./package.json");
-const BonjourListener = require('./BonjourListener');
-
-// Module to create native browser window.
 
 
-const l = new BonjourListener();
+var mdns = require('mdns');
+
+
+var resolve_sequence = [
+  mdns.rst.DNSServiceResolve()
+, mdns.rst.getaddrinfo({families:[0]})
+, mdns.rst.makeAddressesUnique()
+];
+// watch all http servers
+class ServiceSet extends EventEmitter{
+  constructor(){
+    super();
+    this._data = [];
+    let browser = mdns.createBrowser(mdns.tcp('workstation'),{resolverSequence:resolve_sequence});
+    browser.on('serviceUp',this.add.bind(this));
+    browser.on('serviceDown', this.remove.bind(this));
+    browser.start();
+    this.browser = browser;
+  }
+  findIndex(item){
+    return this._data.findIndex(n => typeof n.fullname ==="string" && n.fullname === item.fullname);
+  }
+  add(item){
+    if(!item || !item.fullname) return console.warn("tried to add invalid item : ",item);
+    let idx = this.findIndex(item);
+    if( idx == -1){
+      this._data.push(item);
+      console.log("added Product : ",item);
+    }else if(JSON.stringify(this._data[idx]) != JSON.stringify(item)){//update object if necessary
+      this._data[idx] = item;
+      console.log("updated Product : ",item);
+    }else{
+      return;
+    }
+    this.emit("change", this._data);
+  }
+  remove(item){
+    if(!item || !item.fullname) return console.warn("tried to remove invalid item : ",item);
+    let idx = this.findIndex(item);
+    if (idx == -1) return console.warn("Tried to remove non-existant service : ",item);
+    this._data.splice(idx, 1);
+    this.emit("change", this._data);
+  }
+  get list(){
+    return this._data;
+  }
+}
+
+
+let services = new ServiceSet();
+
 
 let mainWindow;
 
 //Passive update publishing
-l.on("change",function(p){
-  console.log("product list changed : ", p);
+services.on("change",function(list){
   if (!mainWindow || ! mainWindow.webContents){return}
-  mainWindow.webContents.send('clients-list', p);
-});
+  console.log("Change : ",JSON.stringify(list));
+  mainWindow.webContents.send('clients-list', list);
+})
 //Active update requests
 ipcMain.on('get-clients', (event) => {
-  event.sender.send('clients-list', l.list);
+  event.sender.send('clients-list', services.list);
 });
 
 function createWindow () {

@@ -2,9 +2,10 @@
   "targets": [
     {
       "target_name": "BonjourListener",
-      "sources": [ "BonjourListener.cc" ],
+      "sources": [ "src/BonjourListener.cc", ],
       "include_dirs": [
-        "<!(node -e \"require('nan')\")"
+        "<!(node -e \"require('nan')\")",
+        "<(module_root_dir)/src"
       ],
       "conditions":[
         ['OS=="win"',{
