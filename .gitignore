@@ -8,3 +8,6 @@ dist/
 *.msi
 wix.wixpdb
 wix.wixobj
+
+# ignore vendor folder for now
+vendor/
