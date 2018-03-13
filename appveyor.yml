@@ -1,0 +1,29 @@
+image: Visual Studio 2017
+
+platform:
+  - x64
+environment:
+  BONJOUR_SDK_HOME: 'C:\\Program Files\\Bonjour SDK'
+  sdk_location:
+    secure: EZeX3E60jlUAYoXrao9JNfw5jHZ+ITmNZd3Jr1KfIGllk/RxWWrHuk3Kh+cx8NY0hJTTU2gFXNeBG58YOL+HSA==
+install:
+  - ps: (new-object net.webclient).DownloadFile($env:sdk_location, 'setup.exe')
+
+
+
+
+cache:
+  - node_modules
+  - '%USERPROFILE%\.electron'
+
+init:
+  - git config --global core.autocrlf input
+
+install:
+  - ps: Install-Product node 8 x64
+  - npm install
+
+build_script:
+  - npm run dist
+
+test: off
