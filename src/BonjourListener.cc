@@ -65,7 +65,7 @@ public:
 	{
 		DNSServiceErrorType err;
 		printf("Start adresser for : %s\n",hostname);
-		DNSServiceGetAddrInfo(&client, 0, interfaceIndex, 0, hostname, AddresserCallback, this);
+		// DNSServiceGetAddrInfo(&client, 0, interfaceIndex, 0, hostname, AddresserCallback, this);
 		if (err ){
 			printf("Error getting client address : %d\n",err);
 		}
