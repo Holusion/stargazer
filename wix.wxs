@@ -21,16 +21,16 @@
       <MsiPackage
         Id="bonjour64"
         DisplayName="Bonjour Network Services (x86_64)"
-        SourceFile=".\vendor\Bonjour SDK\Installer\Bonjour64.msi"
+        SourceFile=".\vendor\Bonjour64.msi"
         InstallCondition="VersionNT64"  />
       <MsiPackage
         Id="bonjourx86"
         DisplayName="Bonjour Network Services (x86)"
-        SourceFile=".\vendor\Bonjour SDK\Installer\Bonjour64.msi"
+        SourceFile=".\vendor\Bonjour.msi"
         InstallCondition="NOT VersionNT64"  />
      <MsiPackage
         Id="mainPackage"
-        SourceFile=".\dist\test_mdns-1.0.0.msi" />
+        SourceFile=".\dist\holusion-stargazer-setup.msi" />
     </Chain>
   </Bundle>
 </Wix>
