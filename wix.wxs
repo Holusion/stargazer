@@ -21,12 +21,12 @@
       <MsiPackage
         Id="bonjour64"
         DisplayName="Bonjour Network Services (x86_64)"
-        SourceFile="C:\Program Files\Bonjour SDK\Installer\Bonjour64.msi"
+        SourceFile=".\Bonjour64.msi"
         InstallCondition="VersionNT64"  />
       <MsiPackage
         Id="bonjourx86"
         DisplayName="Bonjour Network Services (x86)"
-        SourceFile="C:\Program Files\Bonjour SDK\Installer\Bonjour.msi"
+        SourceFile=".\Bonjour.msi"
         InstallCondition="NOT VersionNT64"  />
      <MsiPackage
         Id="mainPackage"
