@@ -44,4 +44,5 @@ build_script:
 test: off
 
 artifacts:
-  - path: installer.log
+  - path: dist/*.msi
+    name: App

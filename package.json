@@ -1,7 +1,7 @@
 {
-  "name": "test_mdns",
+  "name": "holusion-stargazer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Network discovery and product administration toolset for holographic displays",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
