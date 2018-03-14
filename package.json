@@ -38,6 +38,9 @@
         "msi"
       ],
       "icon": "static/icons/favicon.ico"
+    },
+    "msi": {
+      "warningsAsErrors": false
     }
   }
 }
