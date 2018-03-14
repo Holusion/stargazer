@@ -29,8 +29,8 @@ install:
   - ps: Get-ChildItem "env:"
   - curl -fsS -u %download_user% -o Bonjour64.msi http://%bonjour_installer64%
   - curl -fsS -u %download_user% -o BonjourSDK64.msi http://%bonjour_sdk64%
-  - ps: start /wait msiexec /i 'C:\projects\stargazer\Bonjour64.msi' /quiet /qn /norestart /l*v 'C:\projects\stargazer\install.log'
-  - ps: start /wait msiexec /i 'C:\projects\stargazer\BonjourSDK64.msi' /quiet /qn /norestart /l*v 'C:\projects\stargazer\install_sdk.log'
+  - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\Bonjour64.msi', /quiet, /qn, /norestart, /l*v, 'C:\projects\stargazer\install.log' -Wait
+  - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\BonjourSDK64.msi', /quiet, /qn, /norestart, /l*v, 'C:\projects\stargazer\install_sdk.log' -Wait
   - ps: ls
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: type install.log
