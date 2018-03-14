@@ -14,7 +14,7 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "Sebastien DUMETZ <s.dumetz@holusion.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bonjour": "^3.5.0",
     "material-components-web": "^0.32.0",
