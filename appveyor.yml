@@ -19,6 +19,7 @@ environment:
 
 cache:
   - node_modules
+  - vendor
   - '%USERPROFILE%\.electron'
   - '%LocalAppData%\electron-builder\cache'
 init:
@@ -27,11 +28,12 @@ init:
 install:
   - cmd: echo %BONJOUR_SDK_HOME%
   - ps: Get-ChildItem "env:"
-  - curl -fsS -u %download_user% -o Bonjour.msi http://%bonjour_installer%
-  - curl -fsS -u %download_user% -o Bonjour64.msi http://%bonjour_installer64%
-  - curl -fsS -u %download_user% -o BonjourSDK64.msi http://%bonjour_sdk64%
-  - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\Bonjour64.msi', /quiet, /qn, /norestart, /l, 'C:\projects\stargazer\install.log' -Wait
-  - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\BonjourSDK64.msi', /quiet, /qn, /norestart, /l, 'C:\projects\stargazer\install_sdk.log' -Wait
+  - IF NOT EXIST vendor mkdir vendor
+  - IF NOT EXIST C:\projects\stargazer\vendor\Bonjour.msi curl -fsS -u %download_user% -o vendor\Bonjour.msi http://%bonjour_installer%
+  - IF NOT EXIST C:\projects\stargazer\vendor\Bonjour64.msi curl -fsS -u %download_user% -o vendor\Bonjour64.msi http://%bonjour_installer64%
+  - IF NOT EXIST C:\projects\stargazer\vendor\BonjourSDK64.msi curl -fsS -u %download_user% -o vendor\BonjourSDK64.msi http://%bonjour_sdk64%
+  - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\vendor\Bonjour64.msi', /quiet, /qn, /norestart, /l, 'C:\projects\stargazer\install.log' -Wait
+  - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\vendor\BonjourSDK64.msi', /quiet, /qn, /norestart, /l, 'C:\projects\stargazer\install_sdk.log' -Wait
   - ps: ls
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: type install.log
