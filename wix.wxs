@@ -30,7 +30,7 @@
         InstallCondition="NOT VersionNT64"  />
      <MsiPackage
         Id="mainPackage"
-        SourceFile=".\dist\test_mdns-1.0.0.msi" />
+        SourceFile=".\dist\holusion-stargazer-setup.msi" />
     </Chain>
   </Bundle>
 </Wix>

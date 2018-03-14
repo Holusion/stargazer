@@ -20,7 +20,7 @@ environment:
 cache:
   - node_modules
   - '%USERPROFILE%\.electron'
-
+  - '%LocalAppData%\electron-builder\cache'
 init:
   - git config --global core.autocrlf input
 
@@ -40,9 +40,14 @@ install:
 
 build_script:
   - npm run dist
+  - npm run candle
+  - npm run light
 
 test: off
+configuration: Release
 
 artifacts:
-  - path: dist/*.msi
+  - path: "dist/*.msi"
     name: App
+  - path: "*.msi" 
+    name: Bundle

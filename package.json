@@ -33,6 +33,7 @@
   },
   "build": {
     "appId": "com.holusion.app",
+    "artifactName":"${productName}-setup.${ext}",
     "win": {
       "target": [
         "msi"
