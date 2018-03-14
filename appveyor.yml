@@ -24,7 +24,9 @@ install:
   - cmd: curl -fsSL -o Bonjour64.msi %bonjour_installer64%
   - cmd: curl -fsSL -o BonjourSDK64.msi %bonjour_sdk64%
   - ps: msiexec /i Bonjour64.msi /quiet /qn /norestart /log install.log
-  - ps: msiexec /i BonjourSDK64.msi /quiet /qn /norestart /log install.log
+  - cmd: type install.log
+  - ps: msiexec /i BonjourSDK64.msi /quiet /qn /norestart /log install_sdk.log
+  - cmd: type install_sdk.log
   - ps: Install-Product node 8 x64
   - npm install
 
