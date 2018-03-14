@@ -5,6 +5,7 @@ platform:
 environment:
   BONJOUR_HOME: 'C:\Program Files (x86)\Bonjour'
   BONJOUR_SDK_HOME: 'C:\Program Files (x86)\Bonjour SDK'
+  APPVEYOR_RDP_PASSWORD: temp_test_password
   download_user:
     secure: qJc53Aj3IePOJrzM23qw2UzmmHhzw0AfGQmAMUsAc5I=
   bonjour_installer64:
@@ -28,9 +29,10 @@ install:
   - ps: Get-ChildItem "env:"
   - curl -fsS -u %download_user% -o Bonjour64.msi http://%bonjour_installer64%
   - curl -fsS -u %download_user% -o BonjourSDK64.msi http://%bonjour_sdk64%
-  - ps: msiexec /i 'C:\projects\stargazer\Bonjour64.msi' /quiet /v /qn /norestart /log 'C:\projects\stargazer\install.log' INSTALLDIR="%BONJOUR_HOME%"
-  - ps: msiexec /i 'C:\projects\stargazer\BonjourSDK64.msi' /quiet /v /qn /norestart /log 'C:\projects\stargazer\install_sdk.log' INSTALLDIR="%BONJOUR_SDK_HOME%"
+  - ps: msiexec /i 'C:\projects\stargazer\Bonjour64.msi' /quiet /qn /norestart /l*v 'C:\projects\stargazer\install.log'
+  - ps: msiexec /i 'C:\projects\stargazer\BonjourSDK64.msi' /quiet /qn /norestart /l*v 'C:\projects\stargazer\install_sdk.log'
   - ps: ls
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: type install.log
   - ps: type install_sdk.log
   - ps: Install-Product node 8 x64
