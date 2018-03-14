@@ -21,7 +21,6 @@
     "mdns": "^2.3.4",
     "nan": "^2.9.2",
     "navigo": "^7.1.1",
-    "node-gyp": "^3.6.2",
     "r2": "^2.0.0"
   },
   "devDependencies": {
@@ -34,7 +33,6 @@
   },
   "build": {
     "appId": "com.holusion.app",
-    "nodeGypRebuild": true,
     "win": {
       "target": [
         "msi"
