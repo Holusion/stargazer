@@ -2,7 +2,7 @@
   "name": "test_mdns",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron main.js",
     "test": "node test.js",
