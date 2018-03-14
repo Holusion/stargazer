@@ -3,8 +3,8 @@ image: Visual Studio 2017
 platform:
   - x64
 environment:
-  BONJOUR_HOME: 'C:\\Program Files (x86)\\Bonjour'
-  BONJOUR_SDK_HOME: 'C:\\Program Files (x86)\\Bonjour SDK'
+  BONJOUR_HOME: 'C:\Program Files (x86)\Bonjour'
+  BONJOUR_SDK_HOME: 'C:\Program Files (x86)\Bonjour SDK'
   download_user:
     secure: qJc53Aj3IePOJrzM23qw2UzmmHhzw0AfGQmAMUsAc5I=
   bonjour_installer64:
@@ -26,8 +26,8 @@ init:
 install:
   - cmd: echo %BONJOUR_SDK_HOME%
   - ps: Get-ChildItem "env:"
-  - curl -fsS -u %download_user% -o Bonjour64.msi %bonjour_installer64%
-  - curl -fsS -u %download_user% -o BonjourSDK64.msi %bonjour_sdk64%
+  - curl -fsS -u %download_user% -o Bonjour64.msi http://%bonjour_installer64%
+  - curl -fsS -u %download_user% -o BonjourSDK64.msi http://%bonjour_sdk64%
   - ps: ls
   - ps: msiexec /i Bonjour64.msi /quiet /qn /norestart /log install.log INSTALLDIR=%BONJOUR_HOME%
   - ps: type install.log
