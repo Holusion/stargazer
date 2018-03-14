@@ -23,8 +23,10 @@ init:
 
 install:
   - cmd: echo %BONJOUR_SDK_HOME%
-  - cmd: curl -fsSL -o Bonjour64.msi %bonjour_installer64%
-  - cmd: curl -fsSL -o BonjourSDK64.msi %bonjour_sdk64%
+  - ps: Get-ChildItem env:
+  - ps: Start-FileDownload $env:bonjour_installer64
+  - ps: Start-FileDownload $env:bonjour_sdk64
+  - ps: ls
   - ps: msiexec /i Bonjour64.msi /quiet /qn /norestart /log install.log INSTALLDIR=%BONJOUR_HOME%
   - ps: type install.log
   - ps: msiexec /i BonjourSDK64.msi /quiet /qn /norestart /log install_sdk.log INSTALLDIR=%BONJOUR_SDK_HOME%
