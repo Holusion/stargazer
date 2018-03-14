@@ -3,6 +3,7 @@ image: Visual Studio 2017
 platform:
   - x64
 environment:
+  BONJOUR_HOME: 'C:\\Program Files (x86)\\Bonjour'
   BONJOUR_SDK_HOME: 'C:\\Program Files (x86)\\Bonjour SDK'
   bonjour_installer64:
     secure: tGBN/fS3KL8U+e8zHLBz53vq+voN+X3myVnWI7B8nn00/XsMFvkThBqXXdfFfv1K3IYq7XjsgqxQhc8si+vyESlGNJ2PUKwfsY7K2T9Y+iA=
@@ -21,12 +22,13 @@ init:
   - git config --global core.autocrlf input
 
 install:
+  - cmd: echo %BONJOUR_SDK_HOME%
   - cmd: curl -fsSL -o Bonjour64.msi %bonjour_installer64%
   - cmd: curl -fsSL -o BonjourSDK64.msi %bonjour_sdk64%
-  - ps: msiexec /i Bonjour64.msi /quiet /qn /norestart /log install.log
-  - cmd: type install.log
-  - ps: msiexec /i BonjourSDK64.msi /quiet /qn /norestart /log install_sdk.log
-  - cmd: type install_sdk.log
+  - ps: msiexec /i Bonjour64.msi /quiet /qn /norestart /log install.log INSTALLDIR=%BONJOUR_HOME%
+  - ps: type install.log
+  - ps: msiexec /i BonjourSDK64.msi /quiet /qn /norestart /log install_sdk.log INSTALLDIR=%BONJOUR_SDK_HOME%
+  - ps: type install_sdk.log
   - ps: Install-Product node 8 x64
   - npm install
 
