@@ -21,8 +21,8 @@ init:
   - git config --global core.autocrlf input
 
 install:
-  - ps: (new-object net.webclient).DownloadFile($env:bonjour64, 'Bonjour64.msi')
-  - ps: (new-object net.webclient).DownloadFile($env:bonjour_sdk64, 'BonjourSDK64.msi')
+  - cmd: curl -fsSL -o Bonjour64.msi %bonjour_64%
+  - cmd: curl -fsSL -o BonjourSDK64.msi %bonjour_sdk64%
   - ps: msiexec /i Bonjour64.msi /quiet /qn /norestart /log install.log
   - ps: msiexec /i BonjourSDK64.msi /quiet /qn /norestart /log install.log
   - ps: Install-Product node 8 x64
