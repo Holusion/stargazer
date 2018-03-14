@@ -23,7 +23,7 @@ init:
 
 install:
   - cmd: echo %BONJOUR_SDK_HOME%
-  - ps: Get-ChildItem env:
+  - ps: Get-ChildItem "$env:"
   - ps: Start-FileDownload $env:bonjour_installer64
   - ps: Start-FileDownload $env:bonjour_sdk64
   - ps: ls
