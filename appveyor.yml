@@ -3,7 +3,7 @@ image: Visual Studio 2017
 platform:
   - x64
 environment:
-  BONJOUR_SDK_HOME: 'C:\\Program Files\\Bonjour SDK'
+  BONJOUR_SDK_HOME: 'C:\\Program Files (x86)\\Bonjour SDK'
   bonjour_installer64:
     secure: tGBN/fS3KL8U+e8zHLBz53vq+voN+X3myVnWI7B8nn00/XsMFvkThBqXXdfFfv1K3IYq7XjsgqxQhc8si+vyESlGNJ2PUKwfsY7K2T9Y+iA=
   bonjour_installer:
@@ -32,3 +32,6 @@ build_script:
   - npm run dist
 
 test: off
+
+artifacts:
+  - path: installer.log
