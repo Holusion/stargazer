@@ -1,11 +1,12 @@
 image: Visual Studio 2017
+# Start builds on tags only (GitHub and BitBucket)
+skip_non_tags: true
 
 platform:
   - x64
 environment:
   BONJOUR_HOME: 'C:\Program Files\Bonjour'
   BONJOUR_SDK_HOME: 'C:\Program Files\Bonjour SDK'
-  APPVEYOR_RDP_PASSWORD: Temp_Test_0234
   download_user:
     secure: qJc53Aj3IePOJrzM23qw2UzmmHhzw0AfGQmAMUsAc5I=
   bonjour_installer64:
@@ -35,7 +36,6 @@ install:
   - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\vendor\Bonjour64.msi', /quiet, /qn, /norestart, /l, 'C:\projects\stargazer\install.log' -Wait
   - ps: Start-Process -FilePath msiexec -ArgumentList /i, 'C:\projects\stargazer\vendor\BonjourSDK64.msi', /quiet, /qn, /norestart, /l, 'C:\projects\stargazer\install_sdk.log' -Wait
   - ps: ls
-#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: type install.log
   - ps: type install_sdk.log
   - ps: Install-Product node 8 x64
@@ -52,5 +52,5 @@ configuration: Release
 artifacts:
   - path: "dist/*.msi"
     name: App
-  - path: "*.exe" 
+  - path: "*.exe"
     name: Bundle
