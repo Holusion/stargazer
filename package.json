@@ -1,6 +1,6 @@
 {
   "name": "holusion-stargazer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Network discovery and product administration toolset for holographic displays",
   "main": "main.js",
   "scripts": {
