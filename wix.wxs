@@ -4,7 +4,7 @@
   xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
   <Bundle
     Name="holusion stargazer"
-    Version=$(var.version)
+    Version="$(var.version)"
     Manufacturer="Holusion SAS"
     IconSourceFile=".\static\icons\favicon.ico"
     SplashScreenSourceFile=".\static\icons\holusion_logo.png"
