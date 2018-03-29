@@ -1,3 +1,4 @@
+# Stargazer
 
 ## Dependencies
 
@@ -7,6 +8,6 @@ Install : `libavahi-compat-libdnssd-dev`
 
 
 
-#Doc
+# Doc
 
 Apple's doc on bonjour : https://developer.apple.com/documentation/dnssd/1804744-dnsserviceresolve
