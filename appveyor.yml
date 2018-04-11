@@ -57,5 +57,6 @@ artifacts:
 
 deploy:
   - provider: GitHub
-    auth_token: 0fd30f397bc88d40b522117fc59a29104a0302f8
+    auth_token:
+      secure: rDaQKugNpZ/X1f1VHPp9pWhHdHnzt5OUJKYB8Y+B0opO2ee8eJW1jgKHL4k9cjnB
     artifact: Bundle
