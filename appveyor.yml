@@ -54,3 +54,7 @@ artifacts:
     name: App
   - path: "*.exe"
     name: Bundle
+
+deploy:
+  - provider: GitHub
+  artifact: Bundle
