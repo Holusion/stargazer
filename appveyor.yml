@@ -57,4 +57,4 @@ artifacts:
 
 deploy:
   - provider: GitHub
-  artifact: Bundle
+    artifact: Bundle
