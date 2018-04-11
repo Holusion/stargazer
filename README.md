@@ -8,6 +8,9 @@
 
 # Stargazer - Scanner de réseau zeroconf pour les produits [Holusion](http://holusion.com/fr/)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/aqxc55did14mf0qa?svg=true)](https://ci.appveyor.com/project/sdumetz/stargazer)
+
+
 ## Installation
 
 ### Windows
