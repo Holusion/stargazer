@@ -88,8 +88,8 @@ média devrait apparaître dans la playlist.
 Si vous rencontrez une erreur, un message s'affichera pour vous prévenir. Ces erreurs sont
 copiées dans un fichier se trouvant dans :
 
-- Windows : C:\Users\<nom d'utilsateur>\AppData\Roaming\holusion-stargazer\log.log
-- Linux : /home/<nom d'utilisateur>/.config/holusion-stargazer/log.log
+- Windows : *C:\Users\<nom d'utilsateur>\AppData\Roaming\holusion-stargazer\log.log*
+- Linux : */home/<nom d'utilisateur>/.config/holusion-stargazer/log.log*
 
 Vous pouvez nous envoyer ce fichier à <contact@holusion.com> ou en ouvrant une issue sur
 [Github](https://github.com/Holusion/stargazer) en nous expliquant votre problème et si
