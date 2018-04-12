@@ -6,7 +6,7 @@
 [card]:./docs/card.png
 [upload]:./docs/upload.png
 
-<a href="english">English documentation</a> - <a href="french">Documentation française</a>
+[English documentation](#english) - [Documentation française](#french)
 
 # <a name="french"></a>Stargazer - Scanner de réseau zeroconf pour les produits [Holusion](http://holusion.com/fr/)
 
