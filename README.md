@@ -6,7 +6,9 @@
 [card]:./docs/card.png
 [upload]:./docs/upload.png
 
-# Stargazer - Scanner de réseau zeroconf pour les produits [Holusion](http://holusion.com/fr/)
+<a href="english">English documentation</a> - <a href="french">Documentation française</a>
+
+# <a name="french"></a>Stargazer - Scanner de réseau zeroconf pour les produits [Holusion](http://holusion.com/fr/)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/aqxc55did14mf0qa?svg=true)](https://ci.appveyor.com/project/sdumetz/stargazer)
 
@@ -97,7 +99,7 @@ possible avec un exemple pour reproduire le problème.
 
 -------------------------------------------------------------------------------
 
-# Stargazer - zeroconf network scanner for [Holusion](http://holusion.com/fr/) products
+# <a name="english"></a>Stargazer - zeroconf network scanner for [Holusion](http://holusion.com/fr/) products
 
 [![Build status](https://ci.appveyor.com/api/projects/status/aqxc55did14mf0qa?svg=true)](https://ci.appveyor.com/project/sdumetz/stargazer)
 
