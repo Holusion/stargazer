@@ -77,6 +77,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width:1280,
     height: 1024,
+    minWidth: 720,
+    minHeight: 640,
     title: `${pkgInfos.name} - ${pkgInfos.version}`,
     webPreferences: {
       webSecurity: false
