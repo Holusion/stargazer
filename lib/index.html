@@ -46,7 +46,24 @@
   <load-notifier style="position:absolute;top:5px;right:5px;"></load-notifier>
   <load-spinner absolute id="main-spinner"></load-spinner>
   <body class="mdc-typography">
-    <aside class="mdc-drawer mdc-drawer--persistent mdc-drawer--open">
+    <header class="toolbar mdc-toolbar mdc-toolbar--fixed mdc-elevation--z4">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <span>
+            <a onclick="goBack()" class="mdc-toolbar__menu-icon">
+              <h-icon name="back"/>
+            </a>
+          </span>
+          <button class="demo-menu material-icons mdc-toolbar__menu-icon" onclick='document.querySelector("aside").classList.toggle("mdc-drawer--open");'>
+            <h-icon name="menu"/>
+          </button>
+          <span class="mdc-toolbar__title catalog-title"><slot name="title">Holusion</slot></span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+        </section>
+      </div>
+    </header>
+    <aside class="mdc-drawer mdc-drawer--persistent mdc-drawer--open main-content mdc-toolbar-fixed-adjust">
       <nav class="mdc-drawer__drawer">
         <div class="mdc-drawer__toolbar-spacer"></div>
         <div class="mdc-list-group">
