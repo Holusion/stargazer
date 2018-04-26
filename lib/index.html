@@ -41,6 +41,11 @@
     .mdc-list-item.drawer-list-item.mdc-list-item--selected{
       color: var(--mdc-theme-primary);
     }
+    .aside-button {
+      margin-top: 12px;
+      margin-left: 16px;
+      margin-bottom: 12px;
+    }
     </style>
   </head>
 <body>
@@ -61,10 +66,9 @@
     </header>
     <aside class="mdc-drawer mdc-drawer--persistent mdc-drawer--open main-content mdc-toolbar-fixed-adjust">
       <nav class="mdc-drawer__drawer">
-        <div class="mdc-drawer__toolbar-spacer"></div>
         <div class="mdc-list-group">
-          <button onclick="updateProductList()" class="mdc-button mdc-button--stroked">
-            <h-icon name="refresh" class="mdc-button__icon" />
+          <button onclick="updateProductList()" class="aside-button mdc-button mdc-button--raised mdc-button--dense">
+            Actualiser
           </button>
         </div>
         <div class="mdc-list-group">
