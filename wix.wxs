@@ -12,7 +12,7 @@
 
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
       <bal:WixStandardBootstrapperApplication
-        LicenseUrl="https://opensource.org/licenses/mit-license.php"
+        LicenseFile=".\static\license.rtf"
         LogoFile=".\static\icons\holusion_logo.png"
         />
     </BootstrapperApplicationRef>
