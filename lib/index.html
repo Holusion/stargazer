@@ -41,8 +41,6 @@
       height: 24px;
       margin-right: 0px;
       font-size: 24px;
-      line-height: inherit;
-      vertical-align: middle;
     }
     .mdc-list-item.drawer-list-item.mdc-list-item--selected{
       color: var(--mdc-theme-primary);
@@ -64,14 +62,14 @@
   <body class="mdc-typography">
     <header class="toolbar mdc-toolbar mdc-toolbar--fixed mdc-elevation--z4">
       <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" style="height:64px;">
+
+        </section>
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
           <button class="demo-menu material-icons mdc-toolbar__menu-icon" onclick='document.querySelector("aside").classList.toggle("mdc-drawer--open");'>
             <h-icon name="menu"/>
           </button>
           <span id="title" class="mdc-toolbar__title catalog-title">Holusion</span>
-        </section>
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-          
         </section>
       </div>
     </header>
