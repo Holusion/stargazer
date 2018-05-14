@@ -15,8 +15,6 @@
         height: 100%;
       }
     body{
-      display: flex;
-      flex-direction: row;
       padding: 0;
       margin: 0;
       box-sizing: border-box;
@@ -24,14 +22,18 @@
       width: 100%;
       overflow: hidden;
     }
+    .content{
+      display: flex;
+      flex-direction: row;
+    }
     div#main-content{
       display: inline-flex;
       flex-direction: column;
+      margin-left: 16px;
       flex-grow: 1;
       height: 94%;
       box-sizing: border-box;
       overflow-y: scroll;
-      margin-top: 60px;
     }
     .list-base {
       padding-left: 16px;
@@ -60,34 +62,36 @@
   <load-notifier style="position:absolute;top:5px;right:5px;"></load-notifier>
   <load-spinner absolute id="main-spinner"></load-spinner>
   <body class="mdc-typography">
-    <header class="toolbar mdc-toolbar mdc-toolbar--fixed mdc-elevation--z4">
-      <div class="mdc-toolbar__row">
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" style="height:64px;">
+    <header class="toolbar mdc-top-app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
 
         </section>
-        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-          <button class="demo-menu material-icons mdc-toolbar__menu-icon" onclick='document.querySelector("aside").classList.toggle("mdc-drawer--open");'>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <a href="#" class="demo-menu material-icons mdc-top-app-bar__navigation-icon" onclick='document.querySelector("aside").classList.toggle("mdc-drawer--open");'>
             <h-icon name="menu"/>
-          </button>
-          <span id="title" class="mdc-toolbar__title catalog-title">Holusion</span>
+          </a>
+          <span id="title" class="mdc-top-app-bar__title catalog-title">Holusion</span>
         </section>
       </div>
     </header>
-    <aside class="mdc-drawer mdc-drawer--persistent mdc-drawer--open main-content mdc-toolbar-fixed-adjust">
-      <nav class="mdc-drawer__drawer">
-        <div class="mdc-list-group">
-          <button onclick="updateProductList()" class="aside-button mdc-button mdc-button--raised mdc-button--dense">
-            Actualiser
-          </button>
-        </div>
-        <div class="mdc-list-group">
-          <h-products fetch="GetList" ></h-products>
-        </div>
-      </nav>
-    </aside>
-    <!--Will be filled by a template element -->
-    <div id="main-content">
-      Loading, please wait...
+    <div class="content">
+      <aside class="mdc-drawer mdc-drawer--persistent mdc-drawer--open main-content mdc-top-app-bar--fixed-adjust">
+        <nav class="mdc-drawer__drawer">
+          <div class="mdc-list-group">
+            <button onclick="updateProductList()" class="aside-button mdc-button mdc-button--raised mdc-button--dense">
+              Actualiser
+            </button>
+          </div>
+          <div class="mdc-list-group">
+            <h-products fetch="GetList" ></h-products>
+          </div>
+        </nav>
+      </aside>
+      <!--Will be filled by a template element -->
+      <div id="main-content">
+        Loading, please wait...
+      </div>
     </div>
 
     <script src="../node_modules/material-components-web/dist/material-components-web.js"></script>
