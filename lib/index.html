@@ -21,6 +21,11 @@
       height: 100%;
       width: 100%;
     }
+    .mdc-top-app-bar--fixed{
+      position: fixed;
+      display: block;
+      z-index: 9;
+    }
     .content{
       display: flex;
       flex-direction: row;
@@ -32,6 +37,7 @@
       margin-right: 16px;
       flex-grow: 1;
       box-sizing: border-box;
+      margin-top: 64px;
     }
     .list-base {
       padding-left: 16px;
@@ -50,17 +56,18 @@
       margin-left: 16px;
       margin-bottom: 12px;
     }
-    /*aside{
-      overflow-y: scroll;
-      overflow-x: visible;
-    }*/
+    aside{
+      margin-top: 64px;
+      /*overflow-y: scroll;
+      overflow-x: visible;*/
+    }
     </style>
   </head>
 <body>
   <load-notifier style="position:absolute;top:5px;right:5px;"></load-notifier>
   <load-spinner absolute id="main-spinner"></load-spinner>
   <body class="mdc-typography">
-    <header class="toolbar mdc-top-app-bar">
+    <header class="toolbar mdc-top-app-bar mdc-top-app-bar--fixed">
       <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
 
