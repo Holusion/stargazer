@@ -2,7 +2,7 @@
 const path = require('path');
 const url = require('url');
 const {EventEmitter} = require("events");
-const {ipcMain, app, BrowserWindow} = require('electron');
+const {ipcMain, app, BrowserWindow, shell, Menu} = require('electron');
 
 const pkgInfos = require("./package.json");
 
@@ -126,4 +126,30 @@ app.on('activate', function () {
     createWindow()
   }
 })
+
+const template = [
+  {
+    label: 'Fichier',
+    submenu: [
+      { label: 'Accueil', click () {mainWindow.webContents.send('accueil')} },
+      { label: 'Quitter', role: 'quit'}
+    ]
+  },
+  {
+    label: 'Fenêtre',
+    submenu: [
+      { label: 'Outil de développement', role: 'toggledevtools'}
+    ]
+  },
+  {
+    label: 'Aide',
+    submenu: [
+      { label: 'En savoir plus', click() {shell.openExternal('https://holusion.com')}},
+      { label: 'Documentation', click() {shell.openExternal('https://github.com/Holusion/stargazer')}}
+    ]
+  }
+]
+
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
 //*/
