@@ -21,6 +21,10 @@ class ServiceSet extends EventEmitter{
     super();
     this._data = [];
     let browser = mdns.createBrowser(mdns.tcp('workstation'),{resolverSequence:resolve_sequence});
+    browser.on("error",function(e){
+      console.error("mdns browser error : ", e);
+      throw new Error("network error : "+e.message);
+    });
     browser.on('serviceUp',this.add.bind(this));
     browser.on('serviceDown', this.remove.bind(this));
     browser.start();
