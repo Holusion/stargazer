@@ -22,8 +22,22 @@ class ServiceSet extends EventEmitter{
     this._data = [];
     let browser = mdns.createBrowser(mdns.tcp('workstation'),{resolverSequence:resolve_sequence});
     browser.on("error",function(e){
-      console.error("mdns browser error : ", e);
-      throw new Error("network error : "+e.message);
+      switch(e.code){
+        //uv_getaddrinfo() error codes are defined under UV__EAI_* in :
+        //https://github.com/libuv/libuv/blob/fe3fbd63e5dfe26c473cdd422ad216a14ae2d7e4/include/uv-errno.h
+        case -3008: //UV__EAI_NONAME
+          //The node or service is not known; or both node and service are NULL;
+          //or AI_NUMERICSERV was specified in hints.ai_flags
+          //and service was not a numeric port-number string.
+          // in `node_modules/mdns/lib/resolver_sequence_tasks.js :117` :
+          // we call to cares_wrap's getAddrInfo which is :
+          // https://github.com/nodejs/node/blob/master/src/cares_wrap.cc#L1891
+          console.warn("name or service not known (no valid address found for device)");
+          break
+        default:
+          throw new Error("network exploration error : "+e.message);
+      }
+
     });
     browser.on('serviceUp',this.add.bind(this));
     browser.on('serviceDown', this.remove.bind(this));
