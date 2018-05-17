@@ -156,6 +156,7 @@ const template = [
   {
     label: 'Fenêtre',
     submenu: [
+      { label: 'Plein écran', role: 'togglefullscreen'},
       { label: 'Outil de développement', role: 'toggledevtools'}
     ]
   },
