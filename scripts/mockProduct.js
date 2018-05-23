@@ -8,7 +8,12 @@ app.get('/', function(req, res){
 });
 
 let startPort = 4321;
-let nbTest = parseInt(process.argv[2]);
+let nbTest = process.argv[2];
+if(!nbTest) {
+  nbTest = 50;
+} else {
+  nbTest = parseInt(nbTest);
+}
 
 for(let i = startPort; i < startPort + nbTest; i++) {
   let listener = app.listen(i, function() {
