@@ -20,6 +20,7 @@
       box-sizing: border-box;
       height: 100%;
       width: 100%;
+      overflow: hidden;
     }
     .mdc-top-app-bar--fixed{
       position: fixed;
@@ -33,8 +34,6 @@
     div#main-content{
       display: inline-flex;
       flex-direction: column;
-      margin-left: 16px;
-      margin-right: 16px;
       flex-grow: 1;
       box-sizing: border-box;
       margin-top: 64px;
@@ -88,7 +87,7 @@
               Actualiser
             </button>
           </div>
-          <div class="mdc-list-group">
+          <div class="mdc-list-group" style="overflow-y: scroll; overflow-x: hidden; height: calc(100vh - 120px)">
             <h-products fetch="GetList" ></h-products>
           </div>
         </nav>
