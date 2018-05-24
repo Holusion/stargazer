@@ -3,6 +3,7 @@ const path = require('path');
 const url = require('url');
 const {EventEmitter} = require("events");
 const {ipcMain, app, BrowserWindow, shell, Menu} = require('electron');
+const {download} = require('electron-dl');
 
 const pkgInfos = require("./package.json");
 
@@ -89,6 +90,12 @@ services.on("change",function(list){
 ipcMain.on('get-clients', (event) => {
   event.sender.send('clients-list', services.list);
 });
+//Active doawnload
+ipcMain.on('download', (e, args) => {
+  download(BrowserWindow.getFocusedWindow(), args.url)
+    .then(dl => mainWindow.webContents.send("download-complete", dl.getSavePath()))
+    .catch(console.error);
+})
 
 function createWindow () {
   // Create the browser window.
@@ -171,4 +178,6 @@ const template = [
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
+
+
 //*/
