@@ -11,6 +11,26 @@
       --mdc-theme-secondary: #2fafe6;
       --mdc-theme-text-icon-on-background: #103040;
     }
+    /* width */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+        border-radius: 2px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #d1d1d1;
+        border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #c1c1c1;
+        border-radius: 10px;
+    }
     html {
         height: 100%;
       }
@@ -37,6 +57,7 @@
       flex-grow: 1;
       box-sizing: border-box;
       margin-top: 64px;
+      margin-right: 16px;
     }
     .list-base {
       padding-left: 16px;
