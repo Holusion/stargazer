@@ -83,12 +83,12 @@ Sélectionnez un produit, la fenêtre devrait ressembler à ceci :
 
 #### Zone playlist
 
-<center>![Tabbar][tab]</center>
+![Tabbar][tab]
 
 - Contenus : Affiche la playlist du produit
 - Infos : Affiche des informations sur le produit comme l'adresse IP, le player actuel, etc...
 
-<center>![Carte de la playlist][card]</center>
+![Carte de la playlist][card]
 
 Un simple clique permet de sélectionner la carte. Un clique sur une carte sélectionnée lance le média associé.
 
@@ -185,12 +185,12 @@ Select a product, the window should looks like this :
 
 #### Playlist area
 
-<center>![Tabbar][tab]</center>
+![Tabbar][tab]
 
 - Contenus : Show the product playlist
 - Infos : Show the informations about the product like IP address, actual player, etc..
 
-<center>![Playlist card][card]</center>
+![Playlist card][card]
 
 A click allows to select the card. A click on a selected card launch the associated media.
 
