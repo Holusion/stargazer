@@ -5,6 +5,17 @@
 [main]:./docs/main.png
 [card]:./docs/card.png
 [upload]:./docs/upload.png
+[burger]:./docs/burger.png
+[filter]:./docs/filter.png
+[playbar]:./docs/playbar.png
+[deletebar]:./docs/deletebar.png
+[closebar]:./docs/closebar.png
+[checkbar]:./docs/checkbar.png
+[play]:./docs/play.png
+[active]:./docs/active.png
+[delete]:./docs/delete.png
+[select]:./docs/select.png
+[tab]:./docs/tab.png
 
 [English documentation](#english) - [Documentation française](#french)
 
@@ -37,8 +48,7 @@ npm start
 
 ### Mise en place
 
-Stargazer peut fonctionner dans un environnement possèdant un réseau internet mais aussi
-dans un environnement sans réseau.
+Stargazer peut fonctionner dans un environnement possédant un réseau internet mais aussi dans un environnement sans réseau.
 
 Dans le premier cas, branchez votre produit sur le réseau et ouvrez l'application. Dans l'autre cas,
 branchez le produit avec un câble RJ45 (ou un adaptateur RJ45 -> USB) directement
@@ -50,32 +60,43 @@ Si l'installation s'est bien passé, une fenêtre devrait s'ouvrir ressemblant �
 
 ### Interface
 
-La fenêtre est composée de deux zones distinctes :
-
-- la zone de gauche correspond à la liste des produits trouvés sur le réseau
-- la zone centrale affichera les médias présents sur le produit sélectionnés (*voir la suite*)
-
-L'application est composée de plusieurs boutons :
-
-- ![Rechercher produit][reload] met à jour la liste des produits
-- ![Retour arrière et coupe de la liste][header]
-  - la flèche représente le retour en arrière, attention, ça n'enlève pas les modifications faites sur le produit
-  - les trois barres horizontales permettent de couper la liste et de ne concerver que la vue du produit courant
-- ![Sélection produit][product] permet d'accèder au produit du même nom
-
 Sélectionnez un produit, la fenêtre devrait ressembler à ceci :
 
 ![Playlist d'un produit][main]
 
-De nouvelles informations apparaissent, le nom du produit, la version du produit et
-la liste des médias installés sur le produit. La playlist est affichée sous forme de cartes :
+#### Barre d'outils
 
-![Carte de la playlist][card]
+![Barre d'outils][header]
 
-Les trois boutons suivant permettent de manipuler le média :
-- **LIRE** : lit immédiatement le média
-- **ACTIF / INACTIF** : Active / Désactive le média
-- **SUPPRIMER** : Supprime définitivement le média
+- ![Ouvrir / Fermer le menu des produits][burger] Ouvrir / Fermer le menu des produits
+- ![Ouvrir / Fermer le menu des filtres][filter] Ouvrir / Fermer le menu des filtres
+- ![Lance le média sélectionné][playbar] Lance le média sélectionné
+- ![Supprime les médias sélectionnés][deletebar] Supprime les médias sélectionnés
+- ![Annule les filtres][closebar] Annule les filtres
+- ![Confirme les filtres][checkbar] Confirme les filtres
+
+#### Zone produits
+
+
+- ![Rechercher produit][reload] met à jour la liste des produits
+- ![Sélection produit][product] permet d'accéder au produit du même nom
+
+#### Zone playlist
+
+<center>![Tabbar][tab]</center>
+
+- Contenus : Affiche la playlist du produit
+- Infos : Affiche des informations sur le produit comme l'adresse IP, le player actuel, etc...
+
+<center>![Carte de la playlist][card]</center>
+
+Un simple clique permet de sélectionner la carte. Un clique sur une carte sélectionnée lance le média associé.
+
+Les quatre sélecteurs suivant permettent de manipuler le média :
+- ![Lire un média][play] : lit immédiatement le média
+- ![Active / Désactive un média][active] : active / désactive le média
+- ![Supprime définitivement un média][delete] : supprime définitivement le média
+- ![Sélectionne la carte][select] : sélectionne la carte (permet la sélection multiple)
 
 ### Ajouter un média
 
@@ -141,34 +162,43 @@ If the installation was succeeded, a window should appear like this one:
 
 ## Interface
 
-The window is composed of two distinct areas:
+Select a product, the window should looks like this :
 
-- the left area correspond to the products list found on the network
-- the central area will show the medias present on the selected product (*see the rest*)
+![Playlist d'un produit][main]
 
-The application is composed of multiple buttons:
+#### Toolbar
 
-- ![Product search][reload] met à jour la liste des produits
-- ![Go back and cut the list][header]
-  - the arrow represent the "Go back", warning, it does not remove the last modifications made
-  on de product.
-  - the three horizontal bars allow to cut the list and keep only the current product view
-- ![Product selection][product] allow to access to the product of the same name
+![Toolbar][header]
 
-Select a product and the window should look like this:
+- ![Open / Close the products menu][burger] Open / Close the products menu
+- ![Open / Close the filter menu][filter] Open / Close the filter menu
+- ![Launch a media][playbar] Launch the selected media
+- ![Remove the selected medias][deletebar] Remove the selected medias
+- ![Cancel the filters][closebar] Cancel the filter modifications
+- ![Confirm the filters][checkbar] Confirm the filter modifications
 
-![Playslist of a product][main]
+#### Product area
 
-New information appears, the product name, the product version and the medias list installed
-on the product. The playlist is displayed in the form of card:
 
-![Card of the playlist][card]
+- ![Search product][reload] Update the product list
+- ![Select product][product] Allows to access to the product with the same name
 
-The next three buttons allow to manipulate the media:
+#### Playlist area
 
-- **Lire**: Read the media immediately
-- **ACTIF / INACTIF**: Enable / Disable the media
-- **SUPPRIMER**: Remove the media definitively
+<center>![Tabbar][tab]</center>
+
+- Contenus : Show the product playlist
+- Infos : Show the informations about the product like IP address, actual player, etc..
+
+<center>![Playlist card][card]</center>
+
+A click allows to select the card. A click on a selected card launch the associated media.
+
+The next  four selectors allow to manipulate the medias :
+- ![Launch a media][play] : Launch immediately the media
+- ![Enable / Disable a media][active] : Enable / Disable the media
+- ![Remove definitively a media][delete] : Remove definitively the media
+- ![Select the card][select] : Select the card (allow the multiple selection)
 
 ## Adding a media
 
