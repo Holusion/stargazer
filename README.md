@@ -118,6 +118,12 @@ Vous pouvez nous envoyer ce fichier à <contact@holusion.com> ou en ouvrant une 
 [Github](https://github.com/Holusion/stargazer) en nous expliquant votre problème et si
 possible avec un exemple pour reproduire le problème.
 
+## Problème connu
+
+### Linux
+
+Si vous recevez une erreur `-3008 : name or service not known`, c'est probablement parce que le fichier `/etc/nsswitch.conf` n'est pas correctement configuré. Sur la ligne commençant par `hosts:` il doit y avoir l'option `mdns`, si elle n'est pas là, ajoutez là juste après `hosts:`. Si l'option `mdns` est là et que l'erreur est toujours déclenchée, changez la position de l'option. De temps en temps, il y a une option `dns4_minimal`, remplacez là par `mdns`.
+
 -------------------------------------------------------------------------------
 
 # <a name="english"></a>Stargazer - zeroconf network scanner for [Holusion](http://holusion.com/fr/) products
@@ -217,6 +223,16 @@ in a file based in:
 
 You can send us this file at <contact@holusion.com> or open an issue on [Github](https://github.com/Holusion/stargazer)
 by explaining you problem and if possible with an example to reproduce you problem.
+
+## Troubleshooting
+
+### Linux
+
+If you received an error `-3008 : name or service not known` it's probably because
+the file `/etc/nsswitch.conf` is not correctly configured. On the line starting with
+`hosts:` there must be the option `mdns`, if it is not here, add it just after `hosts:`.
+If the option `mdns` is here and the error is still fired, change the position of the option.
+Sometime there is an option `dns4_minimal`, replace it with `mdns`.
 
 -------------------------------------------------------------------------------
 
