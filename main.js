@@ -2,6 +2,7 @@
 const path = require('path');
 const url = require('url');
 const {EventEmitter} = require("events");
+const electron = require('electron');
 const {ipcMain, app, BrowserWindow, shell, Menu} = require('electron');
 const {download} = require('electron-dl');
 
@@ -104,11 +105,29 @@ function createWindow () {
     height: 1024,
     minWidth: 720,
     minHeight: 640,
+    show: false,
     title: `${pkgInfos.name} - ${pkgInfos.version}`,
     webPreferences: {
       webSecurity: false
     }
   });
+
+  let splash = new BrowserWindow({
+    width: 640, 
+    height: 360, 
+    frame: false,
+    alwaysOnTop: true,
+    center: true,
+    title: `${pkgInfos.name} - ${pkgInfos.version}`,
+    webPreferences: {
+      webSecurity: false
+    },
+  });
+  splash.loadURL(url.format({
+    pathname: path.join(__dirname, 'lib', 'splash.html'),
+    protocol: 'file',
+    slashes: true
+  }));
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -120,6 +139,13 @@ function createWindow () {
      mainWindow.webContents.openDevTools();
   }
   //
+
+  mainWindow.once('ready-to-show', () => {
+    setTimeout(() => {
+      splash.destroy();
+      mainWindow.show();
+    }, 1000);
+  })
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {

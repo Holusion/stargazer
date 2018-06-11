@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" href="../node_modules/material-components-web/dist/material-components-web.css">
+        <style>
+            :root{
+                --mdc-theme-primary: #103040;
+                --mdc-theme-secondary: #2fafe6;
+                --mdc-theme-text-icon-on-background: #103040;
+            }
+            body{
+               background-color: #103040;
+               overflow: hidden;
+            }
+            .content{
+              display: flex;
+              flex-direction: column;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              width: 100%;  
+              height: 100%;
+              margin: 0%;
+              color: white;
+            }
+            .text-content{
+                text-align: start;
+                display: block;
+                padding: 16px;
+                font-size: 16px;
+                font-weight: 400;
+            }
+            .mdc-button{
+                position: absolute;
+                right: 24px;
+                bottom: 24px;
+                color: white;
+            }
+
+            .mdc-button:disabled {
+                color: rgba(255, 255, 255, 0.1);
+            }
+        </style>
+    </head>
+    <body class="mdc-typography">
+        <div class="mdc-drawer">
+            <div class="content">
+                <img src="../static/icons/logo_holusion_blanc.png" alt="Logo holusion">
+                <div class="text-content">
+                    Bienvenue dans le gestionnaire de médias par Holusion : Stargazer
+                </div>
+            </div>
+        </div>
+
+        <script src="../node_modules/material-components-web/dist/material-components-web.js"></script>
+        <script>
+            mdc.autoInit()
+            // let drawer = new mdc.drawer.MDCPersistentDrawer(document.querySelector(".mdc-drawer"));
+        </script>
+    </body>
+</html>
