@@ -4,7 +4,6 @@ os:
 osx_image: xcode8.3
 
 dist: trusty
-sudo: false
 
 language: node_js
 node_js: "8"
@@ -14,6 +13,11 @@ env:
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
+addons:
+  apt:
+    packages:
+    - libavahi-compat-libdnssd-dev
+    
 cache:
   directories:
   - node_modules
@@ -25,5 +29,6 @@ install:
   - npm install
 
 script:
+  - npm test
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run dist; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run dist -- --mac; fi
