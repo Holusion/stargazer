@@ -8,7 +8,7 @@
     "test": "mocha",
     "build": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -w",
+    "dist": "electron-builder",
     "candle": "wixtoolset-compiler candle --args=\"wix.wxs -dversion=%npm_package_version% -ext WiXUtilExtension -ext WiXBalExtension\"",
     "light": "wixtoolset-compiler light --args=\"-o holusionStargazerSetup.exe wix.wixobj -ext WiXUIExtension.dll -ext WiXUtilExtension -ext WiXBalExtension\"",
     "postinstall": "electron-builder install-app-deps"
@@ -33,7 +33,6 @@
     "chai-as-promised": "^7.1.1",
     "electron": "1.8.2",
     "electron-builder": "^20.2.0",
-    "electron-rebuild": "^1.7.3",
     "mocha": "^5.0.5"
   },
   "optionalDependencies": {
@@ -47,6 +46,15 @@
         "msi"
       ],
       "icon": "static/icons/favicon.ico"
+    },
+    "linux": {
+      "executableName": "stargazer",
+      "target": [
+        "deb",
+        "tar.gz"
+      ],
+      "category": "Network",
+      "depends": ["libavahi-compat-libdnssd-dev"]
     },
     "msi": {
       "warningsAsErrors": false
