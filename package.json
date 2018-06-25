@@ -13,6 +13,7 @@
     "light": "wixtoolset-compiler light --args=\"-o holusionStargazerSetup.exe wix.wixobj -ext WiXUIExtension.dll -ext WiXUtilExtension -ext WiXBalExtension\"",
     "postinstall": "electron-builder install-app-deps"
   },
+  "homepage": "https://github.com/Holusion/stargazer/releases/latest",
   "author": "Sebastien DUMETZ <s.dumetz@holusion.com>",
   "license": "MIT",
   "dependencies": {
