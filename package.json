@@ -9,6 +9,7 @@
     "build": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
+    "release": "build",
     "candle": "wixtoolset-compiler candle --args=\"wix.wxs -dversion=%npm_package_version% -ext WiXUtilExtension -ext WiXBalExtension\"",
     "light": "wixtoolset-compiler light --args=\"-o holusionStargazerSetup.exe wix.wixobj -ext WiXUIExtension.dll -ext WiXUtilExtension -ext WiXBalExtension\"",
     "postinstall": "electron-builder install-app-deps"
@@ -19,6 +20,7 @@
   "dependencies": {
     "bonjour": "^3.5.0",
     "electron-dl": "^1.12.0",
+    "electron-log": "^2.2.15",
     "express": "^4.16.3",
     "form-data": "^2.3.2",
     "http-proxy": "^1.16.2",
@@ -55,7 +57,9 @@
         "tar.gz"
       ],
       "category": "Network",
-      "depends": ["libavahi-compat-libdnssd-dev"]
+      "depends": [
+        "libavahi-compat-libdnssd-dev"
+      ]
     },
     "msi": {
       "warningsAsErrors": false
