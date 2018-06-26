@@ -2,22 +2,18 @@ os:
 - linux
 - osx
 osx_image: xcode8.3
-
 dist: trusty
-
 language: node_js
 node_js: '8'
-
 env:
   global:
   - ELECTRON_CACHE=$HOME/.cache/electron
   - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-  - secure: GH_TOKEN="a3OwYvvPu2ws5keFQEfjJFrI1IWkxvmu9/9Uw9w4KxjtCEQqNpQL4EMciZ+PTMPmS1i8r4aLKIB2QikY4MAbxqXUnF8+4mrAgFvKKm6ys3DkQzj/HSCLqkIG6UMR/hhZbOej+FpXeWjgVhCVFS9V52e8e5fz0tu1AtrDYFrBy9YvGbRPugiWAS0H+VzqzRWusqlYXisnPhyU9yps1PYuZVxFBdEzXKp1rFobrU8C7kvZ4oLiEW7TQj1mn+5ZcMtBOHwGSYjN8PJsEjerEFN1XotwbPTUlH29NgV8/h3F8JdfIxuMsXrirVQGFmqP8MTGsTORtCE8umczY0CLm2xPwDarI+i1DCI0vCSRwTYdkWsr387wNpEz4Bk4JTqi62PzX9EvQHaJl1jUIXaJtD6W9WO2Ue7r/qFnvUJC4YxMwp0KCELsQ37kCmDTq6WW2u+gBcJ8OTcMBi3R5SBzcv6msGhR/sSPNiNyo+jg959GnoPCP9hDgA31zRmSkZBdDqEq2sbCZSfA+l58pakHs6X3bKAiLeejlNYQN2ktIpKbU6ngyI8ZbLBwYE25oDMXld3Il4z14K4EQgdh0D0R45oUAR14TIrnhiL6QZ62D+hnuqVXLFy2TKJf7SKV81kYf++7SKtcM96mwjHMyOlRxwgD59oQ+sdkmYNCe2bvPsZeBFk="
-addons:
+  - secure: "UPOy+e0W7I8Iuiem056i9dOyoWmHrBzTLhrYYD9JL2mJ2Iwdsc9yB//mvyreD6tSj1NIAGaKWBYpNpLPMRB3qFURkCz5khxUQN1bddnHAVOfq2gcC21WJ9wELNSQDFq5NTbRzRkp8FXAM4BQRpkClPL4QDop1tURUCap312efF8SAfeea5vzC8kJpiRv+SoSJ52FXsBpcWMa1fy4QrCT1+upK6x0LgHvMxVp3epk0lGch6KhKN4E4Zu2ilVWLdXd1Wrg5KBhxmY7X7UrVIUAGQLdBKQbJ2+7c2J7ib2Inr6N5kJHQ7kAfuknqCW3ooXkKiSOq1xxEesoIn03tkQ68LjmEGiW87v3kgx0c3/p9VGWEujwgpBvWo38VPZvqLOccua/YFi9jUgqeRtJQOs4qCdF2P52r9MTSlqlKSTrcbcVqlF/MRHC6kCc9AWmJaCfuNVqVL/YJL0WTtfXiN7bwwNfP1TIO/iFi8e5IncVs3xs9vsmhaUpRgSbr+ATsyo/hP5pm5KnUaekcjeAaMB/VvZ9FZL1y+AbLHUGqiWfQxm9b0HtGFw5Pz4febqA8EOBPanx5agmnnUtklESCad+Eqm/bEGmMlZuoCfex/2UzZfYaQiac/4Mvyg7yoKVJNelVkU7T5OEpz5KZJ+zPxFNADr4NZxPZHZ8MDSmueHTDfU="
+  addons: 
   apt:
     packages:
     - libavahi-compat-libdnssd-dev
-
 cache:
   directories:
   - node_modules
@@ -26,7 +22,6 @@ cache:
   - "$HOME/.npm/_prebuilds"
 install:
 - npm install
-
 script:
 - npm test
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run dist; fi
