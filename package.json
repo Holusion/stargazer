@@ -9,7 +9,7 @@
     "build": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "build",
+    "publish": "build -p always",
     "candle": "wixtoolset-compiler candle --args=\"wix.wxs -dversion=%npm_package_version% -ext WiXUtilExtension -ext WiXBalExtension\"",
     "light": "wixtoolset-compiler light --args=\"-o holusionStargazerSetup.exe wix.wixobj -ext WiXUIExtension.dll -ext WiXUtilExtension -ext WiXBalExtension\"",
     "postinstall": "electron-builder install-app-deps"
@@ -21,6 +21,7 @@
     "bonjour": "^3.5.0",
     "electron-dl": "^1.12.0",
     "electron-log": "^2.2.15",
+    "electron-updater": "^2.22.0",
     "express": "^4.16.3",
     "form-data": "^2.3.2",
     "http-proxy": "^1.16.2",
@@ -35,7 +36,7 @@
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "electron": "1.8.2",
-    "electron-builder": "^20.2.0",
+    "electron-builder": "20.14.7",
     "mocha": "^5.0.5"
   },
   "optionalDependencies": {
@@ -44,6 +45,20 @@
   "build": {
     "appId": "com.holusion.app",
     "artifactName": "${productName}-setup.${ext}",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Holusion",
+        "repo": "stargazer"
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.utilities"
+    },
     "win": {
       "target": [
         "msi"
@@ -52,11 +67,12 @@
     },
     "linux": {
       "executableName": "stargazer",
+      "category": "Network",
       "target": [
+        "AppImage",
         "deb",
         "tar.gz"
       ],
-      "category": "Network",
       "depends": [
         "libavahi-compat-libdnssd-dev"
       ]
