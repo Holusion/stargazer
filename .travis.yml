@@ -1,34 +1,33 @@
 os:
-  - linux
-  - osx
+- linux
+- osx
 osx_image: xcode8.3
 
 dist: trusty
 
 language: node_js
-node_js: "8"
+node_js: '8'
 
 env:
   global:
-    - ELECTRON_CACHE=$HOME/.cache/electron
-    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
+  - ELECTRON_CACHE=$HOME/.cache/electron
+  - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+  - secure: od+qnPE+LUK+FIR6XRTUznhNAdck6WL2RAxD0RseYOmvfUGn+TWsxhOSJ760OSKv52BRGKYDCYORrNthitHpPgOYDKF2g6s9USmAZKaOXawTmxhXiMdW4kH2KGUw8ekQsOBHDgTDjJocrgsFT2xwhZY9ne2jHIX088HGEEyA9xJr4j9n8LPJO0KuEyqfejdbOm/iSREjFYQInEcyWYWYX4cfvh/rl/h0ho/FFxGNkSp60gTnp/dxcP9Xpy+URLv50vuOh7AKs5EKdg8I35jHyFER45gIjg7JIaSwKiY6WFkvBsa+ggnShqPk7eMJfFL6kl15GPieeaxPDMtotoS6Q5/KqQM8RaaRuOnwcU9R6HJslSjLID/Xn5QF6ROnd7bdLorG49Qt0PMllTH2HF6rmyiT+KN/RyNlOGr6AvnxtRYz5P9N477u+BzKfiy52dZF2dnPt7fiznFq9kmPBwwVZd+dnrWt5HAo1tNFOqUy3xPjxT85MfGvDtHHbs5TRQLZE9eCwQYJgiqAHwBZU7k53zgibFaUuH7gHaM4Gb3f3SqLsCT7byRvxbtku2ep4d4zwJoDoaz4+AoIMw57sN5j0bdlJEcAcRs3hsQxUhcP2h/ilVYMvkXsMUX7S0a4znFVp3ZUh831QPOOAovhL/LLP7TTmHy8kOGxuz9yp9LzPPY=
 addons:
   apt:
     packages:
     - libavahi-compat-libdnssd-dev
-    
+
 cache:
   directories:
   - node_modules
-  - $HOME/.cache/electron
-  - $HOME/.cache/electron-builder
-  - $HOME/.npm/_prebuilds
-
+  - "$HOME/.cache/electron"
+  - "$HOME/.cache/electron-builder"
+  - "$HOME/.npm/_prebuilds"
 install:
-  - npm install
+- npm install
 
 script:
-  - npm test
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run dist; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run dist -- --mac; fi
+- npm test
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run dist; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run dist -- --mac; fi
