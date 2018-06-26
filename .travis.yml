@@ -7,22 +7,22 @@ language: node_js
 node_js: '8'
 env:
   global:
-  - ELECTRON_CACHE=$HOME/.cache/electron
-  - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-  - secure: "UPOy+e0W7I8Iuiem056i9dOyoWmHrBzTLhrYYD9JL2mJ2Iwdsc9yB//mvyreD6tSj1NIAGaKWBYpNpLPMRB3qFURkCz5khxUQN1bddnHAVOfq2gcC21WJ9wELNSQDFq5NTbRzRkp8FXAM4BQRpkClPL4QDop1tURUCap312efF8SAfeea5vzC8kJpiRv+SoSJ52FXsBpcWMa1fy4QrCT1+upK6x0LgHvMxVp3epk0lGch6KhKN4E4Zu2ilVWLdXd1Wrg5KBhxmY7X7UrVIUAGQLdBKQbJ2+7c2J7ib2Inr6N5kJHQ7kAfuknqCW3ooXkKiSOq1xxEesoIn03tkQ68LjmEGiW87v3kgx0c3/p9VGWEujwgpBvWo38VPZvqLOccua/YFi9jUgqeRtJQOs4qCdF2P52r9MTSlqlKSTrcbcVqlF/MRHC6kCc9AWmJaCfuNVqVL/YJL0WTtfXiN7bwwNfP1TIO/iFi8e5IncVs3xs9vsmhaUpRgSbr+ATsyo/hP5pm5KnUaekcjeAaMB/VvZ9FZL1y+AbLHUGqiWfQxm9b0HtGFw5Pz4febqA8EOBPanx5agmnnUtklESCad+Eqm/bEGmMlZuoCfex/2UzZfYaQiac/4Mvyg7yoKVJNelVkU7T5OEpz5KZJ+zPxFNADr4NZxPZHZ8MDSmueHTDfU="
-  addons: 
+    - ELECTRON_CACHE=$HOME/.cache/electron
+    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+    - secure: UPOy+e0W7I8Iuiem056i9dOyoWmHrBzTLhrYYD9JL2mJ2Iwdsc9yB//mvyreD6tSj1NIAGaKWBYpNpLPMRB3qFURkCz5khxUQN1bddnHAVOfq2gcC21WJ9wELNSQDFq5NTbRzRkp8FXAM4BQRpkClPL4QDop1tURUCap312efF8SAfeea5vzC8kJpiRv+SoSJ52FXsBpcWMa1fy4QrCT1+upK6x0LgHvMxVp3epk0lGch6KhKN4E4Zu2ilVWLdXd1Wrg5KBhxmY7X7UrVIUAGQLdBKQbJ2+7c2J7ib2Inr6N5kJHQ7kAfuknqCW3ooXkKiSOq1xxEesoIn03tkQ68LjmEGiW87v3kgx0c3/p9VGWEujwgpBvWo38VPZvqLOccua/YFi9jUgqeRtJQOs4qCdF2P52r9MTSlqlKSTrcbcVqlF/MRHC6kCc9AWmJaCfuNVqVL/YJL0WTtfXiN7bwwNfP1TIO/iFi8e5IncVs3xs9vsmhaUpRgSbr+ATsyo/hP5pm5KnUaekcjeAaMB/VvZ9FZL1y+AbLHUGqiWfQxm9b0HtGFw5Pz4febqA8EOBPanx5agmnnUtklESCad+Eqm/bEGmMlZuoCfex/2UzZfYaQiac/4Mvyg7yoKVJNelVkU7T5OEpz5KZJ+zPxFNADr4NZxPZHZ8MDSmueHTDfU=
+addons: 
   apt:
     packages:
-    - libavahi-compat-libdnssd-dev
+      - libavahi-compat-libdnssd-dev
 cache:
   directories:
-  - node_modules
-  - "$HOME/.cache/electron"
-  - "$HOME/.cache/electron-builder"
-  - "$HOME/.npm/_prebuilds"
+    - node_modules
+    - "$HOME/.cache/electron"
+    - "$HOME/.cache/electron-builder"
+    - "$HOME/.npm/_prebuilds"
 install:
-- npm install
+  - npm install
 script:
-- npm test
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run dist; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run dist -- --mac; fi
+  - npm test
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run dist; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run dist -- --mac; fi
