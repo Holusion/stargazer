@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 const path = require('path');
 const url = require('url');
 const {EventEmitter} = require("events");
@@ -7,6 +8,8 @@ const {ipcMain, app, BrowserWindow, shell, Menu} = require('electron');
 const {download} = require('electron-dl');
 
 const pkgInfos = require("./package.json");
+const constant = require('./constants');
+const {Plugins} = require('./lib/Plugins');
 
 
 var mdns = require('mdns');
@@ -204,6 +207,17 @@ const template = [
 
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
+
+if(!fs.existsSync(constant.DATA_PATH)) {
+  fs.mkdirSync(constant.DATA_PATH);
+}
+
+if(!fs.existsSync(constant.PLUGINS_PATH)) {
+  fs.mkdirSync(constant.PLUGINS_PATH);
+}
+
+let p = new Plugins();
+p.loadAllPlugins();
 
 
 //*/
