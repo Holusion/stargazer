@@ -9,7 +9,6 @@ const {download} = require('electron-dl');
 
 const pkgInfos = require("./package.json");
 const constant = require('./constants');
-const {Plugins} = require('./lib/Plugins');
 
 
 var mdns = require('mdns');
@@ -215,9 +214,5 @@ if(!fs.existsSync(constant.DATA_PATH)) {
 if(!fs.existsSync(constant.PLUGINS_PATH)) {
   fs.mkdirSync(constant.PLUGINS_PATH);
 }
-
-let p = new Plugins();
-p.loadAllPlugins();
-
 
 //*/
