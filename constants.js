@@ -1,6 +1,8 @@
+'use strict';
+
 const path = require('path')
 
-constant = module.exports;
+let constant = module.exports;
 
 constant.WIN_DATA_PATH = process.env.APPDATA
 constant.MACOS_DATA_PATH = process.env.HOME + '/Library/Preferences'
