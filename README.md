@@ -34,15 +34,13 @@
 
 ### MacOS
 
-La compatibilité MacOS n'est pas supportée actuellement.
+- Télécharger holusion-stargazer-setup.dmg
+- Installer le fichier .dmg
 
 ### Linux
 
-Il n'y a a pas encore de package linux, mais vous pouvez cloner ce repo et installer avec
-```shell
-npm install
-npm start
-```
+- Télécharger holusion-stargazer-setup.deb ou holusion-stargazer-setup.AppImage
+- Installer le .deb ou double cliquer sur le fichier AppImage pour lancer stargazer 
 
 ## Utilisation
 
@@ -141,15 +139,13 @@ Si vous recevez une erreur `-3008 : name or service not known`, c'est probableme
 
 ### MacOS
 
-MacOS compatibility is not actually supported.
+- Download holusion-stargazer-setup.dmg
+- Install le fichier .dmg
 
 ### Linux
 
-There is no linux package yet, but you can clone this repo and install it with
-```shell
-npm install
-npm start
-```
+- Download holusion-stargazer-setup.deb or holusion-stargazer-setup.AppImage
+- Install the .deb file or double click on the AppImage file to launch stargazer 
 
 ## Usage
 
