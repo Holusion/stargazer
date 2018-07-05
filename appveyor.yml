@@ -17,6 +17,8 @@ environment:
     secure: QbbC1VtR6vZAKfHUJeJ1nnm3Hi0HVrpmS3+ocEwmfIhP2q0XRDUqXUrSKhvyy/iu
   bonjour_sdk:
     secure: QbbC1VtR6vZAKfHUJeJ1nnm3Hi0HVrpmS3+ocEwmfIjjzytlZvdLKEiCanjwgvLJ
+  GH_TOKEN:
+    secure: rDaQKugNpZ/X1f1VHPp9pWhHdHnzt5OUJKYB8Y+B0opO2ee8eJW1jgKHL4k9cjnB
 
 cache:
   - node_modules
