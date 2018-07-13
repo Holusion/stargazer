@@ -41,10 +41,6 @@ class MockNetwork {
         return true;
     }
     
-    init() {
-    
-    }
-    
     toggleActivation(elem) {
         let e = this.playlist.filter(n => n.name == elem.name)[0];
         e.active = !e.active;
