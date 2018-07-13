@@ -30,8 +30,6 @@ describe('Playlist - network', () => {
 
     it('.removeItem', async function() {
         await this.playlist.removeItem(this.network.playlist[0]);
-        console.log(this.playlist.medias);
-        
         await expect(this.playlist.medias.length).to.equal(2);
     })
 })
