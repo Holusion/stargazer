@@ -3,6 +3,8 @@
 const {Playlist} = require('../lib/components/Playlist');
 const {MockNetwork, MockPlaylistItem} = require('./mock/mock_network');
 
+// To check method calling : http://www.chaijs.com/plugins/chai-spies/
+
 describe('Playlist', () => {
     beforeEach(function () {
         this.network = new MockNetwork([
@@ -26,7 +28,7 @@ describe('Playlist', () => {
                 name: 'baz'
             })
         ]);
-        this.playlist = new Playlist(this.network, {render: (list) => console.log(''), updateCurrent: () => console.log('')});
+        this.playlist = new Playlist(this.network);
         this.playlist.current = 'bar';
     })
 
