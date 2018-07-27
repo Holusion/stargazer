@@ -3,6 +3,9 @@
 const {Playlist} = require('../lib/components/Playlist');
 const {MockNetwork, MockPlaylistItem} = require('./mock/mock_network');
 
+const playlistSandbox = sandbox();
+const networkSandbox = sandbox();
+
 // To check method calling : http://www.chaijs.com/plugins/chai-spies/
 
 describe('Playlist', () => {
@@ -30,25 +33,66 @@ describe('Playlist', () => {
         ]);
         this.playlist = new Playlist(this.network);
         this.playlist.current = 'bar';
+
+        playlistSandbox.on(this.playlist, ['updatePlaylist', 'updateCurrent']);
+        networkSandbox.on(this.network, ['remove', 'play', 'toggleActivation', 'getPlaylist', 'getCurrent']);
+    })
+    afterEach(function() {
+        playlistSandbox.restore();
+        networkSandbox.restore();
     })
 
     describe('Playlist - network', function() {
-        it('.toggleActiveItem', async function() {
-            await this.playlist.toggleActiveItem(this.network.playlist[0]);
-            expect(this.playlist.medias[0].active).to.equal(true);
-    
-            await this.playlist.toggleActiveItem(this.network.playlist[1]);
-            expect(this.playlist.medias[1].active).to.equal(false);
+        describe('.toggleActiveItem', function() {
+            it('Check medias', async function() {
+                await this.playlist.toggleActiveItem(this.network.playlist[0]);
+                expect(this.playlist.medias[0].active).to.equal(true);
+        
+                await this.playlist.toggleActiveItem(this.network.playlist[1]);
+                expect(this.playlist.medias[1].active).to.equal(false);
+            })
+            it('Check playlist function call', async function() {
+
+            })
+            it('Check network function call', async function() {
+                await this.playlist.toggleActiveItem(this.network.playlist[0]);
+                expect(this.network.toggleActivation).to.have.been.called.with(this.network.playlist[0]);
+            })
         })
-    
-        it('.playItem', async function() {
-            await this.playlist.playItem(this.network.playlist[2]);
-            expect(this.playlist.current).to.equal('baz');
+
+        describe('.playItem', function() {
+            it('Check medias', async function() {
+                await this.playlist.playItem(this.network.playlist[2]);
+                expect(this.playlist.current).to.equal('baz');
+            })
+
+            it('Check playlist function call', async function() {
+                await this.playlist.playItem(this.network.playlist[2]);
+                expect(this.playlist.updateCurrent).to.have.been.called();
+            })
+
+            it('Check network function call', async function() {
+                await this.playlist.playItem(this.network.playlist[2]);
+                expect(this.network.play).to.have.been.called.with(this.network.playlist[2]);
+            })
         })
-    
-        it('.removeItem', async function() {
-            await this.playlist.removeItem(this.network.playlist[0]);
-            expect(this.playlist.medias.length).to.equal(2);
+
+        describe('.remoevItem', function() {
+            it('Check medias', async function() {
+                await this.playlist.removeItem(this.network.playlist[0]);
+                expect(this.playlist.medias.length).to.equal(2);
+            })
+            
+            it('Check playlist function call', async function() {
+                await this.playlist.removeItem(this.network.playlist[0]);
+                expect(this.playlist.updatePlaylist).to.have.been.called();
+            })
+
+            it('Check network function call', async function() {
+                let e = this.network.playlist[0];
+                await this.playlist.removeItem(this.network.playlist[0]);
+                expect(this.network.remove).to.have.been.called.with(e);
+            })
         })
     })
 
