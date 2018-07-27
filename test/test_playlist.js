@@ -68,7 +68,7 @@ describe('Playlist', () => {
 
             it('Check playlist function call', async function() {
                 await this.playlist.playItem(this.network.playlist[2]);
-                expect(this.playlist.updateCurrent).to.have.been.called();
+                expect(this.playlist.updateCurrent).to.have.been.called.with(this.network.playlist[2]);
             })
 
             it('Check network function call', async function() {
@@ -97,6 +97,32 @@ describe('Playlist', () => {
     })
 
     describe('Playlist - medias', function() {
+        describe('.updatePlaylist', function() {
+            it('Check network.getPlaylist called', async function() {
+                await this.playlist.updatePlaylist();
+                expect(this.network.getPlaylist).to.have.been.called();
+            })
+            it('Check network.getCurrent called', async function() {
+                await this.playlist.updatePlaylist();
+                expect(this.network.getCurrent).to.have.been.called();
+            })
+            it('Check playlist.updateCurrent called', async function() {
+                let current = this.network.playlist[1];
+                await this.playlist.updatePlaylist();
+                expect(this.playlist.updateCurrent).to.have.been.called.with(current);
+            })
+            it('Check playlist.updateCurrent called with no current', async function() {
+                this.network.playlist = [new MockPlaylistItem({
+                    active: false,
+                    rank: 1,
+                    path: '/foo/foo.mp4',
+                    name: 'foo'
+                })];
+                await this.playlist.updatePlaylist();
+                expect(this.playlist.updateCurrent).to.not.have.been.called();
+            })
+        })
+
         it('.selectItem', async function() {
             await this.playlist.selectItem(this.network.playlist[0]);
             await this.playlist.selectItem(this.network.playlist[1]);
