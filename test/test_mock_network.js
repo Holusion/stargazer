@@ -51,4 +51,9 @@ describe('MockNetwork', () => {
         let res = await this.network.getCurrent();
         expect(res.current).to.equal(true);
     })
+
+    it('.getPlaylist', async function() {
+        let res = await this.network.getPlaylist();
+        expect(res).to.equal(this.playlist);
+    })
 })
