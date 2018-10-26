@@ -1,6 +1,7 @@
 os:
 - linux
 - osx
+- windows
 osx_image: xcode8.3
 dist: trusty
 language: node_js
@@ -26,3 +27,4 @@ script:
   - npm test
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run dist; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run dist -- --mac; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then npm run dist; fi
