@@ -20,11 +20,13 @@ let mainWindow;
 services.on("change",function(list){
   if (!mainWindow || ! mainWindow.webContents){return}
   console.log("Change : ",JSON.stringify(list));
+  list = list.filter(elem => elem.status == 'running')
   mainWindow.webContents.send('clients-list', list);
 })
+
 //Active update requests
 ipcMain.on('get-clients', (event) => {
-  event.sender.send('clients-list', services.list);
+  event.sender.send('clients-list', services.list.filter(elem => elem.status == "running"));
 });
 //Active doawnload
 ipcMain.on('download', (e, args) => {
