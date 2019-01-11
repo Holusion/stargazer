@@ -13,7 +13,7 @@ const constant = require('./constants');
 const {Scanner} = require('@holusion/product-scanner')
 
 
-let services = new Scanner();
+let services = new Scanner({autostart:true, autorefresh:10000});
 let mainWindow;
 
 //Passive update publishing
