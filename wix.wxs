@@ -10,6 +10,8 @@
     SplashScreenSourceFile=".\static\icons\holusion_logo.png"
     UpgradeCode="1c1ad690-ad5d-498a-99df-b9afb84451d1">
 
+    <WixVariable Id="WixUILicenseRtf" Value=".\static\license.rtf" />
+    
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
       <bal:WixStandardBootstrapperApplication
         LicenseFile=".\static\license.rtf"
