@@ -2,8 +2,6 @@
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
-const {EventEmitter} = require("events");
-const electron = require('electron');
 const {ipcMain, app, BrowserWindow, shell, Menu} = require('electron');
 const {download} = require('electron-dl');
 
@@ -26,6 +24,7 @@ try {
 
   //Active update requests
   ipcMain.on('get-clients', (event) => {
+    services.refresh();
     event.sender.send('clients-list', services.list.filter(elem => elem.status == "running"));
   });
 } catch(error) {
