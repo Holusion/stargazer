@@ -24,7 +24,6 @@
     "form-data": "^2.3.3",
     "material-components-web": "^0.32.0",
     "navigo": "^7.1.2",
-    "request": "^2.88.0",
     "socket.io-client": "^2.2.0",
     "winston": "^2.4.4"
   },
