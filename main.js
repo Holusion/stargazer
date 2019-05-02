@@ -11,13 +11,9 @@ const constant = require('./constants');
 const {Scanner} = require('@holusion/product-scanner')
 
 let mainWindow;
-let services;
+let errors = [];
 
-try {
-  services = new Scanner({autostart:true, autorefresh:10000});
-} catch(error) {
-  console.error(error);
-}
+let services = new Scanner({autostart:true, autorefresh:10000});
 
 if(services instanceof Scanner) {
   //Passive update publishing
@@ -26,6 +22,14 @@ if(services instanceof Scanner) {
     console.log("Change : ",JSON.stringify(list));
     list = list.filter(elem => elem.status == 'running')
     mainWindow.webContents.send('clients-list', list);
+  })
+  
+  services.on("error", (err) => {
+    if (!mainWindow || ! mainWindow.webContents) errors.push(error);
+    else {
+      errors = [];
+      mainWindow.webContents.send('remote-error', [{message: err.message, code: err.code, stack: err.stack}]);
+    }
   })
   
   //Active update requests
@@ -39,7 +43,7 @@ if(services instanceof Scanner) {
 ipcMain.on('download', (e, args) => {
   download(BrowserWindow.getFocusedWindow(), args.url)
     .then(dl => mainWindow.webContents.send("download-complete", dl.getSavePath()))
-    .catch(console.error);
+    .catch(error => mainWindow.webContents.send('remote-error', [{message: err.message, code: err.code, stack: err.stack}]));
 })
 
 function createWindow () {
@@ -88,6 +92,8 @@ function createWindow () {
     setTimeout(() => {
       splash.destroy();
       mainWindow.show();
+      mainWindow.webContents.send('remote-error', errors.map(error => ({message: error.message, code: error.code, stack: error.stack})));
+      errors = [];
     }, 1000);
   })
 
