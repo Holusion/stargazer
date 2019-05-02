@@ -11,9 +11,15 @@ const constant = require('./constants');
 const {Scanner} = require('@holusion/product-scanner')
 
 let mainWindow;
-try {
-  let services = new Scanner({autostart:true, autorefresh:10000});
+let services;
 
+try {
+  services = new Scanner({autostart:true, autorefresh:10000});
+} catch(error) {
+  console.error(error);
+}
+
+if(services instanceof Scanner) {
   //Passive update publishing
   services.on("change",function(list){
     if (!mainWindow || ! mainWindow.webContents){return}
@@ -21,14 +27,13 @@ try {
     list = list.filter(elem => elem.status == 'running')
     mainWindow.webContents.send('clients-list', list);
   })
-
+  
   //Active update requests
   ipcMain.on('get-clients', (event) => {
     services.refresh();
     event.sender.send('clients-list', services.list.filter(elem => elem.status == "running"));
   });
-} catch(error) {
-  console.error(error);
+
 }
 //Active doawnload
 ipcMain.on('download', (e, args) => {
