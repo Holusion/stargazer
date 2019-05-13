@@ -159,8 +159,4 @@ if(!fs.existsSync(constant.DATA_PATH)) {
   fs.mkdirSync(constant.DATA_PATH);
 }
 
-if(!fs.existsSync(constant.PLUGINS_PATH)) {
-  fs.mkdirSync(constant.PLUGINS_PATH);
-}
-
 //*/
