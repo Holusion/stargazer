@@ -43,7 +43,7 @@ if(services instanceof Scanner) {
 ipcMain.on('download', (e, args) => {
   download(BrowserWindow.getFocusedWindow(), args.url)
     .then(dl => mainWindow.webContents.send("download-complete", dl.getSavePath()))
-    .catch(error => mainWindow.webContents.send('remote-error', [{message: err.message, code: err.code, stack: err.stack}]));
+    .catch(err => mainWindow.webContents.send('remote-error', [{message: err.message, code: err.code, stack: err.stack}]));
 })
 
 function createWindow () {
