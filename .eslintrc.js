@@ -2,7 +2,14 @@ module.exports = {
     "env": {
         "es6": true,
         "node": true,
-        "browser": true
+        "browser": true,
+        "mocha": true,
+    },
+    "globals": {
+        "expect": true,
+        "sandbox": true,
+        "should": true,
+        "assert": true,
     },
     "extends": "eslint:recommended",
     "parserOptions": {
