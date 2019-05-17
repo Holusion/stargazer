@@ -19,13 +19,13 @@ if(services instanceof Scanner) {
   //Passive update publishing
   services.on("change",function(list){
     if (!mainWindow || ! mainWindow.webContents){return}
-    console.log("Change : ",JSON.stringify(list));
+    // console.log("Change : ",JSON.stringify(list));
     list = list.filter(elem => elem.status == 'running')
     mainWindow.webContents.send('clients-list', list);
   })
   
   services.on("error", (err) => {
-    if (!mainWindow || ! mainWindow.webContents) errors.push(error);
+    if (!mainWindow || ! mainWindow.webContents) errors.push(err);
     else {
       errors = [];
       mainWindow.webContents.send('remote-error', [{message: err.message, code: err.code, stack: err.stack}]);
