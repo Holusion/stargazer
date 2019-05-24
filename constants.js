@@ -9,3 +9,9 @@ constant.MACOS_DATA_PATH = process.env.HOME + '/Library/Preferences'
 constant.LINUX_DATA_PATH = process.env.HOME + '/.local/share'
 
 constant.DATA_PATH = path.join(constant.WIN_DATA_PATH || (process.platform == 'darwin' ? constant.MACOS_DATA_PATH : constant.LINUX_DATA_PATH), 'stargazer');
+
+constant.HTTP_CODE = {
+    success: 200,
+    noContent: 204,
+    notFound: 404
+}
