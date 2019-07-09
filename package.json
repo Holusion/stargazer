@@ -76,7 +76,7 @@
       "depends": [
         "libavahi-compat-libdnssd-dev"
       ],
-      "extraResources": "extraResources/libdns_sd.so.1"
+      "extraFiles": {"from": "libraries", "to": "usr/lib"}
     },
     "msi": {
       "warningsAsErrors": false
