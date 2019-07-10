@@ -52,9 +52,6 @@ describe('Playlist', () => {
                 await this.playlist.toggleActiveItem(this.network.playlist[1]);
                 expect(this.playlist.medias[1].active).to.equal(false);
             })
-            it('Check playlist function call', async function() {
-
-            })
             it('Check network function call', async function() {
                 await this.playlist.toggleActiveItem(this.network.playlist[0]);
                 expect(this.network.toggleActivation).to.have.been.called.with(this.network.playlist[0]);
@@ -134,24 +131,70 @@ describe('Playlist', () => {
             })
         })
 
-        it('.selectItem', async function() {
-            await this.playlist.selectItem(this.network.playlist[0]);
-            await this.playlist.selectItem(this.network.playlist[1]);
-            expect(this.playlist.medias[0]).to.have.property('selected');
-            expect(this.playlist.medias[1]).to.have.property('selected');
+        describe(".selectItem", function() {
+            it('when items exists', function() {
+                this.playlist.selectItem(this.network.playlist[0]);
+                this.playlist.selectItem(this.network.playlist[1]);
+                expect(this.playlist.medias[0]).to.have.property('selected');
+                expect(this.playlist.medias[1]).to.have.property('selected');
+            })
+
+            it('when items not exists', function() {
+                expect(() => this.playlist.selectItem({name: 'error'})).to.throw(MediaNotFound);
+            })
         })
-    
-        it('.unselectItem', async function() {
-            await this.playlist.selectItem(this.network.playlist[0]);
-            expect(this.playlist.medias[0]).to.have.property('selected');
-            await this.playlist.unselectItem(this.network.playlist[0]);
-            expect(this.playlist.medias[0]).to.not.have.property('selected');
+        
+        describe('.unselectItem', function() {
+            it('when items exists', function() {
+                this.playlist.selectItem(this.network.playlist[0]);
+                expect(this.playlist.medias[0]).to.have.property('selected');
+                this.playlist.unselectItem(this.network.playlist[0]);
+                expect(this.playlist.medias[0]).to.not.have.property('selected');
+            })
+
+            it('when items not exists', function() {
+                expect(() => this.playlist.unselectItem({name: 'error'})).to.throw(MediaNotFound);
+            })
         })
 
-        it('.filter', async function() {
-            this.playlist.filterOption = {active: (e) => e.active == true};
-            let res = this.network.playlist.filter(info => this.playlist.filter(info));
-            expect(res.length).to.equal(2);
+        describe('.selectAllItem', function() {
+            it('basic usage', function() {
+                this.playlist.selectAllItem();
+                for(let m of this.playlist.medias) {
+                    expect(m).to.have.property('selected');
+                }
+            })
+        })
+
+        describe('.unselectAllItem', function() {
+            it('when all selected', function() {
+                this.playlist.selectAllItem();
+                this.playlist.unselectAllItem();
+                for(let m of this.playlist.medias) {
+                    expect(m).to.not.have.property('selected');
+                }
+            })
+
+            it('when not all selected', function() {
+                this.playlist.selectItem(this.network.playlist[0]);
+                this.playlist.unselectAllItem();
+                for(let m of this.playlist.medias) {
+                    expect(m).to.not.have.property('selected');
+                }
+            })
+        })
+
+        describe(".filter", function() {
+            it('when property exists', function() {
+                this.playlist.filterOption = {active: (e) => e.active == true};
+                let res = this.network.playlist.filter(info => this.playlist.filter(info));
+                expect(res.length).to.equal(2);
+            })
+            it('when property not exists', function() {
+                this.playlist.filterOption = {foo: (e) => e.foo == 'bar'};
+                let res = this.network.playlist.filter(info => this.playlist.filter(info));
+                expect(res.length).to.equal(0);
+            })
         })
     })
     
