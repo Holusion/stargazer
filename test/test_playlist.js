@@ -1,6 +1,7 @@
 'use strict'
 
 const {Playlist} = require('../lib/components/Playlist');
+const {MediaNotFound} = require('../lib/errors/MediaNotFound');
 const {MockNetwork, MockPlaylistItem} = require('./mock/mock_network');
 
 const playlistSandbox = sandbox();
@@ -120,6 +121,16 @@ describe('Playlist', () => {
                 })];
                 await this.playlist.updatePlaylist();
                 expect(this.playlist.updateCurrent).to.not.have.been.called();
+            })
+        })
+
+        describe('._getMediaByName', function() {
+            it('get the media when exists', function() {
+                const media = this.playlist._getMediaByName('foo');
+                expect(media).to.equal(this.network.playlist[0]);
+            })
+            it('throw MediaNotFound if the media not exists', function () {
+                expect(() => this.playlist._getMediaByName('error')).to.throw(MediaNotFound);
             })
         })
 
