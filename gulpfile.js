@@ -20,7 +20,7 @@ const css = () => {
 }
 
 const src = () => gulp.src(['src/**/*.js']).pipe(babel()).pipe(gulp.dest('app/src'));
-const root = () => gulp.src(['*.js']).pipe(babel()).pipe(gulp.dest('app/'))
+const root = () => gulp.src(['*.js', '!gulpfile.js']).pipe(babel()).pipe(gulp.dest('app/'))
 
 const js = gulp.parallel(src, root);
 
