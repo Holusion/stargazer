@@ -1,0 +1,10 @@
+@import url("../../variables.css");
+
+.topbar {
+    background-color: var(--theme-primary);
+    padding: 16px;
+}
+
+.title {
+    font-size: 20px;
+}

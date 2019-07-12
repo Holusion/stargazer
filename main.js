@@ -1,9 +1,9 @@
 'use strict';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as url from 'url';
-import {BrowserWindow, Menu, app, ipcMain, shell} from 'electron';
-import {download} from 'electron-dl';
+const fs = require('fs');
+const path = require('path');
+const url = require('url');
+const {BrowserWindow, Menu, app, ipcMain, shell} = require('electron');
+const {download} = require('electron-dl');
 
 const pkgInfos = require("./package.json");
 const constant = require('./constants');
