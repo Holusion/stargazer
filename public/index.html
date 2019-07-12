@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="../../node_modules/material-components-web/dist/material-components-web.css">
+    <!-- <link rel="stylesheet" href="../../node_modules/material-components-web/dist/material-components-web.css">
     <script defer src="../src/index.js"></script>
     <style>
     :root{
@@ -123,9 +123,9 @@
             <h-products fetch="GetList" ></h-products>
           </div>
         </nav>
-      </aside>
+      </aside> -->
       <!--Will be filled by a template element -->
-      <div id="main-content">
+      <!-- <div id="main-content">
         Loading, please wait...
       </div>
       <div class="notifier mdc-snackbar" aria-live="assertive" aria-atomic="true" aria-hidden="true">
@@ -140,7 +140,10 @@
     <script>
       mdc.autoInit()
       let drawer = new mdc.drawer.MDCPersistentDrawer(document.querySelector(".mdc-drawer"));
+    </script> -->
+    <div id="root"></div>
+    <script type="application/javascript">
+      require('../src/index.js');
     </script>
-    <!-- <div id="root"></div> -->
 </body>
 </html>

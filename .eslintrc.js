@@ -11,7 +11,7 @@ module.exports = {
         "should": true,
         "assert": true,
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
         "ecmaVersion": 2017,
         "sourceType": "module"
