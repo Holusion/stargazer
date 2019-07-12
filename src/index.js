@@ -1,7 +1,7 @@
 'use strict';
-const React = require("react");
-const ReactDOM = require('react-dom');
-const Home = require('./Home');
+import Home from './Home';
+import React from "react";
+import ReactDOM from 'react-dom';
 
 // require("./widgets/Spinner");
 // require("./widgets/Notifier");
