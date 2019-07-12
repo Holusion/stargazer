@@ -2,10 +2,12 @@
   "name": "holusion-stargazer",
   "version": "1.2.2",
   "description": "Network discovery and product administration toolset for holographic displays",
-  "main": "app/main.js",
+  "main": "main.js",
   "scripts": {
     "eject": "react-scripts eject",
-    "start": "gulp start",
+    "bundle": "webpack --mode development",
+    "serve": "electron .",
+    "start": "npm run bundle & npm run serve",
     "test": "mocha",
     "build": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
@@ -33,6 +35,8 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-react-css-modules": "^5.2.6",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.2.0",
@@ -46,12 +50,10 @@
     "eslint-plugin-react": "^7.14.2",
     "fetch-mock": "^7.3.3",
     "fetch-ponyfill": "^6.0.2",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-css": "^0.1.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.5"
   },
   "optionalDependencies": {
     "wixtoolset-compiler": "^1.0.3"
