@@ -26,9 +26,12 @@ const js = gulp.parallel(src, root);
 
 const package_json = () => gulp.src(['package.json']).pipe(gulp.dest('app/'));
 
+const static_folder = () => gulp.src(['static/**/*']).pipe(gulp.dest('app/static/'));
+
 const electron = () => {
     return spawn('node_modules/.bin/electron', ['.'], { stdio: 'inherit' })
+    // eslint-disable-next-line no-process-exit
     .on('close', () => process.exit(0));
 }
 
-exports.start = gulp.series(clean, html, css, js, package_json, electron);
+exports.start = gulp.series(clean, html, css, static_folder, package_json, js, electron);
