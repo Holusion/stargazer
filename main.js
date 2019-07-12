@@ -1,12 +1,12 @@
 'use strict';
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
-const {ipcMain, app, BrowserWindow, shell, Menu} = require('electron');
-const {download} = require('electron-dl');
+import * as fs from 'fs';
+import * as path from 'path';
+import * as url from 'url';
+import {BrowserWindow, Menu, app, ipcMain, shell} from 'electron';
+import {download} from 'electron-dl';
 
-const pkgInfos = require("./package.json");
-const constant = require('./constants');
+const pkgInfos = require("../package.json");
+const constant = require('../constants');
 
 const {Scanner} = require('@holusion/product-scanner')
 
@@ -72,14 +72,14 @@ function createWindow () {
     },
   });
   splash.loadURL(url.format({
-    pathname: path.join(__dirname, 'lib', 'splash.html'),
+    pathname: path.join(__dirname, 'public', 'splash.html'),
     protocol: 'file',
     slashes: true
   }));
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'lib', 'index.html'),
+    pathname: path.join(__dirname, 'public', 'index.html'),
     protocol: 'file:',
     slashes: true
   }));

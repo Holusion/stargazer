@@ -1,5 +1,5 @@
 'use strict';
-const Icon = require('./Icon.js')
+const Icon = require('./Icon.js.js')
 
 let toolbar = document.querySelector(".mdc-top-app-bar__section--align-end");
 

@@ -11,3 +11,6 @@ wix.wixobj
 
 # ignore vendor folder for now
 vendor/
+
+# ignore babel compile
+app/

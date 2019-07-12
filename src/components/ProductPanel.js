@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 const {listenPlaylist, dispatchError, dispatchTask, endTask} = require("../store");
-const toolbar = require("../toolbar.js");
+const toolbar = require("../toolbar.js.js");
 
 const {UploadButton} = require('./UploadButton');
 const {UploadBox} = require('./UploadBox');
