@@ -5,8 +5,8 @@ import * as url from 'url';
 import {BrowserWindow, Menu, app, ipcMain, shell} from 'electron';
 import {download} from 'electron-dl';
 
-const pkgInfos = require("../package.json");
-const constant = require('../constants');
+const pkgInfos = require("./package.json");
+const constant = require('./constants');
 
 const {Scanner} = require('@holusion/product-scanner')
 

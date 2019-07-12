@@ -20,13 +20,15 @@ const css = () => {
 }
 
 const src = () => gulp.src(['src/**/*.js']).pipe(babel()).pipe(gulp.dest('app/src'));
-const main = () => gulp.src(['main.js']).pipe(babel()).pipe(gulp.dest('app/'))
+const root = () => gulp.src(['*.js']).pipe(babel()).pipe(gulp.dest('app/'))
 
-const js = gulp.parallel(src, main);
+const js = gulp.parallel(src, root);
+
+const package_json = () => gulp.src(['package.json']).pipe(gulp.dest('app/'));
 
 const electron = () => {
     return spawn('node_modules/.bin/electron', ['.'], { stdio: 'inherit' })
     .on('close', () => process.exit(0));
 }
 
-exports.start = gulp.series(clean, html, css, js, electron);
+exports.start = gulp.series(clean, html, css, js, package_json, electron);
