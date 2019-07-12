@@ -1,10 +1,9 @@
 'use strict';
 import React from 'react';
-import Topbar from './components/Topbar'
 
 export default class Home extends React.Component {
   render() {
-    return <div><Topbar title="Holusion"/></div>
+    return <div></div>
   }
 }
 

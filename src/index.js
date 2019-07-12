@@ -1,6 +1,6 @@
 'use strict';
 import './index.css';
-import Home from './Home';
+import App from './App';
 import React from "react";
 import ReactDOM from 'react-dom';
 
@@ -106,4 +106,4 @@ import ReactDOM from 'react-dom';
 //   notifier.pushUpdate(arg);
 // })
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
