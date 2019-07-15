@@ -1,0 +1,26 @@
+@import url("../../variables.css");
+
+.home-content {
+    margin: auto;
+    padding:10px;
+    color: #103040;
+}
+
+.home-connect {
+    padding: 8px;
+    margin: auto;
+    align: center;
+    display: block;
+    width: 70%;
+}
+
+.home-connect-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.home-link {
+    color:var(--mdc-theme-secondary); 
+    font-weight: bold;
+}

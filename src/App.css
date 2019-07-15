@@ -1,1 +1,26 @@
-@import url("./variables.css")
+@import url("./variables.css");
+
+.container {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    height: 100%;
+}
+
+.contents {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    height: calc(100% - var(--top-app-bar-height));
+}
+
+.left-content {
+    position: relative;
+    width: 20%;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+.right-content {
+    width: 80%;
+}

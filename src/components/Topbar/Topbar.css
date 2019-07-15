@@ -1,10 +1,25 @@
 @import url("../../variables.css");
 
 .topbar {
+    display: flex;
+    z-index: 9;
     background-color: var(--theme-primary);
     padding: 16px;
+    width: 100%;
+    flex-direction: column;
+    height: var(--top-app-bar-height);
 }
 
 .title {
     font-size: 20px;
+    color: rgb(255, 255, 255);
+}
+
+.start {
+    align-content: flex-start;
+    margin-right: 32px;
+}
+
+.end {
+    align-content: flex-end;
 }
