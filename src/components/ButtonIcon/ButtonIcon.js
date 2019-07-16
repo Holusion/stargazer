@@ -1,5 +1,5 @@
 import "./ButtonIcon.css";
-import Icon from "../../Icon";
+import Icon from "../Icon";
 import PropTypes from 'prop-types'
 import React from 'react';
 
