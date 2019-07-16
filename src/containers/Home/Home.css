@@ -3,7 +3,7 @@
 .home-content {
     margin: auto;
     padding:10px;
-    color: #103040;
+    color: var(--theme-primary);
 }
 
 .home-connect {
@@ -20,6 +20,6 @@
 }
 
 .home-link {
-    color:var(--mdc-theme-secondary); 
+    color:var(--theme-secondary); 
     font-weight: bold;
 }

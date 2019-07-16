@@ -1,0 +1,27 @@
+@import url("../../variables.css");
+
+.button {
+    display: flex;
+    min-width: 64px;
+    height: 32px;
+    padding: 16px;
+    vertical-align: middle;
+    background-color: var(--theme-primary);
+    color: var(--theme-text-on-primary);
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px black;
+}
+
+.button:hover {
+    cursor: pointer;
+    box-shadow: 0 0px 0px;
+    opacity: 0.95;
+}
+
+.button:active {
+    box-shadow: inset 5px 5px rgba(0,0,0,0.3), inset -5px -5px rgba(0,0,0,0.3);
+    opacity: 1;
+}
