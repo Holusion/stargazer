@@ -9,11 +9,11 @@
     flex-direction: row;
     height: var(--top-app-bar-height);
     align-items: center;
+    color: var(--theme-text-on-primary);
 }
 
 .title {
     font-size: 20px;
-    color: rgb(255, 255, 255);
 }
 
 .start {
