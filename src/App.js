@@ -3,6 +3,8 @@ import {dispatchError, dispatchList, dispatchTask, listenError, listenInfo, list
 import Button from "./components/Button";
 import ButtonIcon from "./components/ButtonIcon";
 import Home from "./containers/Home";
+import List from "./components/List/List";
+import ListItem from "./components/ListItem";
 import {Logger} from "./widgets/Logger";
 import React from 'react';
 import Topbar from './components/Topbar';
@@ -74,10 +76,12 @@ export default class App extends React.Component {
     }
     
     render() {
+        const items = ["Test","Test"];
         const leftPanel = this.state.leftPanelHide ? null : (
             <div className="left-content">
                 <div className="list-group">
                     <Button onClick={this.updateProductList.bind(this)}>Actualiser</Button>
+                    <List items={items} />
                 </div>
             </div>
         )
