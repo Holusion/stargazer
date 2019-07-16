@@ -84,11 +84,11 @@ import ReactDOM from 'react-dom';
 
 // })();
 
-// window.addEventListener("keydown",(e)=>{
-//   if(e.keyCode == 116){
-//     window.location.reload();
-//   }
-// })
+window.addEventListener("keydown",(e)=>{
+  if(e.keyCode == 116){
+    window.location.reload();
+  }
+})
 
 // ipcRenderer.on('accueil', () => {
 //   navigate('/');

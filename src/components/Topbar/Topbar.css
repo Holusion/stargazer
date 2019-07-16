@@ -6,8 +6,9 @@
     background-color: var(--theme-primary);
     padding: 16px;
     width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     height: var(--top-app-bar-height);
+    align-items: center;
 }
 
 .title {

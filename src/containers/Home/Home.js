@@ -4,7 +4,8 @@ import "./Home.css"
 import React from 'react';
 
 export default class Home extends React.Component {
-  UNSAFE_componentWillMount() {
+  constructor(props) {
+    super(props);
     let shell = require('electron').shell
     document.addEventListener('click', function (event) {
       if (event.target.tagName === 'A' && event.target.href.startsWith('http')) {
