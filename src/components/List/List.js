@@ -1,6 +1,5 @@
 'use strict'
 import "./List.css"
-import ListItem from '../ListItem'
 import PropTypes from 'prop-types'
 import React from 'react'
 

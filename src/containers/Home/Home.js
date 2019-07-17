@@ -18,7 +18,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div className="home-content">
-        <h1 style={{textAlign:"center", color:"var(theme-secondary)"}}>Bienvenue</h1>
+        <h1 style={{textAlign:"center", color:"var(--theme-secondary)"}}>Bienvenue</h1>
         <div className="home-connect">
           <img className="home-connect-img" src={"static/img/connect.svg#connect"} />
         </div>
