@@ -4,11 +4,11 @@ import Button from "./components/Button";
 import ButtonIcon from "./components/ButtonIcon";
 import Home from "./containers/Home";
 import List from "./components/List/List";
-import ListItem from "./components/ListItem";
 import {Logger} from "./widgets/Logger";
 import React from 'react';
 import Topbar from './components/Topbar';
 import {ipcRenderer} from 'electron';
+import ListItem from "./components/ListItem";
 
 
 export default class App extends React.Component {
@@ -17,7 +17,8 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             updating: false,
-            leftPanelHide: false
+            leftPanelHide: false,
+            list: []
         }
     }
 
@@ -58,6 +59,7 @@ export default class App extends React.Component {
             if (Array.isArray(message)){
             // console.log("new list : ",message)
                 dispatchList(message);
+                this.setState(() => ({list: message.map(e => e.name)}))
             }else{
                 dispatchError(new Error("clients-list is not an array : "+ JSON.stringify(message)));
             }
@@ -76,12 +78,14 @@ export default class App extends React.Component {
     }
     
     render() {
-        const items = ["Test","Test"];
         const leftPanel = this.state.leftPanelHide ? null : (
             <div className="left-content">
                 <div className="list-group">
                     <Button onClick={this.updateProductList.bind(this)}>Actualiser</Button>
-                    <List items={items} />
+                    <List>
+                        <ListItem>Test</ListItem>
+                        <ListItem>Test</ListItem>
+                    </List>
                 </div>
             </div>
         )

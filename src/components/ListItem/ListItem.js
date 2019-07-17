@@ -6,28 +6,11 @@ import React from 'react'
 export default class ListItem extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            selected: false,
-        }
-    }
-
-    select() {
-        this.setState(() => ({selected: true}));
-    }
-
-    unselect() {
-        this.setState(() => ({selected: false}));
-    }
-
-    handleClick() {
-        this.select();
-        // this.props.onClick();
     }
     
     render() {
         return (
-            <li className={`list-item ${this.state.selected ? "selected" : ""}`} onClick={this.handleClick.bind(this)}>
+            <li className={`list-item ${this.props.selected ? "selected" : ""}`} onClick={this.props.onClick}>
                 {this.props.children}
             </li>
         )
@@ -37,5 +20,6 @@ export default class ListItem extends React.Component {
 ListItem.propTypes = {
     children: PropTypes.string,
     onClick: PropTypes.func,
-    selected: PropTypes.bool
+    selected: PropTypes.bool,
+    key: PropTypes.string
 }
