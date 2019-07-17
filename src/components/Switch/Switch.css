@@ -1,0 +1,57 @@
+@import url('../../variables.css');
+
+.switch {
+    position: absolute;
+    left: -9999px;
+}
+
+.switch:not(:checked) + label, .switch:checked + label {
+    position: relative;
+    cursor: pointer;
+}
+
+.switch:not(:checked) + label::before, .switch:checked + label::before {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 16px;
+    background-color: #0000008a;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.3);
+    top: 2px;
+    transition: all .2s;
+}
+
+.switch:not(:checked) + label::before {
+    background-color: #0000008a;
+    opacity: 1;
+}
+
+.switch:checked + label::before {
+    background-color: var(--theme-secondary);
+    opacity: 1;
+}
+
+.switch:not(:checked) + label::after, .switch:checked + label::after {
+    content: '';
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    transition: all .2s;
+}
+
+.switch:checked + label::after {
+    transform: translateX(calc(36px - 20px));
+    background-color: var(--theme-secondary);
+}
+
+.switch:not(:checked) + label::after {
+    transform: translateX(0);
+    background-color: white;
+}

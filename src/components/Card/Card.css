@@ -1,0 +1,27 @@
+@import url('../../variables.css');
+
+.card{
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    flex-direction: column;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 0px;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    border-radius: 4px;
+    width:200px;
+    height:200px;
+    margin:1px;
+    white-space: nowrap;
+    background-color: rgba(0,0,0,0.4);
+    background-size: 100%;
+}
+
+.card-top {
+    display: flex;
+}

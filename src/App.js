@@ -3,9 +3,10 @@ import {dispatchError, dispatchList, dispatchTask, listenError, listenInfo, list
 import Button from "./components/Button";
 import ButtonIcon from "./components/ButtonIcon";
 import Home from "./containers/Home";
-import List from "./components/List/List";
+import List from "./components/List";
 import ListItem from "./components/ListItem";
 import {Logger} from "./widgets/Logger";
+import Product from "./containers/Product";
 import React from 'react';
 import Topbar from './components/Topbar';
 import {ipcRenderer} from 'electron';
@@ -18,7 +19,8 @@ export default class App extends React.Component {
         this.state = {
             updating: false,
             leftPanelHide: false,
-            list: []
+            list: [],
+            product: null
         }
     }
 
@@ -76,9 +78,13 @@ export default class App extends React.Component {
     createStartTopAppBar() {
         return <ButtonIcon name="menu" title="Cache la liste de produits" onClick={() => this.setState(() => ({leftPanelHide: !this.state.leftPanelHide}))}/>
     }
+
+    navigateToProduct(message) {
+        this.setState(() => ({product: message}))
+    }
     
     render() {
-        const items = this.state.list.map(msg => <ListItem key={msg.name} icon="library">{msg.name}</ListItem>)
+        const items = this.state.list.map(msg => <ListItem key={msg.name} icon="library" onClick={this.navigateToProduct.bind(this, msg)}>{msg.name}</ListItem>)
 
         const leftPanel = this.state.leftPanelHide ? null : (
             <div className="left-content">
@@ -91,13 +97,21 @@ export default class App extends React.Component {
             </div>
         )
 
+        let rightPanel = <Home />
+        let title = "Holusion"
+
+        if(this.state.product) {
+            rightPanel = <Product product={this.state.product} />
+            title = this.state.product.name;
+        }
+
         return (
             <div className="container">
-                <Topbar title="Holusion" start={this.createStartTopAppBar()}/>
+                <Topbar title={title} start={this.createStartTopAppBar()}/>
                 <div className="contents">
                     {leftPanel}
                     <div className="right-content">
-                        <Home />
+                        {rightPanel}
                     </div>
                 </div>
             </div>

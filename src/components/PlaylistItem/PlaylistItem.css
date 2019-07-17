@@ -1,0 +1,82 @@
+@import url('../../variables.css');
+
+@keyframes remove {
+    0% {
+      width: 200px;
+      height: 200px;
+    }
+    100%{
+      transform: translate(100px, 100px);
+      width: 0;
+      height: 0;
+    }
+  }
+
+@keyframes adding {
+    0% {
+      transform: translate(100px, 100px);
+      width: 0;
+      height: 0;
+    }
+
+    100% {
+      transform: translate(0,0);
+      width: 200px;
+      height: 200px;
+    }
+}
+
+.playlist-item-bottom {
+  display: flex;
+}
+
+.playlist-item-bottom {
+  color: white;
+  margin: 0;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.playlist-item-main-action {
+  text-align: center;
+  position: absolute;
+  right: 0px;
+}
+
+.playlist-item-current {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.playlist-item-top {
+  position: absolute;
+  top: 0;
+  padding: 2px;
+  width: 100%;
+  height: 30px;
+}
+
+.playlist-item-top-middle {
+  position: absolute;
+  left: calc(50% - 18px);
+  top: 4px;
+}
+
+.playlist-item-top-right {
+  position: absolute;
+  right: 2px;
+}
+
+.playlist-item-remove {
+  color: white;
+  background-color: darkred;
+  width: 28px;
+  height: 28px;
+  border: none;
+  text-align: center;
+  display: flex;
+}
