@@ -20,6 +20,5 @@ export default class ListItem extends React.Component {
 ListItem.propTypes = {
     children: PropTypes.string,
     onClick: PropTypes.func,
-    selected: PropTypes.bool,
-    key: PropTypes.string
+    selected: PropTypes.bool
 }

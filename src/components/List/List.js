@@ -40,6 +40,6 @@ export default class List extends React.Component {
 }
 
 List.propTypes = {
-    children: PropTypes.oneOfType([PropTypes.objectOf(PropTypes.instanceOf(ListItem)), PropTypes.arrayOf(PropTypes.instanceOf(ListItem))]),
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
     onClick: PropTypes.func
 }
