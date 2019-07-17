@@ -1,5 +1,6 @@
 'use strict'
 import "./ListItem.css"
+import Icon from "../Icon";
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -9,9 +10,13 @@ export default class ListItem extends React.Component {
     }
     
     render() {
+        let icon = null;
+        if(this.props.icon) icon = <div className="list-icon"><Icon name={this.props.icon} /></div>
+
         return (
             <li className={`list-item ${this.props.selected ? "selected" : ""}`} onClick={this.props.onClick}>
-                {this.props.children}
+                {icon}
+                <span className="list-content">{this.props.children}</span>
             </li>
         )
     }
@@ -20,5 +25,6 @@ export default class ListItem extends React.Component {
 ListItem.propTypes = {
     children: PropTypes.string,
     onClick: PropTypes.func,
-    selected: PropTypes.bool
+    selected: PropTypes.bool,
+    icon: PropTypes.string
 }

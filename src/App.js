@@ -78,7 +78,7 @@ export default class App extends React.Component {
     }
     
     render() {
-        const items = this.state.list.map(msg => <ListItem key={msg.name}>{msg.name}</ListItem>)
+        const items = this.state.list.map(msg => <ListItem key={msg.name} icon="library">{msg.name}</ListItem>)
 
         const leftPanel = this.state.leftPanelHide ? null : (
             <div className="left-content">
