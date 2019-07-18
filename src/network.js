@@ -1,13 +1,12 @@
 'use strict'
 
-const io = require('socket.io-client');
-const {dispatchPlaylist} = require('./store');
+import {ErrorWrapper} from "./errors/ErrorWrapper"
+import {HTTPError} from "./errors/HTTPError";
+import constant from "../constants"; 
+import {dispatchPlaylist} from './store';
+import io from'socket.io-client';
 
-const {ErrorWrapper} = require("./errors/ErrorWrapper")
-const {HTTPError} = require("./errors/HTTPError");
-const constant = require("../constants"); 
-
-class Network {
+export default class Network {
 
     constructor(url) {
         this.url = url;
@@ -124,6 +123,3 @@ class Network {
         return await this.requestUpdate("delete", `/medias/${elem.name}`, null);
     }
 }
-
-
-module.exports = {Network}
