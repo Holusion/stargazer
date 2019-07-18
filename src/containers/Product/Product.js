@@ -15,6 +15,7 @@ export default class Product extends React.Component {
         this.state = {
             playlist: [],
             url: "",
+            selected: []
         }
     }
 
@@ -48,10 +49,23 @@ export default class Product extends React.Component {
         }
     }
 
+    handleCheckboxChange(item, event) {
+        event.target.checked 
+            ? this.setState((prevState) => ({selected: [...prevState.selected, item]})) 
+            : this.setState(() => ({selected: this.state.selected.filter(elem => elem.name !== item.name)}))
+    }
+
     render() {
+        const items = this.state.playlist.map(elem => ({
+            ...elem,
+            image: `http://${this.state.url}/medias/${elem.name}?thumb=true`,
+            selected: this.state.selected.filter(item => item.name === elem.name).length > 0,
+            onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
+        }))
+
         return (
             <div className="product">
-                <Playlist items={this.state.playlist} url={this.state.url}/>
+                <Playlist items={items} />
             </div>
         )
     }

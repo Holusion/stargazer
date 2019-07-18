@@ -7,27 +7,16 @@ export default class Playlist extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            selected: []
-        }
-    }
-
-    handleSelection(item, event) {
-        event.target.checked 
-            ? this.setState((prevState) => ({selected: [...prevState.selected, item]})) 
-            : this.setState(() => ({selected: this.state.selected.filter(elem => elem.name !== item.name)}))
     }
 
     render() {
         const cards = this.props.items.map(item => {
-            let imgUrl = `http://${this.props.url}/medias/${item.name}?thumb=true`;
+            let imgUrl = item.image;
             imgUrl = encodeURI(imgUrl.trim())
             return <PlaylistItem 
                         key={item.name} 
                         item={item} 
                         image={imgUrl} 
-                        selected={this.state.selected.filter(elem => elem.name === item.name).length > 0} 
-                        onCheckboxChange={this.handleSelection.bind(this, item)} 
                     />
         })
 
@@ -39,7 +28,22 @@ export default class Playlist extends React.Component {
     }
 }
 
+/**
+ * the shape of an item is :
+ * {
+ *   "name": string,
+ *   "rank": int,
+ *   "active": bool,
+ *   "_id": string,
+ *   "onCheckboxChange": func(item, event),
+ *   "onSwitchChange": func(item, event),
+ *   "onClick": func(item, event),
+ *   "onPlay": func(item, event),
+ *   "current": bool,
+ *   "selected": bool,
+ *   "image": string
+ * },
+ */
 Playlist.propTypes = {
-    url: PropTypes.string,
-    items: PropTypes.arrayOf(PropTypes.object)
+    items: PropTypes.arrayOf(PropTypes.object), 
 }

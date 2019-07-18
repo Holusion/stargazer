@@ -13,10 +13,10 @@ export default class PlaylistItem extends React.Component {
         return (
             <div className="playlist-item-top">
                 <div className="playlist-item-top-left">
-                    <Checkbox onChange={this.props.onCheckboxChange} />
+                    <Checkbox onChange={this.props.item.onCheckboxChange} />
                 </div>
                 <div className="playlist-item-top-middle">
-                    <Switch checked={this.props.item.active} onChange={this.props.onSwitchChange}/>
+                    <Switch checked={this.props.item.active} onChange={this.props.item.onSwitchChange}/>
                 </div>
                 <div className="playlist-item-top-right">
                     <button className="playlist-item-remove">
@@ -28,7 +28,7 @@ export default class PlaylistItem extends React.Component {
     }
 
     createPrimary() {
-        const display = this.props.current ? <Icon name="play" width="100" height="100"/> : null;
+        const display = this.props.item.current ? <Icon name="play" width="100" height="100"/> : null;
 
         return (
             <div className="playlist-item-current">
@@ -44,7 +44,7 @@ export default class PlaylistItem extends React.Component {
                     {this.props.item.name}
                 </div>
                 <div className="playlist-item-main-action">
-                    <ButtonIcon name="play" />
+                    <ButtonIcon name="play" onClick={this.props.item.onPlay} />
                 </div>
             </div>
         )
@@ -52,7 +52,7 @@ export default class PlaylistItem extends React.Component {
 
     render() {
         return (
-            <div className={`playlist-item ${this.props.selected ? "selected" : ""}`} onClick={this.props.onClick}>
+            <div className={`playlist-item ${this.props.item.selected ? "selected" : ""}`} onClick={this.props.item.onClick}>
                 <Card top={this.createTop()} primary={this.createPrimary()} bottom={this.createBottom()} image={this.props.image} />
             </div>
         )
@@ -61,10 +61,5 @@ export default class PlaylistItem extends React.Component {
 
 PlaylistItem.propTypes = {
     item: PropTypes.object,
-    onSwitchChange: PropTypes.func,
-    onCheckboxChange: PropTypes.func,
-    onClick: PropTypes.func,
     image: PropTypes.string,
-    current: PropTypes.bool,
-    selected: PropTypes.bool
 }
