@@ -19,7 +19,7 @@ export default class PlaylistItem extends React.Component {
                     <Switch checked={this.props.item.active} onChange={this.props.item.onSwitchChange}/>
                 </div>
                 <div className="playlist-item-top-right">
-                    <button className="playlist-item-remove">
+                    <button className="playlist-item-remove" onClick={this.props.item.onRemove}>
                         <Icon name="delete" />
                     </button>
                 </div>

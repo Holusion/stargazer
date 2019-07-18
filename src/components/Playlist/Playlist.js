@@ -39,6 +39,7 @@ export default class Playlist extends React.Component {
  *   "onSwitchChange": func(item, event),
  *   "onClick": func(item, event),
  *   "onPlay": func(item, event),
+ *   "onRemove": func(item, event),
  *   "current": bool,
  *   "selected": bool,
  *   "image": string
