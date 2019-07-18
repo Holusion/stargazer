@@ -101,7 +101,7 @@ export default class App extends React.Component {
         let title = "Holusion"
 
         if(this.state.product) {
-            rightPanel = <Product product={this.state.product} />
+            rightPanel = <Product key={this.state.product.name} product={this.state.product} />
             title = this.state.product.name;
         }
 
