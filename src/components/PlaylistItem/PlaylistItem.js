@@ -28,9 +28,11 @@ export default class PlaylistItem extends React.Component {
     }
 
     createPrimary() {
+        const display = this.props.current ? <Icon name="play" width="100" height="100"/> : null;
+
         return (
             <div className="playlist-item-current">
-                <Icon name="play" width="100" height="100"/>   
+                {display}
             </div>
         )
     }
@@ -58,5 +60,6 @@ export default class PlaylistItem extends React.Component {
 PlaylistItem.propTypes = {
     item: PropTypes.object,
     onSwitchChange: PropTypes.func,
-    image: PropTypes.string
+    image: PropTypes.string,
+    current: PropTypes.bool,
 }

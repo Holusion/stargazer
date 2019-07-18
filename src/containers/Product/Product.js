@@ -472,7 +472,7 @@ export default class Product extends React.Component {
               "path": "/home/user/medias/trelon_eevee.mp4",
               "rank": 62,
               "active": true,
-              "_id": "T7ukW9B3TPQhyG5K"
+              "_id": "T7ukW9B3TPQhyG5K",
             }
           ]
 
