@@ -478,7 +478,7 @@ export default class Product extends React.Component {
 
         return (
             <div className="product">
-                <Playlist items={items} />
+                <Playlist items={items} url="192.168.1.101"/>
             </div>
         )
     }
