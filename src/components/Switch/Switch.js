@@ -7,7 +7,7 @@ export default class Switch extends React.Component {
     render() {
         return (
             <div className="switch-container">
-                <input type="checkbox" className="switch" title={this.props.title} id="switch" />
+                <input type="checkbox" className="switch" title={this.props.title} id="switch" checked={this.props.checked} onChange={this.props.onChange} />
                 <label htmlFor="switch" />
             </div>
         )
@@ -15,5 +15,7 @@ export default class Switch extends React.Component {
 }
 
 Switch.propTypes = {
-    title: PropTypes.string
+    title: PropTypes.string,
+    checked: PropTypes.bool,
+    onChange: PropTypes.func
 }

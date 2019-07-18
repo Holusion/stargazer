@@ -16,7 +16,7 @@ export default class PlaylistItem extends React.Component {
                     <Checkbox />
                 </div>
                 <div className="playlist-item-top-middle">
-                    <Switch />
+                    <Switch checked={this.props.item.active} onChange={this.props.onSwitchChange}/>
                 </div>
                 <div className="playlist-item-top-right">
                     <button className="playlist-item-remove">
@@ -56,5 +56,6 @@ export default class PlaylistItem extends React.Component {
 }
 
 PlaylistItem.propTypes = {
-    item: PropTypes.object
+    item: PropTypes.object,
+    onSwitchChange: PropTypes.func
 }
