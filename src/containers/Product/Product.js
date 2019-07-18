@@ -4,7 +4,7 @@ import Network from '../../network';
 import Playlist from '../../components/Playlist';
 import PropTypes from 'prop-types'
 import React from 'react'
-import {dispatchError} from '../../store'
+import {dispatchError, listenPlaylist} from '../../store'
 import net from "net";
 
 
@@ -15,7 +15,8 @@ export default class Product extends React.Component {
         this.state = {
             playlist: [],
             url: "",
-            selected: []
+            selected: [],
+            current: {}
         }
     }
 
@@ -44,9 +45,17 @@ export default class Product extends React.Component {
 
         if(addr) {
           const network = new Network(addr);
+          network.synchronize();
           const playlist = await network.getPlaylist();
-          this.setState(() => ({url: addr, playlist: [...playlist]}))
+          let current = await network.getCurrent();
+          this.setState(() => ({url: addr, playlist: [...playlist], current: current}))
+
+          listenPlaylist("current-playlist", async () => {
+            current = await network.getCurrent();
+            this.setState(() => ({current: current}))
+          })
         }
+
     }
 
     handleCheckboxChange(item, event) {
@@ -60,6 +69,7 @@ export default class Product extends React.Component {
             ...elem,
             image: `http://${this.state.url}/medias/${elem.name}?thumb=true`,
             selected: this.state.selected.filter(item => item.name === elem.name).length > 0,
+            current: this.state.current.name === elem.name,
             onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
         }))
 
