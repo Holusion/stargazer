@@ -84,3 +84,7 @@
   text-align: center;
   display: flex;
 }
+
+.selected .playlist-item-bottom {
+  background-color: var(--theme-secondary);
+}

@@ -13,7 +13,7 @@ export default class PlaylistItem extends React.Component {
         return (
             <div className="playlist-item-top">
                 <div className="playlist-item-top-left">
-                    <Checkbox />
+                    <Checkbox onChange={this.props.onCheckboxChange} />
                 </div>
                 <div className="playlist-item-top-middle">
                     <Switch checked={this.props.item.active} onChange={this.props.onSwitchChange}/>
@@ -52,7 +52,9 @@ export default class PlaylistItem extends React.Component {
 
     render() {
         return (
-            <Card top={this.createTop()} primary={this.createPrimary()} bottom={this.createBottom()} image={this.props.image} />
+            <div className={`playlist-item ${this.props.selected ? "selected" : ""}`} onClick={this.props.onClick}>
+                <Card top={this.createTop()} primary={this.createPrimary()} bottom={this.createBottom()} image={this.props.image} />
+            </div>
         )
     }
 }
@@ -60,6 +62,9 @@ export default class PlaylistItem extends React.Component {
 PlaylistItem.propTypes = {
     item: PropTypes.object,
     onSwitchChange: PropTypes.func,
+    onCheckboxChange: PropTypes.func,
+    onClick: PropTypes.func,
     image: PropTypes.string,
     current: PropTypes.bool,
+    selected: PropTypes.bool
 }
