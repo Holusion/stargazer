@@ -8,10 +8,10 @@ const {UploadBox} = require('./UploadBox');
 const {FilterPanel} = require('./FilterPanel');
 const {ButtonInOut} = require('./ButtonInOut');
 const {PlaylistItem} = require('./PlaylistItem');
-const {PlaylistItems} = require('./PlaylistItems');
+const {PlaylistItems} = require('./PlaylistItems.old');
 const {RemovePopup} = require('./RemovePopup');
 
-const {Playlist} = require('./Playlist');
+const {Playlist} = require('../controllers/Playlist');
 const {Network} = require('../network');
 
 const {ErrorWrapper} = require('../errors/ErrorWrapper');

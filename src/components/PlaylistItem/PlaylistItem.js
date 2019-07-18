@@ -39,7 +39,7 @@ export default class PlaylistItem extends React.Component {
         return (
             <div className="playlist-item-bottom">
                 <div className="playlist-item-title">
-                    {this.props.item.title}
+                    {this.props.item.name}
                 </div>
                 <div className="playlist-item-main-action">
                     <ButtonIcon name="play" />

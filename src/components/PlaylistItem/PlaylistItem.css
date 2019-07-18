@@ -28,9 +28,6 @@
 
 .playlist-item-bottom {
   display: flex;
-}
-
-.playlist-item-bottom {
   color: white;
   margin: 0;
   padding: 16px;
@@ -38,6 +35,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.playlist-item-title {
+  overflow: hidden;
+  width: 128px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .playlist-item-main-action {
