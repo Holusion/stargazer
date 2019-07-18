@@ -50,12 +50,13 @@ export default class PlaylistItem extends React.Component {
 
     render() {
         return (
-            <Card top={this.createTop()} primary={this.createPrimary()} bottom={this.createBottom()}/>
+            <Card top={this.createTop()} primary={this.createPrimary()} bottom={this.createBottom()} image={this.props.image} />
         )
     }
 }
 
 PlaylistItem.propTypes = {
     item: PropTypes.object,
-    onSwitchChange: PropTypes.func
+    onSwitchChange: PropTypes.func,
+    image: PropTypes.string
 }

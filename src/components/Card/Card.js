@@ -6,7 +6,7 @@ export default class Card extends React.Component {
 
     render() {
         return (
-            <div className="card">
+            <div className="card" style={{backgroundImage: `url(${this.props.image})`}}>
                 <div className="card-top">
                     {this.props.top}
                 </div>
@@ -24,5 +24,6 @@ export default class Card extends React.Component {
 Card.propTypes = {
     top: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
     primary: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-    bottom: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+    bottom: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+    image: PropTypes.string
 }

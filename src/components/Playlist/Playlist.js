@@ -10,7 +10,7 @@ export default class Playlist extends React.Component {
     }
 
     render() {
-        const cards = this.props.items.map(item => <PlaylistItem key={item.name} item={item} />)
+        const cards = this.props.items.map(item => <PlaylistItem key={item.name} item={item} image="static/img/16-9.jpg" />)
 
         return (
             <div className="playlist-container">
