@@ -1,20 +1,20 @@
 @import url("../../variables.css");
 
 .home-content {
-    margin: auto;
-    padding:10px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
     color: var(--theme-primary);
 }
 
 .home-connect {
     padding: 8px;
-    margin: auto;
     display: block;
-    width: 70%;
 }
 
 .home-connect-img {
-    display: block;
+    margin: 0;
     max-width: 100%;
     height: auto;
 }
@@ -22,4 +22,8 @@
 .home-link {
     color:var(--theme-secondary); 
     font-weight: bold;
+}
+
+.home-text {
+    width: 75%;
 }

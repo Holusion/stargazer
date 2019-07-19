@@ -22,15 +22,17 @@ export default class Home extends React.Component {
         <div className="home-connect">
           <img className="home-connect-img" src={"static/img/connect.svg#connect"} />
         </div>
-        <p> Utilisez la liste dans la colonne de gauche pour sélectionner le produit à utiliser</p>
-        <p> Si la liste est vide, vérifiez que votre produit est correctement connecté au réseau et actualisez</p>
-        <p> Le produit est détecté lorsqu'il apparaît dans le menu à gauche de cette fenêtre. Sélectionnez le produit pour l'utiliser</p>
-        <p> Pour toute aide, visitez</p>
-        <ul>
-          <li>La <a className="home-link" href="https://github.com/Holusion/stargazer">documentation de Stargazer</a> pour le guide d'utilisation</li>
-          <li>Le site <a className="home-link" href="http://holusion.com">Holusion.com</a> pour nous contacter</li>
-          <li>Le <a className="home-link" href="https://github.com/Holusion/stargazer/issues">bugtracker</a> pour nous remonter un bug</li>
-        </ul>
+        <div className="home-text">
+          <p> Utilisez la liste dans la colonne de gauche pour sélectionner le produit à utiliser</p>
+          <p> Si la liste est vide, vérifiez que votre produit est correctement connecté au réseau et actualisez</p>
+          <p> Le produit est détecté lorsqu'il apparaît dans le menu à gauche de cette fenêtre. Sélectionnez le produit pour l'utiliser</p>
+          <p> Pour toute aide, visitez</p>
+          <ul>
+            <li>La <a className="home-link" href="https://github.com/Holusion/stargazer">documentation de Stargazer</a> pour le guide d'utilisation</li>
+            <li>Le site <a className="home-link" href="http://holusion.com">Holusion.com</a> pour nous contacter</li>
+            <li>Le <a className="home-link" href="https://github.com/Holusion/stargazer/issues">bugtracker</a> pour nous remonter un bug</li>
+          </ul>
+        </div>
       </div>
     )
   }
