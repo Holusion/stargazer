@@ -6,15 +6,18 @@ export default class Card extends React.Component {
 
     render() {
         return (
-            <div className="card" style={{backgroundImage: `url(${this.props.image})`}}>
-                <div className="card-top">
-                    {this.props.top}
-                </div>
-                <div className="card-primary">
-                    {this.props.primary}
-                </div>
-                <div className="card-bottom">
-                    {this.props.bottom}
+            <div className="card">
+                <div className="card-background-image" style={{backgroundImage: `url(${this.props.image})`}}></div>
+                <div card-content>
+                    <div className="card-top">
+                        {this.props.top}
+                    </div>
+                    <div className="card-primary">
+                        {this.props.primary}
+                    </div>
+                    <div className="card-bottom">
+                        {this.props.bottom}
+                    </div>
                 </div>
             </div>
         )

@@ -88,3 +88,7 @@
 .selected .playlist-item-bottom {
   background-color: var(--theme-secondary);
 }
+
+.playlist-item:not(.active) .card-background-image {
+  filter: grayscale(80%);
+}
