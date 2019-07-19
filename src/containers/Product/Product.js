@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {dispatchError, listenPlaylist} from '../../store'
 import net from "net";
+import Fab from '../../components/Fab';
 
 
 export default class Product extends React.Component {
@@ -82,6 +83,7 @@ export default class Product extends React.Component {
         return (
             <div className="product">
                 <Playlist items={items} />
+                <Fab title="Ajouter un média" icon="upload"/>
             </div>
         )
     }
