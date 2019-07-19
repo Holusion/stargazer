@@ -46,17 +46,24 @@ export default class Product extends React.Component {
         }
 
         if(addr) {
-          const network = new Network(addr);
-          network.synchronize();
-          const playlist = await network.getPlaylist();
-          let current = await network.getCurrent();
-          this.setState(() => ({url: addr, playlist: [...playlist], current: current}))
-
-          listenPlaylist("current-playlist", async () => {
-            current = await network.getCurrent();
-            this.setState(() => ({current: current}))
-          })
+            const network = new Network(addr);
+            this.endSynchronize = network.synchronize();
+            const playlist = await network.getPlaylist();
+            let current = await network.getCurrent();
+            this.setState(() => ({url: addr, playlist: [...playlist], current: current}))
+            this.updateCurrent = this.updateCurrent.bind(this, network);
+            this.stopListenPlaylist = listenPlaylist("current-playlist", this.updateCurrent);
         }
+    }
+
+    componentWillUnmount() {
+        this.endSynchronize();
+        this.stopListenPlaylist();
+    }
+    
+    async updateCurrent(network) {
+        let current = await network.getCurrent();
+        this.setState(() => ({current: current}))
     }
 
     handleCheckboxChange(item, event) {

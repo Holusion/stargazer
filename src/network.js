@@ -36,6 +36,8 @@ export default class Network {
         this.socket.on('insert', () => {
             dispatchPlaylist('insert-playlist')
         })
+
+        return () => this.endSynchronize();
     }
 
     endSynchronize() {

@@ -94,7 +94,7 @@ function dispatchPlaylist(event, data) {
 
 function listenPlaylist(event, fn) {
   document.addEventListener(event, fn);
-  // return document.removeEventListener.bind(document, event, fn);
+  return document.removeEventListener.bind(document, event, fn);
 }
 
 module.exports = {
@@ -110,5 +110,5 @@ module.exports = {
   dispatchInfo,
   listenInfo,
   dispatchPlaylist,
-  listenPlaylist
+  listenPlaylist,
 };
