@@ -17,5 +17,5 @@ export default class Fab extends React.Component {
 Fab.propTypes = {
     onClick: PropTypes.func,
     icon: PropTypes.string,
-    title: PropTypes.title
+    title: PropTypes.string
 }
