@@ -16,6 +16,7 @@ export default class Product extends React.Component {
             playlist: [],
             url: "",
             selected: [],
+            removed: [],
             current: {}
         }
     }
@@ -55,7 +56,6 @@ export default class Product extends React.Component {
             this.setState(() => ({current: current}))
           })
         }
-
     }
 
     handleCheckboxChange(item, event) {
@@ -64,13 +64,19 @@ export default class Product extends React.Component {
             : this.setState(() => ({selected: this.state.selected.filter(elem => elem.name !== item.name)}))
     }
 
+    handleOnRemove(item, event) {
+        this.setState(() => ({removed: [...this.state.removed, item]}))
+    }
+
     render() {
         const items = this.state.playlist.map(elem => ({
             ...elem,
             image: `http://${this.state.url}/medias/${elem.name}?thumb=true`,
             selected: this.state.selected.filter(item => item.name === elem.name).length > 0,
             current: this.state.current.name === elem.name,
+            visible: this.state.removed.filter(item => item.name === elem.name).length == 0,
             onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
+            onRemove: this.handleOnRemove.bind(this, elem)
         }))
 
         return (

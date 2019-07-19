@@ -8,7 +8,7 @@ export default class Card extends React.Component {
         return (
             <div className="card">
                 <div className="card-background-image" style={{backgroundImage: `url(${this.props.image})`}}></div>
-                <div card-content>
+                <div className="card-content">
                     <div className="card-top">
                         {this.props.top}
                     </div>
