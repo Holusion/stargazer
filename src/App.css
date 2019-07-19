@@ -24,5 +24,6 @@
 
 .right-content {
     margin: 0 auto;
+    overflow-y: scroll;
     width: 80%;
 }
