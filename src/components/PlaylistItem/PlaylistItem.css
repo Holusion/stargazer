@@ -34,13 +34,28 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 48px;
 }
 
 .playlist-item-title {
-  overflow: hidden;
+  position: relative;
   width: 128px;
+  height: 100%;
+  overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.playlist-item .playlist-item-title span {
+  position: absolute;
+  bottom: 0;
+  white-space: nowrap;
+  transform: translateX(0);
+  transition: 1s;
+}
+
+.playlist-item:hover .playlist-item-title span {
+  transform: translateX(calc(128px - 100%));
 }
 
 .playlist-item-main-action {
