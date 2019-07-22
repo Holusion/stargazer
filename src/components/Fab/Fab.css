@@ -29,6 +29,11 @@
     opacity: 0;
 }
 
+
+.fab-container:hover {
+    cursor: pointer;
+}
+
 .fab-container:hover::after {
     opacity: 0.1;
 }
