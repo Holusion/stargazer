@@ -54,6 +54,10 @@
   transition: 1s;
 }
 
+.playlist-item:hover {
+  cursor: pointer;
+}
+
 .playlist-item:hover .playlist-item-title span {
   transform: translateX(calc(128px - 100%));
 }

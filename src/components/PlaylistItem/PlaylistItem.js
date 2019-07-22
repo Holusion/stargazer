@@ -52,7 +52,7 @@ export default class PlaylistItem extends React.Component {
 
     render() {
         return (
-            <div className={`playlist-item ${this.props.item.selected ? "selected" : ""} ${this.props.item.active ? "active" : ""} ${this.props.item.visible ? "visible" : ""}`} onClick={this.props.item.onClick}>
+            <div className={`playlist-item ${this.props.item.selected ? "selected" : ""} ${this.props.item.active ? "active" : ""} ${this.props.item.visible ? "visible" : ""}`} onClick={this.props.item.onClick} title={this.props.item.name}>
                 <Card top={this.createTop()} primary={this.createPrimary()} bottom={this.createBottom()} image={this.props.image} />
             </div>
         )
