@@ -1,14 +1,10 @@
 import "./App.css"
+import {Button, ButtonIcon, List, ListItem, Topbar} from "@holusion/react-components-holusion";
 import {dispatchError, dispatchList, dispatchTask, listenError, listenInfo, listenTasks} from "./store";
-import Button from "./components/Button";
-import ButtonIcon from "./components/ButtonIcon";
 import Home from "./containers/Home";
-import List from "./components/List";
-import ListItem from "./components/ListItem";
 import {Logger} from "./widgets/Logger";
 import Product from "./containers/Product";
 import React from 'react';
-import Topbar from './components/Topbar';
 import {ipcRenderer} from 'electron';
 
 

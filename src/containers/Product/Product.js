@@ -1,13 +1,11 @@
 import './Product.css'
 import BadProductIPFound from '../../errors/BadProductIPFound'
 import Network from '../../network';
-import Playlist from '../../components/Playlist';
+import {Playlist, Fab} from '@holusion/react-components-holusion';
 import PropTypes from 'prop-types'
 import React from 'react'
 import {dispatchError, listenPlaylist} from '../../store'
 import net from "net";
-import Fab from '../../components/Fab';
-
 
 export default class Product extends React.Component {
 
