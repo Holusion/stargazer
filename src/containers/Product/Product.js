@@ -93,7 +93,8 @@ export default class Product extends React.Component {
     }
 
     handleOnRemove(item, event) {
-        this.setState(() => ({removed: [...this.state.removed, item]}))
+        this.setState(() => ({removed: [...this.state.removed, item]}));
+        this.unselectItem(item);
     }
 
     handleOnClick(item, event) {
@@ -105,12 +106,14 @@ export default class Product extends React.Component {
         const items = this.state.playlist.map(elem => ({
             ...elem,
             image: `http://${this.state.url}/medias/${elem.name}?thumb=true`,
-            selected: this.state.selected.filter(item => item.name === elem.name).length > 0,
-            current: this.state.current.name === elem.name,
-            visible: this.state.removed.filter(item => item.name === elem.name).length == 0,
-            onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
-            onRemove: this.handleOnRemove.bind(this, elem),
-            onClick: this.handleOnClick.bind(this, elem)
+            options: {
+                selected: this.state.selected.filter(item => item.name === elem.name).length > 0,
+                current: this.state.current.name === elem.name,
+                visible: this.state.removed.filter(item => item.name === elem.name).length == 0,
+                onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
+                onRemove: this.handleOnRemove.bind(this, elem),
+                onClick: this.handleOnClick.bind(this, elem)
+            }
         }))
 
         return (
