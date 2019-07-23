@@ -80,12 +80,25 @@ export default class Product extends React.Component {
         })
     }
 
+    selectOneItem(item) {
+        this.setState(() => {
+            const newState = {selected: [item]};
+            if(this.props.onSelectionChange) this.props.onSelectionChange(newState.selected);
+            return newState;
+        })
+    }
+
     handleCheckboxChange(item, event) {
         event.target.checked ? this.select(item) : this.unselectItem(item);
     }
 
     handleOnRemove(item, event) {
         this.setState(() => ({removed: [...this.state.removed, item]}))
+    }
+
+    handleOnClick(item, event) {
+        if(event.target.className === "card")
+        this.selectOneItem(item);
     }
 
     render() {
@@ -96,7 +109,8 @@ export default class Product extends React.Component {
             current: this.state.current.name === elem.name,
             visible: this.state.removed.filter(item => item.name === elem.name).length == 0,
             onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
-            onRemove: this.handleOnRemove.bind(this, elem)
+            onRemove: this.handleOnRemove.bind(this, elem),
+            onClick: this.handleOnClick.bind(this, elem)
         }))
 
         return (
