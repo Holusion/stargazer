@@ -4,7 +4,7 @@ import Network from '../../network';
 import {Playlist, Fab} from '@holusion/react-components-holusion';
 import PropTypes from 'prop-types'
 import React from 'react'
-import {dispatchError, listenPlaylist} from '../../store'
+import {dispatchTask, endTask, dispatchError, listenPlaylist} from '../../store'
 import net from "net";
 
 export default class Product extends React.Component {
@@ -44,6 +44,7 @@ export default class Product extends React.Component {
         }
 
         if(addr) {
+            dispatchTask("Init product");
             this.network = new Network(addr);
             this.endSynchronize = this.network.synchronize();
             const playlist = await this.network.getPlaylist();
@@ -51,6 +52,7 @@ export default class Product extends React.Component {
             this.setState(() => ({url: addr, playlist: [...playlist], current: current}))
             this.updateCurrent = this.updateCurrent.bind(this, this.network);
             this.stopListenPlaylist = listenPlaylist("current-playlist", this.updateCurrent);
+            endTask("Init product");
         }
     }
 
@@ -64,9 +66,10 @@ export default class Product extends React.Component {
         this.setState(() => ({current: current}))
     }
 
-    play(item) {
-        console.log("test");
-        this.network.play(item);
+    async play(item) {
+        dispatchTask("play");
+        await this.network.play(item);
+        endTask("play");
     }
 
     select(item) {
@@ -107,8 +110,8 @@ export default class Product extends React.Component {
         this.selectOneItem(item);
     }
 
-    handleOnPlay(item, event) {
-        this.play(item);
+    async handleOnPlay(item, event) {
+        await this.play(item);
     }
 
     render() {
@@ -122,7 +125,7 @@ export default class Product extends React.Component {
                 onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
                 onRemove: this.handleOnRemove.bind(this, elem),
                 onClick: this.handleOnClick.bind(this, elem),
-                onPlay: this.handleOnPlay.bind(this, elem)
+                onPlay: async (e) => await this.handleOnPlay(elem, e)
             }
         }))
 

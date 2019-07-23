@@ -1,5 +1,5 @@
 import "./App.css"
-import {Button, ButtonIcon, List, ListItem, Topbar} from "@holusion/react-components-holusion";
+import {Button, ButtonIcon, List, ListItem, Spinner, Topbar} from "@holusion/react-components-holusion";
 import {dispatchError, dispatchList, dispatchTask, listenError, listenInfo, listenTasks} from "./store";
 import Home from "./containers/Home";
 import {Logger} from "./widgets/Logger";
@@ -18,20 +18,16 @@ export default class App extends React.Component {
             leftPanelHide: false,
             list: [],
             product: null,
-            selectionLength: 0
+            selectionLength: 0,
+            tasksLength: 0,
         }
-    }
 
+    }
+    
     componentDidMount() {
         listenTasks((evt)=>{
-            let tasks = evt.detail;
-            //console.log("Tasks updated : ",tasks);
-            if(tasks.length != 0){
-                // spinner.setAttribute("active", true);
-                // spinner.setAttribute("title",tasks.join(", "));
-            }else {
-                // spinner.removeAttribute("active");
-            }
+            const tasks = evt.detail;
+            this.setState(() => ({tasksLength: tasks.length}))
         });
 
         let initializing = dispatchTask("Initialization");
@@ -40,7 +36,7 @@ export default class App extends React.Component {
         //Set up error manager
         listenError((evt)=>{
         //   notifier.pushError(evt.detail);
-        logger.push(evt.detail);
+            logger.push(evt.detail);
         });
 
         listenInfo((evt) => {
@@ -104,9 +100,14 @@ export default class App extends React.Component {
         }
 
         const toolbar = <Toolbar selectionLength={this.state.selectionLength} />;
+        let spinner = <Spinner absolute />
+        if(this.state.tasksLength != 0) {
+            spinner = <Spinner active absolute />
+        }
 
         return (
             <div className="container">
+                {spinner}        
                 <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null}/>
                 <div className="contents">
                     {leftPanel}
