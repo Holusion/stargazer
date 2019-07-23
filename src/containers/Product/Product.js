@@ -67,7 +67,7 @@ export default class Product extends React.Component {
     select(item) {
         this.setState(() => {
             const newState = {selected: [...this.state.selected, item]};
-            this.props.onSelectionChange(newState.selected);
+            if(this.props.onSelectionChange) this.props.onSelectionChange(newState.selected);
             return newState;
         })
     }
@@ -75,7 +75,7 @@ export default class Product extends React.Component {
     unselectItem(item) {
         this.setState(() => {
             const newState = {selected: this.state.selected.filter(elem => elem.name !== item.name)};
-            this.props.onSelectionChange(newState.selected);
+            if(this.props.onSelectionChange) this.props.onSelectionChange(newState.selected);
             return newState;
         })
     }

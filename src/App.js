@@ -99,13 +99,15 @@ export default class App extends React.Component {
         let title = "Holusion"
 
         if(this.state.product) {
-            rightPanel = <Product key={this.state.product.name} product={this.state.product} />
+            rightPanel = <Product key={this.state.product.name} product={this.state.product} onSelectionChange={(selected) => this.setState(() => ({selectionLength: selected.length}))} />
             title = this.state.product.name;
         }
 
+        const toolbar = <Toolbar selectionLength={this.state.selectionLength} />;
+
         return (
             <div className="container">
-                <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? <Toolbar /> : null}/>
+                <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null}/>
                 <div className="contents">
                     {leftPanel}
                     <div className="right-content">
