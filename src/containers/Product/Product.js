@@ -44,12 +44,12 @@ export default class Product extends React.Component {
         }
 
         if(addr) {
-            const network = new Network(addr);
-            this.endSynchronize = network.synchronize();
-            const playlist = await network.getPlaylist();
-            let current = await network.getCurrent();
+            this.network = new Network(addr);
+            this.endSynchronize = this.network.synchronize();
+            const playlist = await this.network.getPlaylist();
+            let current = await this.network.getCurrent();
             this.setState(() => ({url: addr, playlist: [...playlist], current: current}))
-            this.updateCurrent = this.updateCurrent.bind(this, network);
+            this.updateCurrent = this.updateCurrent.bind(this, this.network);
             this.stopListenPlaylist = listenPlaylist("current-playlist", this.updateCurrent);
         }
     }
@@ -62,6 +62,11 @@ export default class Product extends React.Component {
     async updateCurrent(network) {
         let current = await network.getCurrent();
         this.setState(() => ({current: current}))
+    }
+
+    play(item) {
+        console.log("test");
+        this.network.play(item);
     }
 
     select(item) {
@@ -102,6 +107,10 @@ export default class Product extends React.Component {
         this.selectOneItem(item);
     }
 
+    handleOnPlay(item, event) {
+        this.play(item);
+    }
+
     render() {
         const items = this.state.playlist.map(elem => ({
             ...elem,
@@ -112,7 +121,8 @@ export default class Product extends React.Component {
                 visible: this.state.removed.filter(item => item.name === elem.name).length == 0,
                 onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
                 onRemove: this.handleOnRemove.bind(this, elem),
-                onClick: this.handleOnClick.bind(this, elem)
+                onClick: this.handleOnClick.bind(this, elem),
+                onPlay: this.handleOnPlay.bind(this, elem)
             }
         }))
 
