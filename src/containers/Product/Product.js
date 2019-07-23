@@ -64,10 +64,24 @@ export default class Product extends React.Component {
         this.setState(() => ({current: current}))
     }
 
+    select(item) {
+        this.setState(() => {
+            const newState = {selected: [...this.state.selected, item]};
+            this.props.onSelectionChange(newState.selected);
+            return newState;
+        })
+    }
+
+    unselectItem(item) {
+        this.setState(() => {
+            const newState = {selected: this.state.selected.filter(elem => elem.name !== item.name)};
+            this.props.onSelectionChange(newState.selected);
+            return newState;
+        })
+    }
+
     handleCheckboxChange(item, event) {
-        event.target.checked 
-            ? this.setState((prevState) => ({selected: [...prevState.selected, item]})) 
-            : this.setState(() => ({selected: this.state.selected.filter(elem => elem.name !== item.name)}))
+        event.target.checked ? this.select(item) : this.unselectItem(item);
     }
 
     handleOnRemove(item, event) {
@@ -95,5 +109,6 @@ export default class Product extends React.Component {
 }
 
 Product.propTypes = {
-    product: PropTypes.object
+    product: PropTypes.object,
+    onSelectionChange: PropTypes.func
 }

@@ -5,6 +5,7 @@ import Home from "./containers/Home";
 import {Logger} from "./widgets/Logger";
 import Product from "./containers/Product";
 import React from 'react';
+import Toolbar from "./components/Toolbar";
 import {ipcRenderer} from 'electron';
 
 
@@ -16,7 +17,8 @@ export default class App extends React.Component {
             updating: false,
             leftPanelHide: false,
             list: [],
-            product: null
+            product: null,
+            selectionLength: 0
         }
     }
 
@@ -103,7 +105,7 @@ export default class App extends React.Component {
 
         return (
             <div className="container">
-                <Topbar title={title} start={this.createStartTopAppBar()}/>
+                <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? <Toolbar /> : null}/>
                 <div className="contents">
                     {leftPanel}
                     <div className="right-content">

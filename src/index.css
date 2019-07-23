@@ -1,9 +1,5 @@
 @import url("../src/variables.css");
 
-* {
-  box-sizing: border-box;
-}
-
 html {
   width: 100%;
   height: 100%;
