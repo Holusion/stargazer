@@ -114,6 +114,7 @@ export default class Product extends React.Component {
         this.setState(() => ({removed: [...this.state.removed, item]}));
         setTimeout(async () => {
             await this.updatePlaylist();
+            this.setState(() => ({removed: this.state.removed.filter(elem => elem != item)}));
         }, 1000);
     }
 
@@ -141,7 +142,7 @@ export default class Product extends React.Component {
             }
         }))
 
-        const FabUpload = uploader(Fab, this.state.url, {title: "Ajouter un média", icon: "upload"});
+        const FabUpload = uploader(Fab, this.state.url, this.updatePlaylist.bind(this), {title: "Ajouter un média", icon: "upload"});
 
         return (
             <div className="product">

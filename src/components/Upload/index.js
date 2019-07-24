@@ -3,7 +3,7 @@ import FormData from 'form-data';
 import {HTTPError} from '../../errors/HTTPError'
 import React from 'react'
 
-export default function uploader(WrappedComponent, url, componentProps) {
+export default function uploader(WrappedComponent, url, updatePlaylist, componentProps) {
     return class Upload extends React.Component {
         constructor(props) {
             super(props);
@@ -49,14 +49,30 @@ export default function uploader(WrappedComponent, url, componentProps) {
             const fileSelector = document.createElement('input');
             fileSelector.setAttribute('type', 'file');
             fileSelector.setAttribute('multiple', 'multiple');
-            fileSelector.addEventListener("change", (evt)=>{
-                this.upload(evt.path[0].files);
+            fileSelector.addEventListener("change", async (evt)=>{
+                await this.upload(evt.path[0].files);
+                await updatePlaylist();
             })
             fileSelector.click();
         }
 
+        handleDrop(e) {
+            console.log("test");
+            e.preventDefault();
+            this.upload(e.dataTransfer.files);
+            return false;
+        }
+
         render() {
-            return <WrappedComponent {...this.props} {...componentProps} onClick={() => this.showBoxDialog()} />
+            return <WrappedComponent 
+                {...this.props} 
+                {...componentProps} 
+                onClick={() => this.showBoxDialog()}
+                onDrop={this.handleDrop.bind(this)}
+                onDragOver = {() => false}
+                onDragEnd = {() => false}
+                onDragLeave = {() => false}
+                 />
         }
     }
 }
