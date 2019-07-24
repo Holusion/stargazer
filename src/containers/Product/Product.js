@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {dispatchTask, endTask, dispatchError, listenPlaylist} from '../../store'
 import net from "net";
+import uploader from '../../components/Upload';
 
 export default class Product extends React.Component {
 
@@ -140,10 +141,13 @@ export default class Product extends React.Component {
             }
         }))
 
+        const FabUpload = uploader(Fab, this.state.url, {title: "Ajouter un média", icon: "upload"});
+
         return (
             <div className="product">
                 <Playlist items={items} />
-                <Fab title="Ajouter un média" icon="upload"/>
+                <FabUpload />
+                {/* <Fab title="Ajouter un média" icon="upload"/> */}
             </div>
         )
     }
