@@ -47,9 +47,8 @@ export default class Product extends React.Component {
             dispatchTask("Init product");
             this.network = new Network(addr);
             this.endSynchronize = this.network.synchronize();
-            const playlist = await this.network.getPlaylist();
-            let current = await this.network.getCurrent();
-            this.setState(() => ({url: addr, playlist: [...playlist], current: current}))
+            this.setState(() => ({url: addr}))
+            this.updatePlaylist();
             this.updateCurrent = this.updateCurrent.bind(this, this.network);
             this.stopListenPlaylist = listenPlaylist("current-playlist", this.updateCurrent);
             endTask("Init product");
@@ -64,6 +63,12 @@ export default class Product extends React.Component {
     async updateCurrent(network) {
         let current = await network.getCurrent();
         this.setState(() => ({current: current}))
+    }
+
+    async updatePlaylist() {
+        const playlist = await this.network.getPlaylist();
+        let current = await this.network.getCurrent();
+        this.setState(() => ({playlist: [...playlist], current: current}))
     }
 
     async play(item) {
@@ -100,9 +105,15 @@ export default class Product extends React.Component {
         event.target.checked ? this.select(item) : this.unselectItem(item);
     }
 
-    handleOnRemove(item, event) {
-        this.setState(() => ({removed: [...this.state.removed, item]}));
+    async handleOnRemove(item, event) {
+        dispatchTask(`Remove ${item.name}`);
+        await this.network.remove(item);
+        endTask(`Remove ${item.name}`);
         this.unselectItem(item);
+        this.setState(() => ({removed: [...this.state.removed, item]}));
+        setTimeout(async () => {
+            await this.updatePlaylist();
+        }, 1000);
     }
 
     handleOnClick(item, event) {
