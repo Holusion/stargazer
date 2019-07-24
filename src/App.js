@@ -80,8 +80,8 @@ export default class App extends React.Component {
     render() {
         const items = this.state.list.map(msg => <ListItem key={msg.name} icon="library" onClick={this.navigateToProduct.bind(this, msg)}>{msg.name}</ListItem>)
 
-        const leftPanel = this.state.leftPanelHide ? null : (
-            <div className="left-content">
+        const leftPanel = (
+            <div className={`left-content ${this.state.leftPanelHide ? "hide" : ""}`}>
                 <div className="list-group">
                     <Button onClick={this.updateProductList.bind(this)}>Actualiser</Button>
                     <List>

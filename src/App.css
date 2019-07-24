@@ -1,5 +1,29 @@
 @import url("./variables.css");
 
+@keyframes leftPanelIn {
+    0% {
+        width: 0%;        
+        transform: translateX(-100%) scaleX(0);
+    }
+
+    100% {
+        width: 20%;
+        transform: translateX(0%) scaleX(1);
+    }
+}
+
+@keyframes leftPanelOut {
+    0% {
+        width: 20%;
+        transform: translateX(0%) scaleX(1);
+    }
+
+    100% {
+        width: 0;
+        transform: translateX(-100%) scaleX(0);
+    }
+}
+
 .container {
     width: 100%;
     position: relative;
@@ -19,11 +43,17 @@
     width: 20%;
     overflow-y: scroll;
     height: 100%;
-    min-width: 200px;
+    transform: translateX(0) scaleX(1);
+    animation: leftPanelIn 0.5s forwards;
+}
+
+.left-content.hide {
+    animation: leftPanelOut 0.5s forwards;
 }
 
 .right-content {
     padding: 0 auto;
+    margin-left: 8px;
     overflow-y: scroll;
     width: 100%;
 }
