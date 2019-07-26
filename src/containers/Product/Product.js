@@ -1,160 +1,56 @@
 import './Product.css'
+import {Fab, Playlist, SocketProvider} from '@holusion/react-components-holusion';
+import React, {useEffect, useState} from 'react'
 import BadProductIPFound from '../../errors/BadProductIPFound'
-import Network from '../../network';
-import {Playlist, Fab} from '@holusion/react-components-holusion';
 import PropTypes from 'prop-types'
-import React from 'react'
-import {dispatchTask, endTask, dispatchError, listenPlaylist} from '../../store'
+import {dispatchError} from '../../store'
 import net from "net";
 import uploader from '../../components/Upload';
 
-export default class Product extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            playlist: [],
-            url: "",
-            selected: [],
-            removed: [],
-            current: {}
-        }
-    }
-
-    async componentDidMount() {
-        let addr = null;
-        if(process.platform === "win32") {
-            for(let a of this.props.product.addresses) {
-                if(net.isIP(a) == 4) {
-                    addr = a;
-                }
+function initProduct(product, setUrl) {
+    let addr = null;
+    if(process.platform === "win32") {
+        for(let a of product.addresses) {
+            if(net.isIP(a) == 4) {
+                addr = a;
             }
-    
-            // Fetch can't parse ipv6 addresses
-            switch (net.isIP(addr)) {
-                case 6:
-                    addr = `[${addr}]:3000`;
-                    break;
-                case 0:
-                    dispatchError(new BadProductIPFound(this.props.product.name, addr));
-                    break;
-                default:
-            }
-        } else {
-            addr = `${this.props.product.name}.local`;
         }
 
-        if(addr) {
-            dispatchTask("Init product");
-            this.network = new Network(addr);
-            this.endSynchronize = this.network.synchronize();
-            this.setState(() => ({url: addr}))
-            this.updatePlaylist();
-            this.updateCurrent = this.updateCurrent.bind(this, this.network);
-            this.stopListenPlaylist = listenPlaylist("current-playlist", this.updateCurrent);
-            endTask("Init product");
+        // Fetch can't parse ipv6 addresses
+        switch (net.isIP(addr)) {
+            case 6:
+                addr = `[${addr}]:3000`;
+                break;
+            case 0:
+                dispatchError(new BadProductIPFound(product.name, addr));
+                break;
+            default:
         }
+    } else {
+        addr = `${product.name}.local`;
     }
 
-    componentWillUnmount() {
-        this.endSynchronize();
-        this.stopListenPlaylist();
-    }
-    
-    async updateCurrent(network) {
-        let current = await network.getCurrent();
-        this.setState(() => ({current: current}))
-    }
-
-    async updatePlaylist() {
-        const playlist = await this.network.getPlaylist();
-        let current = await this.network.getCurrent();
-        this.setState(() => ({playlist: [...playlist], current: current}))
-    }
-
-    async play(item) {
-        dispatchTask("play");
-        await this.network.play(item);
-        endTask("play");
-    }
-
-    select(item) {
-        this.setState(() => {
-            const newState = {selected: [...this.state.selected, item]};
-            if(this.props.onSelectionChange) this.props.onSelectionChange(newState.selected);
-            return newState;
-        })
-    }
-
-    unselectItem(item) {
-        this.setState(() => {
-            const newState = {selected: this.state.selected.filter(elem => elem.name !== item.name)};
-            if(this.props.onSelectionChange) this.props.onSelectionChange(newState.selected);
-            return newState;
-        })
-    }
-
-    selectOneItem(item) {
-        this.setState(() => {
-            const newState = {selected: [item]};
-            if(this.props.onSelectionChange) this.props.onSelectionChange(newState.selected);
-            return newState;
-        })
-    }
-
-    handleCheckboxChange(item, event) {
-        event.target.checked ? this.select(item) : this.unselectItem(item);
-    }
-
-    async handleOnRemove(item, event) {
-        dispatchTask(`Remove ${item.name}`);
-        await this.network.remove(item);
-        endTask(`Remove ${item.name}`);
-        this.unselectItem(item);
-        this.setState(() => ({removed: [...this.state.removed, item]}));
-        setTimeout(async () => {
-            await this.updatePlaylist();
-            this.setState(() => ({removed: this.state.removed.filter(elem => elem != item)}));
-        }, 1000);
-    }
-
-    handleOnClick(item, event) {
-        if(event.target.className === "card")
-        this.selectOneItem(item);
-    }
-
-    async handleOnPlay(item, event) {
-        await this.play(item);
-    }
-
-    render() {
-        const items = this.state.playlist.map(elem => ({
-            ...elem,
-            image: `http://${this.state.url}/medias/${elem.name}?thumb=true`,
-            options: {
-                selected: this.state.selected.filter(item => item.name === elem.name).length > 0,
-                current: this.state.current.name === elem.name,
-                visible: this.state.removed.filter(item => item.name === elem.name).length == 0,
-                onCheckboxChange: this.handleCheckboxChange.bind(this, elem),
-                onRemove: this.handleOnRemove.bind(this, elem),
-                onClick: this.handleOnClick.bind(this, elem),
-                onPlay: async (e) => await this.handleOnPlay(elem, e)
-            }
-        }))
-
-        const FabUpload = uploader(Fab, this.state.url, this.updatePlaylist.bind(this), {title: "Ajouter un média", icon: "upload"});
-
-        return (
-            <div className="product">
-                <Playlist items={items} />
-                <FabUpload />
-                {/* <Fab title="Ajouter un média" icon="upload"/> */}
-            </div>
-        )
+    if(addr) {
+        setUrl(addr);
     }
 }
 
+export default function Product(props) {
+    const [url, setUrl] = useState("");
+
+    useEffect(() => initProduct(props.product, setUrl), [props.product]);
+
+    const FabUpload = uploader(Fab, url, {title: "Ajouter un média", icon: "upload"});
+    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}><Playlist url={url} /></SocketProvider> : null;
+
+    return (
+        <div className="product">
+            {playlist}
+            <FabUpload />
+        </div>
+    )
+}
+
 Product.propTypes = {
-    product: PropTypes.object,
-    onSelectionChange: PropTypes.func
+    product: PropTypes.object
 }

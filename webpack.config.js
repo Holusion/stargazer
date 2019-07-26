@@ -33,7 +33,13 @@ module.exports = {
         }
       ]
     },
-    resolve: { extensions: ["*", ".js", ".jsx"] },
+    resolve: { 
+      extensions: ["*", ".js", ".jsx"],
+      alias: { 
+        'react': path.resolve(__dirname, './node_modules/react') ,
+        'react-dom': path.resolve(__dirname, './node_modules/react-dom')
+      }
+    },
     output: {
       path: path.resolve(__dirname, "dist/"),
       publicPath: "/dist/",
