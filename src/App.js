@@ -64,6 +64,12 @@ export default class App extends React.Component {
         ipcRenderer.on('accueil', () => {
             this.setState(() => ({product: null}));
         })
+
+        ipcRenderer.on('remote-error', (sender, errors) => {
+            for(let error of errors) {
+                dispatchError(error);
+            }
+        })
     }
 
     updateProductList(){
