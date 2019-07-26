@@ -60,6 +60,10 @@ export default class App extends React.Component {
                 dispatchError(new Error("clients-list is not an array : "+ JSON.stringify(message)));
             }
         });
+
+        ipcRenderer.on('accueil', () => {
+            this.setState(() => ({product: null}));
+        })
     }
 
     updateProductList(){

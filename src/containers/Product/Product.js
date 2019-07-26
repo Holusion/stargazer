@@ -1,9 +1,9 @@
 import './Product.css'
 import {Fab, Playlist, SocketProvider} from '@holusion/react-components-holusion';
 import React, {useEffect, useState} from 'react'
+import {dispatchError, dispatchTask, endTask} from '../../store'
 import BadProductIPFound from '../../errors/BadProductIPFound'
 import PropTypes from 'prop-types'
-import {dispatchError} from '../../store'
 import net from "net";
 import uploader from '../../components/Upload';
 
@@ -41,7 +41,7 @@ export default function Product(props) {
     useEffect(() => initProduct(props.product, setUrl), [props.product]);
 
     const FabUpload = uploader(Fab, url, {title: "Ajouter un média", icon: "upload"});
-    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}><Playlist url={url} /></SocketProvider> : null;
+    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}><Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} /></SocketProvider> : null;
 
     return (
         <div className="product">
