@@ -56,6 +56,9 @@ export default class App extends React.Component {
             // console.log("new list : ",message)
                 dispatchList(message);
                 this.setState(() => ({list: message}))
+                if(this.state.product != null && message.filter(elem => elem.name === this.state.product.name).length === 0) {
+                    this.setState(() => ({product: null}));
+                }
             }else{
                 dispatchError(new Error("clients-list is not an array : "+ JSON.stringify(message)));
             }
