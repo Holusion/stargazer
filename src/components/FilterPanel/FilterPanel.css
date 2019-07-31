@@ -1,0 +1,32 @@
+@import url("../../variables.css");
+
+.filter-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.filter-panel.hide {
+    transform: translateY(-100%) scaleY(0);
+    height: 0;
+}
+
+.filter-panel:not(.hide) {
+    transform: translateY(0%) scaleY(1);
+    height: 150px;
+}
+
+.filter-panel-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.filter-panel-options .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 16px;
+    text-align: center;
+}

@@ -52,27 +52,6 @@ function removeAll(props, items) {
     }
 }
 
-function setActive(props, item) {
-    props.onTaskStart(`active-${item.name}`);
-    let options = {
-        method: 'PUT',
-        body: JSON.stringify(Object.assign(item,{active:!item.active})),
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    }
-    fetch(url.resolve(`http://${props.url}`, `/playlist`), options).then(res => {
-        if(!res.ok) {
-            const err = new Error(`${res.status} - ${res.statusText}`);
-            props.onTaskEnd(`active-${item.name}`, err);            
-        } else {
-            props.onTaskEnd(`active-${item.name}`);
-        }
-    }).catch(err => {
-        props.onTaskEnd(`active-${item.name}`, err);
-    })
-}
-
 export default function Toolbar(props) {
     let tools = [];
     if(props.selection.length >= 1) {
@@ -85,7 +64,7 @@ export default function Toolbar(props) {
     return (
         <div className="toolbar-container">
             {tools}
-            <ButtonIcon name="filter" title="Filtrer les médias" />
+            <ButtonIcon name="filter" title="Filtrer les médias" onClick={props.onFilterClick} />
         </div>
     )
 }
@@ -95,4 +74,5 @@ Toolbar.propTypes = {
     selection: PropTypes.arrayOf(PropTypes.object),
     onTaskStart: PropTypes.func,
     onTaskEnd: PropTypes.func,
+    onFilterClick: PropTypes.func,
 }

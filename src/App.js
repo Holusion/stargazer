@@ -21,6 +21,7 @@ export default class App extends React.Component {
             selection: [],
             url: null,
             tasksLength: 0,
+            filterOpen: false,
         }
 
     }
@@ -113,12 +114,13 @@ export default class App extends React.Component {
                             key={this.state.product.name} 
                             product={this.state.product} 
                             onUrlFound={(url) => this.setState(() => ({url: url}))} 
-                            onSelectionChange={(selected) => this.setState(() => ({selection: selected}))} 
+                            onSelectionChange={(selected) => this.setState(() => ({selection: selected}))}
+                            filterOpen={this.state.filterOpen}
                         />
             title = this.state.product.name;
         }
 
-        const toolbar = <Toolbar url={this.state.url} selection={this.state.selection} onTaskStart={dispatchTask} onTaskEnd={endTask} />;
+        const toolbar = <Toolbar url={this.state.url} selection={this.state.selection} onTaskStart={dispatchTask} onTaskEnd={endTask} onFilterClick={() => this.setState(() => ({filterOpen: !this.state.filterOpen}))} />;
         let spinner = <Spinner absolute />
         if(this.state.tasksLength != 0) {
             spinner = <Spinner active absolute />

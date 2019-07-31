@@ -3,6 +3,7 @@ import {Playlist, SocketProvider} from '@holusion/react-components-holusion';
 import React, {useEffect, useState} from 'react'
 import {dispatchError, dispatchTask, endTask} from '../../store'
 import BadProductIPFound from '../../errors/BadProductIPFound'
+import FilterPanel from '../../components/FilterPanel';
 import PropTypes from 'prop-types'
 import net from "net";
 
@@ -34,16 +35,38 @@ function initProduct(product, setUrl) {
     }
 }
 
+function handleFilterBy(filter, elem) {
+    if(filter.length === 0) {
+        return true;
+    } else {
+        return filter.filter(item => {
+            switch(item) {
+                case "active":
+                    return elem.active === true;
+                case "desactive":
+                    return elem.active === false;
+                default:
+                    return true;
+            }
+        }).length > 0;
+    }
+}
+
 export default function Product(props) {
     const [url, setUrl] = useState("");
+    const [filter, setFilter] = useState([]);
 
     useEffect(() => initProduct(props.product, setUrl), [props.product]);
     useEffect(() => props.onUrlFound(url), [url]);
     
-    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}><Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} /></SocketProvider> : null;
+    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}>
+                                <Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} filterBy={(elem) => handleFilterBy(filter, elem)} />
+                            </SocketProvider> 
+                        : null;
 
     return (
         <div className="product">
+            <FilterPanel visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />
             {playlist}
         </div>
     )
@@ -51,6 +74,7 @@ export default function Product(props) {
 
 Product.propTypes = {
     product: PropTypes.object,
+    filterOpen: PropTypes.bool,
     onSelectionChange: PropTypes.func,
     onUrlFound: PropTypes.func,
 }
