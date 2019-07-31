@@ -1,0 +1,83 @@
+@import url('../../variables.css');
+
+@keyframes in {
+    0% {
+        transform: translateX(110%);
+        height: 100px;
+    }
+
+    100% {
+        transform: translateX(0);
+        height: 100px;
+    }
+}
+
+@keyframes out {
+    0% {
+        transform: translateX(0);
+        height: 100px;
+    }
+
+    50% {
+        transform: translateX(110%);
+        height: 100px;
+    }
+    
+    100% {
+        transform: translateX(110%);
+        height: 0px;
+    }
+}
+
+.notification-container {
+    width: 300px;
+    height: 100px;
+    background-color: var(--theme-primary);
+    border-color: #1A4C66;
+    border-width: 4px;
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-size: 14px;
+    transition: transform 0.3s ease-out, height 0.3s ease-out, opacity 0.3s ease-out;
+    margin-top: 2px;
+    cursor: pointer;
+    opacity: 0.6;
+    position: relative;
+}
+
+.notification-container.visible {
+    animation: in 1s forwards;
+}
+
+.notification-container:not(.visible) {
+    animation: out 1s forwards;
+}
+
+.notification-container:hover {
+    opacity: 1;
+}
+
+.notification-icon{
+    background-color: #0D2633;
+    height: 95px;
+    width: 95px;
+    margin: 2px;
+}
+
+.notification-right{
+    padding: 4px;
+}
+
+.notification-title{
+    margin-bottom: 8px;
+    font-weight: bold;
+    word-break: break-word;
+}
+
+.notification-top-right{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}

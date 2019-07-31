@@ -1,8 +1,9 @@
 import "./App.css"
 import {Button, ButtonIcon, List, ListItem, Spinner, Topbar} from "@holusion/react-components-holusion";
-import {dispatchError, dispatchList, dispatchTask, endTask, listenError, listenInfo, listenTasks} from "./store";
+import {dispatchError, dispatchInfo, dispatchList, dispatchTask, endTask, listenError, listenInfo, listenTasks} from "./store";
 import Home from "./containers/Home";
 import {Logger} from "./widgets/Logger";
+import Notifier from "./components/Notifier";
 import Product from "./containers/Product";
 import React from 'react';
 import Toolbar from "./components/Toolbar";
@@ -22,6 +23,8 @@ export default class App extends React.Component {
             url: null,
             tasksLength: 0,
             filterOpen: false,
+            error: null,
+            info: null,
         }
 
     }
@@ -37,12 +40,12 @@ export default class App extends React.Component {
 
         //Set up error manager
         listenError((evt)=>{
-        //   notifier.pushError(evt.detail);
+            this.setState(() => ({error: evt.detail}))
             logger.push(evt.detail);
         });
 
         listenInfo((evt) => {
-        //   notifier.pushInfo(evt.detail);
+            this.setState(() => ({info: evt.detail}))
         })
 
         this.updateProductList();
@@ -75,6 +78,8 @@ export default class App extends React.Component {
                 dispatchError(error);
             }
         })
+
+        dispatchInfo("test", "test")
     }
 
     updateProductList(){
@@ -128,7 +133,8 @@ export default class App extends React.Component {
 
         return (
             <div className="container">
-                {spinner}        
+                {spinner}
+                <Notifier error={this.state.error} info={this.state.info} />
                 <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null} />
                 <div className="contents">
                     {leftPanel}
