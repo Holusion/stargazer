@@ -1,5 +1,5 @@
 import './Product.css'
-import {Fab, Playlist, SocketProvider, uploader} from '@holusion/react-components-holusion';
+import {Playlist, SocketProvider} from '@holusion/react-components-holusion';
 import React, {useEffect, useState} from 'react'
 import {dispatchError, dispatchTask, endTask} from '../../store'
 import BadProductIPFound from '../../errors/BadProductIPFound'
@@ -38,18 +38,19 @@ export default function Product(props) {
     const [url, setUrl] = useState("");
 
     useEffect(() => initProduct(props.product, setUrl), [props.product]);
+    useEffect(() => props.onUrlFound(url), [url]);
     
-    const FabUpload = uploader(Fab, {title: "Ajouter un média", icon: "upload"});
-    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}><Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} /></SocketProvider> : null;
+    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}><Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} /></SocketProvider> : null;
 
     return (
         <div className="product">
             {playlist}
-            <FabUpload url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} />
         </div>
     )
 }
 
 Product.propTypes = {
-    product: PropTypes.object
+    product: PropTypes.object,
+    onSelectionChange: PropTypes.func,
+    onUrlFound: PropTypes.func,
 }

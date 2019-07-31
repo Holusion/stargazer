@@ -1,6 +1,6 @@
 import "./App.css"
 import {Button, ButtonIcon, List, ListItem, Spinner, Topbar} from "@holusion/react-components-holusion";
-import {dispatchError, dispatchList, dispatchTask, listenError, listenInfo, listenTasks} from "./store";
+import {dispatchError, dispatchList, dispatchTask, endTask, listenError, listenInfo, listenTasks} from "./store";
 import Home from "./containers/Home";
 import {Logger} from "./widgets/Logger";
 import Product from "./containers/Product";
@@ -18,7 +18,8 @@ export default class App extends React.Component {
             leftPanelHide: false,
             list: [],
             product: null,
-            selectionLength: 0,
+            selection: [],
+            url: null,
             tasksLength: 0,
         }
 
@@ -108,11 +109,16 @@ export default class App extends React.Component {
         let title = "Holusion"
 
         if(this.state.product) {
-            rightPanel = <Product key={this.state.product.name} product={this.state.product} onSelectionChange={(selected) => this.setState(() => ({selectionLength: selected.length}))} />
+            rightPanel = <Product 
+                            key={this.state.product.name} 
+                            product={this.state.product} 
+                            onUrlFound={(url) => this.setState(() => ({url: url}))} 
+                            onSelectionChange={(selected) => this.setState(() => ({selection: selected}))} 
+                        />
             title = this.state.product.name;
         }
 
-        const toolbar = <Toolbar selectionLength={this.state.selectionLength} />;
+        const toolbar = <Toolbar url={this.state.url} selection={this.state.selection} onTaskStart={dispatchTask} onTaskEnd={endTask} />;
         let spinner = <Spinner absolute />
         if(this.state.tasksLength != 0) {
             spinner = <Spinner active absolute />
@@ -121,7 +127,7 @@ export default class App extends React.Component {
         return (
             <div className="container">
                 {spinner}        
-                <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null}/>
+                <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null} />
                 <div className="contents">
                     {leftPanel}
                     <div className="right-content">
