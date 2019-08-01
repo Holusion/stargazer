@@ -86,11 +86,6 @@ export default class App extends React.Component {
                 dispatchError(error);
             }
         })
-
-        dispatchInfo("test1", "test")
-        dispatchInfo("test2", "test")
-        dispatchInfo("test3", "test")
-        dispatchInfo("test4", "test")
     }
 
     updateProductList(){

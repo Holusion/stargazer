@@ -15,6 +15,7 @@ export default function Notifier(props) {
                     content={item.content}
                     visible={item.visible}
                     onClose={() => props.onRemove(item)}
+                    onClick={item.onClick}
                 />
     });
 

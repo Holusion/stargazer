@@ -1,3 +1,5 @@
+import { remote } from "electron";
+
 let list = [];
 
 function pushNotification(obj) {
@@ -9,7 +11,16 @@ function pushNotification(obj) {
 
 function pushError(err) {
     if(err) {
-        const obj = {id: '_' + Math.random().toString(36).substr(2, 9), title: err.message, content: "Cliquez pour en savoir plus", visible: true}
+        const onClick = () => {
+            remote.dialog.showMessageBox({
+                title: err.name,
+                type: 'error',
+                message: err.message,
+                detail: `Details:\n${err.stack}`,
+                buttons: ['OK']
+            });
+        }
+        const obj = {id: '_' + Math.random().toString(36).substr(2, 9), title: err.message, content: "Cliquez pour en savoir plus", visible: true, onClick: onClick}
         pushNotification(obj);
     }
 }

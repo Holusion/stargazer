@@ -7,7 +7,7 @@ export default function Notification(props) {
     const icon = props.icon ?  <div className="notification-icon"><Icon name={props.icon} /></div> : null;
 
     return (
-        <div className={`notification-container ${props.visible ? "visible" : ""}`}>
+        <div className={`notification-container ${props.visible ? "visible" : ""}`} onClick={props.onClick ? props.onClick : null}>
             <div className="notification-left">
                 {icon}
             </div>
@@ -30,4 +30,5 @@ Notification.propTypes = {
     icon: PropTypes.element,
     visible: PropTypes.bool,
     onClose: PropTypes.func,
+    onClick : PropTypes.func,
 }
