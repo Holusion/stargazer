@@ -14,7 +14,8 @@ export default function Notifier(props) {
                     title={item.title} 
                     content={item.content}
                     visible={item.visible}
-                    onClose={() => props.onRemove(item)}
+                    icon={item.icon}
+                    onClose={(event) => {event.stopPropagation(); props.onRemove(item)}}
                     onClick={item.onClick}
                 />
     });

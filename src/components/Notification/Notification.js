@@ -1,10 +1,10 @@
 import './Notification.css'
-import { ButtonIcon, Icon } from '@holusion/react-components-holusion'
+import { Icon } from '@holusion/react-components-holusion'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 export default function Notification(props) {
-    const icon = props.icon ?  <div className="notification-icon"><Icon name={props.icon} /></div> : null;
+    const icon = props.icon ?  <div className="notification-icon"><Icon name={props.icon} width={95} height={95} /></div> : null;
 
     return (
         <div className={`notification-container ${props.visible ? "visible" : ""}`} onClick={props.onClick ? props.onClick : null}>
@@ -17,8 +17,8 @@ export default function Notification(props) {
                 </div>
                 {props.content}
             </div>
-            <div className="notification-top-right">
-                <ButtonIcon key={props.title} name="close" title="Fermer la notification" onClick={props.onClose} />
+            <div className="notification-top-right" onClick={props.onClose}>
+                <Icon key={props.title} name="close" title="Fermer la notification" />
             </div>
         </div>
     )
@@ -27,7 +27,7 @@ export default function Notification(props) {
 Notification.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
-    icon: PropTypes.element,
+    icon: PropTypes.string,
     visible: PropTypes.bool,
     onClose: PropTypes.func,
     onClick : PropTypes.func,

@@ -32,6 +32,24 @@ function pushInfo(info) {
     }
 }
 
+function pushUpdater(info) {
+    if(info) {
+        const onClick = () => {
+            let shell = require('electron').shell;
+            shell.openExternal(info.html_url);
+        }
+        const obj = {
+            id: '_' + Math.random().toString(36).substr(2, 9), 
+            title: `Nouvelle mise à jour : ${info.tag_name}`, 
+            content: "Cliquez pour télécharger la mise à jour", 
+            visible: true, 
+            icon: 'refresh', 
+            onClick: onClick
+        }
+        pushNotification(obj);
+    }
+}
+
 function removeNotification(item, time) {
     item.visible = false;
     setTimeout(() => {
@@ -47,6 +65,7 @@ export {
     pushError,
     pushInfo,
     pushNotification,
+    pushUpdater,
     removeNotification,
     getList
 }

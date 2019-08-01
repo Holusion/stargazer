@@ -1,15 +1,15 @@
 import "./App.css"
 import {Button, ButtonIcon, List, ListItem, Spinner, Topbar} from "@holusion/react-components-holusion";
-import {dispatchError, dispatchInfo, dispatchList, dispatchTask, endTask, listenError, listenInfo, listenTasks} from "./store";
-import {getList, pushError, pushInfo, removeNotification} from './api/notifier'
+import {dispatchError, dispatchList, dispatchTask, endTask, listenError, listenInfo, listenTasks} from "./store";
+import {getList, pushError, pushInfo, pushUpdater, removeNotification} from './api/notifier'
 import Home from "./containers/Home";
 import {Logger} from "./widgets/Logger";
 import Notifier from "./components/Notifier";
 import Product from "./containers/Product";
 import React from 'react';
 import Toolbar from "./components/Toolbar";
+import {checkUpdate} from './updater';
 import {ipcRenderer} from 'electron';
-
 
 export default class App extends React.Component {
     
@@ -26,7 +26,6 @@ export default class App extends React.Component {
             filterOpen: false,
             notifications: []
         }
-
     }
     
     componentDidMount() {
@@ -42,18 +41,12 @@ export default class App extends React.Component {
         listenError((evt)=>{
             pushError(evt.detail);
             logger.push(evt.detail);
-            this.setState(() => ({notifications: getList()}))
-            setTimeout(() => {
-                this.setState(() => ({notifications: getList()}))
-            }, 1000);
+            this.updateNotifications();
         });
 
         listenInfo((evt) => {
             pushInfo(evt.detail);
-            this.setState(() => ({notifications: getList()}))
-            setTimeout(() => {
-                this.setState(() => ({notifications: getList()}))
-            }, 1000);
+            this.updateNotifications();
         })
 
         this.updateProductList();
@@ -86,6 +79,18 @@ export default class App extends React.Component {
                 dispatchError(error);
             }
         })
+
+        checkUpdate().then(info => {
+            pushUpdater(info);
+            this.updateNotifications();
+        })
+    }
+
+    updateNotifications() {
+        this.setState(() => ({notifications: getList()}))
+        setTimeout(() => {
+            this.setState(() => ({notifications: getList()}))
+        }, 1000);
     }
 
     updateProductList(){
