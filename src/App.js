@@ -1,6 +1,7 @@
 import "./App.css"
 import {Button, ButtonIcon, List, ListItem, Spinner, Topbar} from "@holusion/react-components-holusion";
 import {dispatchError, dispatchInfo, dispatchList, dispatchTask, endTask, listenError, listenInfo, listenTasks} from "./store";
+import {getList, pushError, pushInfo, removeNotification} from './api/notifier'
 import Home from "./containers/Home";
 import {Logger} from "./widgets/Logger";
 import Notifier from "./components/Notifier";
@@ -23,8 +24,7 @@ export default class App extends React.Component {
             url: null,
             tasksLength: 0,
             filterOpen: false,
-            error: null,
-            info: null,
+            notifications: []
         }
 
     }
@@ -40,12 +40,20 @@ export default class App extends React.Component {
 
         //Set up error manager
         listenError((evt)=>{
-            this.setState(() => ({error: evt.detail}))
+            pushError(evt.detail);
             logger.push(evt.detail);
+            this.setState(() => ({notifications: getList()}))
+            setTimeout(() => {
+                this.setState(() => ({notifications: getList()}))
+            }, 1000);
         });
 
         listenInfo((evt) => {
-            this.setState(() => ({info: evt.detail}))
+            pushInfo(evt.detail);
+            this.setState(() => ({notifications: getList()}))
+            setTimeout(() => {
+                this.setState(() => ({notifications: getList()}))
+            }, 1000);
         })
 
         this.updateProductList();
@@ -79,7 +87,10 @@ export default class App extends React.Component {
             }
         })
 
-        dispatchInfo("test", "test")
+        dispatchInfo("test1", "test")
+        dispatchInfo("test2", "test")
+        dispatchInfo("test3", "test")
+        dispatchInfo("test4", "test")
     }
 
     updateProductList(){
@@ -134,7 +145,13 @@ export default class App extends React.Component {
         return (
             <div className="container">
                 {spinner}
-                <Notifier error={this.state.error} info={this.state.info} />
+                <Notifier list={this.state.notifications} onRemove={(item) => {
+                    removeNotification(item, 1000);
+                    this.setState(() => ({notifications: getList()}))
+                    setTimeout(() => {
+                        this.setState(() => ({notifications: getList()}))
+                    }, 1000);
+                }} />
                 <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null} />
                 <div className="contents">
                     {leftPanel}
