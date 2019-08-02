@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react'
 import {dispatchError, dispatchTask, endTask} from '../../store'
 import BadProductIPFound from '../../errors/BadProductIPFound'
 import FilterPanel from '../../components/FilterPanel';
+import ProductInfo from '../../components/ProductInfo';
 import PropTypes from 'prop-types'
 import net from "net";
 
@@ -63,12 +64,14 @@ export default function Product(props) {
     const playlist = url ? <SocketProvider key="playlist" url={`http://${url}/playlist`}>
                         <Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} filterBy={(elem) => handleFilterBy(filter, elem)} />
                     </SocketProvider> : null; 
-                    
-    
-    let panelComponent = [
-        <FilterPanel key="filter-panel" visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />,
-        playlist
-    ];
+
+    const productInfo = <ProductInfo url={url}/>;
+
+    let panelComponent = [<FilterPanel key="filter-panel" visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />, /*playlist*/]
+
+    if(panel === 1) {
+        panelComponent = productInfo;
+    }
 
     return (
         <div className="product">
