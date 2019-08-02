@@ -137,10 +137,7 @@ export default class App extends React.Component {
         }
 
         const toolbar = <Toolbar url={this.state.url} selection={this.state.selection} onTaskStart={dispatchTask} onTaskEnd={endTask} onFilterClick={() => this.setState(() => ({filterOpen: !this.state.filterOpen}))} />;
-        let spinner = <Spinner absolute />
-        if(this.state.tasksLength != 0) {
-            spinner = <Spinner active absolute />
-        }
+        let spinner = <Spinner active={this.state.tasksLength != 0} style={{position:"absolute",top:"50%", right:"50%", color:"var(--theme-primary)"}}/>
 
         return (
             <div className="container">
