@@ -144,10 +144,7 @@ export default class App extends React.Component {
                 {spinner}
                 <Notifier list={this.state.notifications} onRemove={(item) => {
                     removeNotification(item, 1000);
-                    this.setState(() => ({notifications: getList()}))
-                    setTimeout(() => {
-                        this.setState(() => ({notifications: getList()}))
-                    }, 1000);
+                    this.updateNotifications();
                 }} />
                 <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null} />
                 <div className="contents">
