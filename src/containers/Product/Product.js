@@ -61,13 +61,13 @@ export default function Product(props) {
     useEffect(() => props.onUrlFound(url), [url]);
     
     const playlist = url ? <SocketProvider key="playlist" url={`http://${url}/playlist`}>
-                                <Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} filterBy={(elem) => handleFilterBy(filter, elem)} />
-                            </SocketProvider> 
-                        : null;
+                        <Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} filterBy={(elem) => handleFilterBy(filter, elem)} />
+                    </SocketProvider> : null; 
+                    
     
     let panelComponent = [
         <FilterPanel key="filter-panel" visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />,
-        // playlist
+        playlist
     ];
 
     return (
