@@ -1,5 +1,5 @@
 import './Product.css'
-import {Playlist, SocketProvider} from '@holusion/react-components-holusion';
+import {Playlist, SocketProvider, Tab, Tabbar} from '@holusion/react-components-holusion';
 import React, {useEffect, useState} from 'react'
 import {dispatchError, dispatchTask, endTask} from '../../store'
 import BadProductIPFound from '../../errors/BadProductIPFound'
@@ -55,19 +55,30 @@ function handleFilterBy(filter, elem) {
 export default function Product(props) {
     const [url, setUrl] = useState("");
     const [filter, setFilter] = useState([]);
+    const [panel, setPanel] = useState(0);
 
     useEffect(() => initProduct(props.product, setUrl), [props.product]);
     useEffect(() => props.onUrlFound(url), [url]);
     
-    const playlist = url ? <SocketProvider url={`http://${url}/playlist`}>
+    const playlist = url ? <SocketProvider key="playlist" url={`http://${url}/playlist`}>
                                 <Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} filterBy={(elem) => handleFilterBy(filter, elem)} />
                             </SocketProvider> 
                         : null;
+    
+    let panelComponent = [
+        <FilterPanel key="filter-panel" visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />,
+        // playlist
+    ];
 
     return (
         <div className="product">
-            <FilterPanel visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />
-            {playlist}
+            <div className="product-tab">
+                <Tabbar>
+                    <Tab text="Playlist" selected onClick={() => setPanel(0)} />
+                    <Tab text="Info" onClick={() => setPanel(1)} />
+                </Tabbar>
+            </div>
+            {panelComponent}
         </div>
     )
 }
