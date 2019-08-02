@@ -67,7 +67,7 @@ export default function Product(props) {
 
     const productInfo = <ProductInfo url={url}/>;
 
-    let panelComponent = [<FilterPanel key="filter-panel" visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />, /*playlist*/]
+    let panelComponent = [<FilterPanel key="filter-panel" visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />, playlist]
 
     if(panel === 1) {
         panelComponent = productInfo;
