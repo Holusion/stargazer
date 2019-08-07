@@ -1,40 +1,12 @@
 import './Product.css'
 import {Playlist, SocketProvider, Tab, Tabbar} from '@holusion/react-components-holusion';
 import React, {useEffect, useState} from 'react'
-import {dispatchError, dispatchTask, endTask} from '../../store'
-import BadProductIPFound from '../../errors/BadProductIPFound'
+import {dispatchTask, endTask} from '../../store'
 import FilterPanel from '../../components/FilterPanel';
 import ProductInfo from '../../components/ProductInfo';
 import PropTypes from 'prop-types'
-import net from "net";
 
-function initProduct(product, setUrl) {
-    let addr = null;
-    if(process.platform === "win32") {
-        for(let a of product.addresses) {
-            if(net.isIP(a) == 4) {
-                addr = a;
-            }
-        }
-
-        // Fetch can't parse ipv6 addresses
-        switch (net.isIP(addr)) {
-            case 6:
-                addr = `[${addr}]:3000`;
-                break;
-            case 0:
-                dispatchError(new BadProductIPFound(product.name, addr));
-                break;
-            default:
-        }
-    } else {
-        addr = `${product.name}.local`;
-    }
-
-    if(addr) {
-        setUrl(addr);
-    }
-}
+import url from 'url'
 
 function handleFilterBy(filter, elem) {
     if(filter.length === 0) {
@@ -54,18 +26,14 @@ function handleFilterBy(filter, elem) {
 }
 
 export default function Product(props) {
-    const [url, setUrl] = useState("");
     const [filter, setFilter] = useState([]);
     const [panel, setPanel] = useState(0);
 
-    useEffect(() => initProduct(props.product, setUrl), [props.product]);
-    useEffect(() => props.onUrlFound(url), [url]);
-    
-    const playlist = url ? <SocketProvider key="playlist" url={`http://${url}/playlist`}>
-                        <Playlist url={url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} filterBy={(elem) => handleFilterBy(filter, elem)} />
-                    </SocketProvider> : null; 
+    const playlist = <SocketProvider key="playlist" url={`http://${props.url}/playlist`}>
+                        <Playlist url={props.url} onTaskStart={dispatchTask} onTaskEnd={endTask} onSelectionChange={props.onSelectionChange} filterBy={(elem) => handleFilterBy(filter, elem)} />
+                    </SocketProvider>; 
 
-    const productInfo = <ProductInfo url={url}/>;
+    const productInfo = <ProductInfo url={props.url}/>;
 
     let panelComponent = [<FilterPanel key="filter-panel" visible={props.filterOpen} onFilterChange={(elem) => setFilter(elem)} />, playlist]
 
@@ -87,8 +55,7 @@ export default function Product(props) {
 }
 
 Product.propTypes = {
-    product: PropTypes.object,
+    url: PropTypes.string,
     filterOpen: PropTypes.bool,
     onSelectionChange: PropTypes.func,
-    onUrlFound: PropTypes.func,
 }

@@ -1,15 +1,17 @@
 import "./App.css"
-import {Button, ButtonIcon, List, ListItem, Spinner, Topbar} from "@holusion/react-components-holusion";
+import {ButtonIcon, Spinner, Topbar} from "@holusion/react-components-holusion";
 import {dispatchError, dispatchList, dispatchTask, endTask, listenError, listenInfo, listenTasks} from "./store";
 import {getList, pushError, pushInfo, pushUpdater, removeNotification} from './api/notifier'
 import Home from "./containers/Home";
 import {Logger} from "./widgets/Logger";
 import Notifier from "./components/Notifier";
 import Product from "./containers/Product";
+import ProductList from "./components/ProductList";
 import React from 'react';
 import Toolbar from "./components/Toolbar";
 import {checkUpdate} from './updater';
 import {ipcRenderer} from 'electron';
+import url from 'url';
 
 export default class App extends React.Component {
     
@@ -19,9 +21,9 @@ export default class App extends React.Component {
             updating: false,
             leftPanelHide: false,
             list: [],
-            product: null,
             selection: [],
             url: null,
+            title: "Holusion",
             tasksLength: 0,
             filterOpen: false,
             notifications: []
@@ -62,8 +64,8 @@ export default class App extends React.Component {
             // console.log("new list : ",message)
                 dispatchList(message);
                 this.setState(() => ({list: message}))
-                if(this.state.product != null && message.filter(elem => elem.name === this.state.product.name).length === 0) {
-                    this.setState(() => ({product: null}));
+                if(this.state.url != null && message.filter(elem => elem.name === this.state.url.name).length === 0) {
+                    this.setState(() => ({url: null}));
                 }
             }else{
                 dispatchError(new Error("clients-list is not an array : "+ JSON.stringify(message)));
@@ -104,36 +106,20 @@ export default class App extends React.Component {
         return <ButtonIcon name="menu" title="Cache la liste de produits" onClick={() => this.setState(() => ({leftPanelHide: !this.state.leftPanelHide}))}/>
     }
 
-    navigateToProduct(message) {
-        this.setState(() => ({product: message}))
+    getProductName() {
+        fetch(url.resolve(`http://${this.state.url}`, `system/hostname`)).then(res => res.text()).then(txt => this.setState(() => ({title: txt})))
     }
     
     render() {
-        const items = this.state.list.map(msg => <ListItem key={msg.name} icon="library" onClick={this.navigateToProduct.bind(this, msg)}>{msg.name}</ListItem>)
-
-        const leftPanel = (
-            <div className={`left-content ${this.state.leftPanelHide ? "hide" : ""}`}>
-                <div className="list-group">
-                    <Button onClick={this.updateProductList.bind(this)}>Actualiser</Button>
-                    <List>
-                        {items}
-                    </List>
-                </div>
-            </div>
-        )
-
         let rightPanel = <Home />
-        let title = "Holusion"
 
-        if(this.state.product) {
+        if(this.state.url) {
             rightPanel = <Product 
-                            key={this.state.product.name} 
-                            product={this.state.product} 
-                            onUrlFound={(url) => this.setState(() => ({url: url}))} 
+                            url={this.state.url}
                             onSelectionChange={(selected) => this.setState(() => ({selection: selected}))}
                             filterOpen={this.state.filterOpen}
                         />
-            title = this.state.product.name;
+            this.getProductName();
         }
 
         const toolbar = <Toolbar url={this.state.url} selection={this.state.selection} onTaskStart={dispatchTask} onTaskEnd={endTask} onFilterClick={() => this.setState(() => ({filterOpen: !this.state.filterOpen}))} />;
@@ -146,9 +132,9 @@ export default class App extends React.Component {
                     removeNotification(item, 1000);
                     this.updateNotifications();
                 }} />
-                <Topbar title={title} start={this.createStartTopAppBar()} end={this.state.product ? toolbar : null} />
+                <Topbar title={this.state.title} start={this.createStartTopAppBar()} end={this.state.url ? toolbar : null} />
                 <div className="contents">
-                    {leftPanel}
+                    <ProductList onButtonClick={this.updateProductList.bind(this)} onProductSelected={(productUrl) => this.setState(() => ({url: productUrl}))} hide={this.state.leftPanelHide} list={this.state.list} />
                     <div className="right-content">
                         {rightPanel}
                     </div>
