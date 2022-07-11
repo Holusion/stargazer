@@ -1,0 +1,23 @@
+
+body{
+    min-height:100%;
+    width:100%;
+    background-color: #103040;
+    color: white;
+  }
+
+a{
+  color: white;
+}
+.card a{
+  display: block;
+  width: 100%;
+  background-color: #00517d;
+  padding: 1rem;
+  margin: 0.2rem;
+
+}
+
+.card:hover{
+  opacity: 0.8;
+}
