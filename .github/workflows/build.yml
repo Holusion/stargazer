@@ -22,8 +22,5 @@ jobs:
           ${{ runner.os }}-node-
     - name: install dependencies
       run: npm ci
-    - name: run tests
-      run: |
-        npm test
     - name: build application
       run: npm run dist
