@@ -2,10 +2,10 @@
 body{
     min-height:100%;
     width:100%;
-    background-color: #103040;
-    color: white;
   }
-
+main{
+  min-height: 100%;
+}
 a{
   color: white;
 }
@@ -16,8 +16,4 @@ a{
   padding: 1rem;
   margin: 0.2rem;
 
-}
-
-.card:hover{
-  opacity: 0.8;
 }
