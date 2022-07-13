@@ -10,7 +10,7 @@
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "build": "npm run dist --publish=never"
+    "build": "npm run dist -- --publish never"
   },
   "homepage": "https://github.com/Holusion/stargazer/releases/latest",
   "author": "Holusion SAS <contact@holusion.com>",
@@ -28,11 +28,13 @@
   "build": {
     "appId": "com.holusion.electron.stargazer",
     "asar": true,
+    "generateUpdatesFilesForAllChannels": true,
     "publish": [
       {
         "provider": "github",
         "owner": "Holusion",
-        "repo": "stargazer"
+        "repo": "stargazer",
+        "releaseType": "release"
       }
     ],
     "mac": {

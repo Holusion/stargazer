@@ -32,6 +32,7 @@ jobs:
     - name: install dependencies
       run: npm ci
     - name: Build application
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         npm run dist
-   
