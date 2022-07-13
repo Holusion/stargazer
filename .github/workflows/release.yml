@@ -1,8 +1,11 @@
-name: Build
+name: Release
 on:
   push:
     tags:
       - v*.*.*
+env:
+  ELECTRON_CACHE: "${{ github.workspace }}/.cache/electron"
+  ELECTRON_BUILDER_CACHE: "${{ github.workspace }}/.cache/electron-builder"
 jobs:
   build:
     strategy:
@@ -15,20 +18,20 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
-    - name: Cache node_modules
+    - name: Get npm cache directory
+      id: npm-cache-dir
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - name: Use Cache
       uses: actions/cache@v3
       with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        path: |
+          ${{ steps.npm-cache-dir.outputs.dir }}
+          ${{ env.ELECTRON_CACHE }}
+          ${{ env.ELECTRON_BUILDER_CACHE }}
+        key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
-          ${{ runner.os }}-node-
-    - name: Cache electron
-      uses: actions/cache@v3
-      with:
-        path: ~/.cache/electron
-        key: ${{ runner.os }}-electron-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-electron-
+          ${{ runner.os }}-build-
     - name: install dependencies
       run: npm ci
     - name: Build application
