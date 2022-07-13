@@ -9,7 +9,8 @@
     "test": "mocha",
     "postinstall": "electron-builder install-app-deps",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "build": "npm run dist --publish=never"
   },
   "homepage": "https://github.com/Holusion/stargazer/releases/latest",
   "author": "Holusion SAS <contact@holusion.com>",

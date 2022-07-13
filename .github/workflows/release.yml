@@ -1,9 +1,14 @@
 name: Build
 on:
   push:
+    tags:
+      - v*.*.*
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  build:
+    strategy:
+      matrix:
+        os: ["ubuntu-latest", "windows-latest", "macos-latest"]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js 18.x
@@ -26,5 +31,7 @@ jobs:
           ${{ runner.os }}-electron-
     - name: install dependencies
       run: npm ci
-    - name: build application
-      run: npm run build
+    - name: Build application
+      run: |
+        npm run dist
+   
