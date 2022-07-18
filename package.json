@@ -1,6 +1,6 @@
 {
   "name": "holusion-stargazer",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "Network discovery and product administration toolset for holographic displays",
   "main": "lib/main.js",
   "type": "commonjs",
