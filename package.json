@@ -45,6 +45,9 @@
     },
     "win": {
       "target": [
+        "7z",
+        "zip",
+        "appx",
         "msi"
       ],
       "icon": "static/icons/favicon.ico"
